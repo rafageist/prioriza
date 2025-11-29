@@ -1,16 +1,17 @@
-# The Prioriza Method
+﻿# Prioriza Method (Theory Repository)
 
-This repository contains the complete theoretical body of the Prioriza Method, a general framework for decision-making and prioritization based on multi-parameter evaluation.
+Prioriza Method is a decision-making and prioritization framework first developed between 2005 and 2010 and now reconstructed for a 2025 edition.
 
-Originally conceptualized between 2005 and 2010 and now being reconstructed and modernized, Prioriza formalizes how to determine which element should come first when several elements compete under multiple parameters, without relying on exponential comparisons.
+## Purpose
+This repository preserves the complete theoretical corpus: definitions, mathematical model, variants, and academic references. It is documentation-first and contains no software.
 
-The repository includes:
+## License
+All documents are released under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license. Full legal text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.
 
-- The discrete version
-- The continuous version
-- The formal mathematical model (levels, weights, leveled tables, priority functions)
-- Complete definitions: elements, parameters, values, levelization, dynamism, solution leveling
-- Examples and case studies (timetabling, resource allocation, decision support)
-- Historical notes, motivation, and conceptual evolution
+## Structure
+- docs/: canonical chapters covering the method, model, variants, and applications
+- examples/: worked examples for discrete and continuous cases
+- thesis/: placeholder workspace for a compiled thesis manuscript
 
-This is the canonical source of the theory.
+## Implementation Note
+The Python implementation will be maintained separately in the Divengine organization as prioriza-py; this repository remains implementation-agnostic.
