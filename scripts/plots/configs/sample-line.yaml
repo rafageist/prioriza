@@ -1,0 +1,20 @@
+﻿id: sample-line
+type: line2d
+mode: table
+data:
+  file: sample-line.csv
+  x: x
+  y: y
+axes:
+  x:
+    label: "X"
+  y:
+    label: "Y"
+title: "Sample quadratic trend"
+output:
+  basename: sample-line
+  formats: ["png", "pdf"]
+  dpi: 200
+y_logscale: false
+fig_width: 6
+fig_height: 4

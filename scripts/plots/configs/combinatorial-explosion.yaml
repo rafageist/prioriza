@@ -1,0 +1,28 @@
+﻿id: combinatorial-explosion
+type: surface3d
+mode: expression
+expression:
+  z: "3**x * math.factorial(int(y))"
+  x:
+    start: 0
+    end: 4
+    step: 1
+  y:
+    start: 0
+    end: 6
+    step: 1
+axes:
+  x:
+    label: "Parameters (m)"
+  y:
+    label: "Elements (n)"
+  z:
+    label: "3^m * n!"
+title: "Combinatorial growth surface"
+output:
+  basename: combinatorial-explosion
+  formats: ["png", "pdf"]
+  dpi: 200
+z_logscale: false
+fig_width: 8
+fig_height: 6
