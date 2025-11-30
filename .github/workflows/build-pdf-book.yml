@@ -1,0 +1,53 @@
+﻿name: Build Prioriza PDF
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-pdf:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended fonts-dejavu-core
+
+      - name: Set version info
+        run: |
+          VERSION=$(python -c "import pathlib,re; default='0.0.0'; path=pathlib.Path('manifest.yml'); text=path.read_text(encoding='utf-8') if path.exists() else ''; match=re.search(r'^version:\s*(.+)$', text, re.MULTILINE); value=(match.group(1).strip() if match else default); value=value.strip('\"').strip(\"'\"); print(value)")
+          echo "BOOK_VERSION=$VERSION" >> $GITHUB_ENV
+          echo "BOOK_TAG=$VERSION" >> $GITHUB_ENV
+          echo "BOOK_DATE=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+
+      - name: Ensure version tag is unique
+        run: |
+          git fetch --tags
+          if git rev-parse "$BOOK_TAG" >/dev/null 2>&1; then
+            echo "Tag $BOOK_TAG already exists. Update manifest.yml version before rerunning."
+            exit 1
+          fi
+
+      - name: Build PDF
+        run: bash scripts/build_pdf.sh
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prioriza-method
+          path: prioriza-method-*.pdf
+
+      - name: Create GitHub Release with PDF
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.BOOK_TAG }}
+          name: "Prioriza Method - v${{ env.BOOK_VERSION }}"
+          body: "Automated PDF export of the Prioriza Method theoretical corpus."
+          files: "prioriza-method-*.pdf"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

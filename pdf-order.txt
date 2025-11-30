@@ -1,0 +1,15 @@
+﻿# Prioriza Method PDF order (edit as needed for releases)
+docs/01-introduction.md
+docs/02-discrete-version.md
+docs/03-continuous-version.md
+docs/04-mathematical-model.md
+docs/05-prioriza-variants.md
+docs/06-dynamism-and-leveling.md
+docs/07-applications/scheduling-timetables.md
+docs/07-applications/resource-allocation.md
+docs/07-applications/decision-support.md
+docs/08-historical-notes.md
+docs/09-references.md
+examples/example-discrete-table.md
+examples/example-continuous-case.md
+thesis/README.md
