@@ -44,7 +44,7 @@ def load_config(plot_id: str) -> Dict[str, Any]:
 
 def _safe_eval(expr: str, x_val: Any, y_val: Any) -> Any:
     """Safely evaluate z expression with restricted globals."""
-    allowed_globals = {"__builtins__": {}, "math": math, "np": np}
+    allowed_globals = {"__builtins__": {}, "math": math, "np": np, "int": int, "float": float}
     local_vars = {"x": x_val, "y": y_val, "m": x_val, "n": y_val}
     return eval(expr, allowed_globals, local_vars)
 
@@ -107,15 +107,15 @@ def read_table(cfg: Dict[str, Any]) -> tuple[List[float], List[float]]:
     return xs, ys
 
 
-def _save_outputs(fig: Any, output_cfg: Dict[str, Any]) -> List[Path]:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+def _save_outputs(fig: Any, output_cfg: Dict[str, Any], output_dir: Path) -> List[Path]:
+    output_dir.mkdir(parents=True, exist_ok=True)
     basename = output_cfg.get("basename")
     formats: Iterable[str] = output_cfg.get("formats", ["png"])
     if not basename:
         raise ConfigError("Output basename is required.")
     saved_paths: List[Path] = []
     for fmt in formats:
-        out_path = OUTPUT_DIR / f"{basename}.{fmt}"
+        out_path = output_dir / f"{basename}.{fmt}"
         fig.savefig(out_path, dpi=output_cfg.get("dpi", 200))
         print(f"Saved: {out_path}")
         saved_paths.append(out_path)
@@ -123,7 +123,7 @@ def _save_outputs(fig: Any, output_cfg: Dict[str, Any]) -> List[Path]:
     return saved_paths
 
 
-def plot_surface_from_expression(cfg: Dict[str, Any]) -> List[Path]:
+def plot_surface_from_expression(cfg: Dict[str, Any], output_dir: Path) -> List[Path]:
     axes_cfg = cfg.get("axes", {})
     fig_width = cfg.get("fig_width", 8)
     fig_height = cfg.get("fig_height", 6)
@@ -139,10 +139,10 @@ def plot_surface_from_expression(cfg: Dict[str, Any]) -> List[Path]:
     if cfg.get("z_logscale"):
         ax.set_zscale("log")
     fig.colorbar(surf, ax=ax, shrink=0.6, aspect=12)
-    return _save_outputs(fig, cfg.get("output", {}))
+    return _save_outputs(fig, cfg.get("output", {}), output_dir)
 
 
-def plot_line_from_table(cfg: Dict[str, Any]) -> List[Path]:
+def plot_line_from_table(cfg: Dict[str, Any], output_dir: Path) -> List[Path]:
     axes_cfg = cfg.get("axes", {})
     fig_width = cfg.get("fig_width", 6)
     fig_height = cfg.get("fig_height", 4)
@@ -156,28 +156,34 @@ def plot_line_from_table(cfg: Dict[str, Any]) -> List[Path]:
     if cfg.get("y_logscale"):
         ax.set_yscale("log")
     ax.grid(True, linestyle="--", alpha=0.5)
-    return _save_outputs(fig, cfg.get("output", {}))
+    return _save_outputs(fig, cfg.get("output", {}), output_dir)
 
 
-def dispatch_plot(cfg: Dict[str, Any]) -> List[Path]:
+def dispatch_plot(cfg: Dict[str, Any], output_dir: Path) -> List[Path]:
     mode = cfg.get("mode")
     plot_type = cfg.get("type")
     if mode == "expression" and plot_type == "surface3d":
-        return plot_surface_from_expression(cfg)
+        return plot_surface_from_expression(cfg, output_dir)
     if mode == "table" and plot_type == "line2d":
-        return plot_line_from_table(cfg)
+        return plot_line_from_table(cfg, output_dir)
     raise ConfigError(f"Unsupported mode/type combination: mode={mode}, type={plot_type}")
 
 
 def main(argv: List[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Render plots from configs.")
     parser.add_argument("plot_id", help="Base name of the plot config (without extension).")
+    parser.add_argument(
+        "--output-dir",
+        default=str(OUTPUT_DIR),
+        help="Directory to write rendered images (default: scripts/plots/outputs).",
+    )
     args = parser.parse_args(argv)
 
     try:
         cfg = load_config(args.plot_id)
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        dispatch_plot(cfg)
+        output_dir = Path(args.output_dir).expanduser()
+        output_dir.mkdir(parents=True, exist_ok=True)
+        dispatch_plot(cfg, output_dir)
     except ConfigError as exc:
         print(f"Config error: {exc}", file=sys.stderr)
         return 1

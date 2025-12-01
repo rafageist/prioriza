@@ -35,6 +35,8 @@ $$
 
 This growth is super-exponential in \(m\) and \(n\), making exhaustive exploration impractical even for modest problem sizes. Therefore, instead of analyzing every possible combination, we need a systematic and efficient way to assign priorities—this motivates the Prioriza Method.
 
+![Combinatorial explosion surface \(3^m \times n!\)](images/combinatorial-explosion.png)
+
 ---
 
 ## 2. Fundamental Concepts
