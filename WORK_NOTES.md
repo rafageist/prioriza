@@ -16,6 +16,10 @@
 
 - Quarto is not installed in the local PATH in this environment, so local
   `quarto render` commands cannot be executed here yet.
+- `quarto --version` was attempted and failed because the executable is not
+  available in PATH.
+- Render commands to run after installing Quarto:
+  `quarto render`, `quarto render --to html`, and `quarto render --to pdf`.
 
 ## DOCX conversion notes
 
