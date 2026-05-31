@@ -257,6 +257,41 @@ tabla y ejecutar nuevamente.
 
 ## Ciclo de refinamiento progresivo
 
+El refinamiento progresivo de la decisión es una forma general de uso de
+Prioriza. No parte de la idea de que la primera tabla deba resolverlo
+todo. Parte de una idea más prudente: una ejecución puede mostrar que el
+modelo ya es suficiente, que falta información, que existe una
+contradicción o que hay equivalencia legítima entre alternativas.
+
+El ciclo operativo puede describirse así:
+
+```text
+ejecutar Prioriza
+observar el resultado
+si el ganador es aceptable: decidir
+si hay empate: preguntar qué aspecto podría distinguir alternativas
+si hay contradicción: revisar valores, criterios o niveles de prioridad
+si no queda distinción relevante: aceptar la equivalencia o usar un
+desempate externo
+recalcular cuando cambie el modelo
+```
+
+La diferencia entre insuficiencia del modelo y empate legítimo es
+central. Hay insuficiencia cuando las alternativas aparecen iguales
+porque faltan aspectos, valores, reglas o información relevante. Hay
+empate legítimo cuando el modelo ya contiene los aspectos relevantes y,
+aun así, las alternativas son equivalentes bajo la estructura de
+prioridad declarada. En el primer caso, Prioriza produce una pregunta
+para mejorar el modelo. En el segundo, produce una decisión no única que
+puede aceptarse.
+
+Esta forma de uso evita dos errores opuestos: forzar una diferencia que
+el modelo no puede justificar, o abandonar el método cada vez que no
+produce un ganador inmediato. Un buen resultado puede ser una nueva
+pregunta: ¿qué aspecto falta?, ¿qué valor es dudoso?, ¿qué prioridad de
+aspecto contradice la política real?, ¿la intuición aporta conocimiento
+no modelado o solo presión operativa?
+
 ## Resumen de la sección
 
 Prioriza no solo se usa ejecutando una tabla una vez. También puede
