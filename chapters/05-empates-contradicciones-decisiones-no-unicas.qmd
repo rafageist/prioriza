@@ -275,6 +275,10 @@ Una salida completa debería incluir:
 - empates globales;
 - advertencias de insuficiencia;
 - explicación del resultado;
+- aspectos dominantes;
+- comparación con alternativas cercanas;
+- sensibilidad básica del resultado;
+- preguntas de revisión;
 - posibles contradicciones detectadas.
 
 En software, esto significa que Prioriza no debe devolver solamente un
@@ -380,6 +384,43 @@ método puede ser percibido como una caja negra, incluso cuando
 internamente conserva todos los valores, niveles y operaciones.
 
 ## Explicabilidad humana del resultado
+
+La trazabilidad técnica y la explicación humana no son lo mismo. La
+trazabilidad permite reconstruir valores, criterios, funciones de
+nivelación, niveles de prioridad de aspectos, contribuciones por aspecto
+y suma final. Esa reconstrucción es necesaria para auditar, pero no
+alcanza para que una persona entienda por qué conviene actuar de una
+forma y no de otra.
+
+Una explicación humana debe traducir la estructura de prioridad en
+razones revisables. Debe indicar qué alternativa queda recomendada, qué
+aspectos dominaron el resultado, por qué la alternativa siguiente no
+quedó primera, qué empates existen, qué contradicciones aparecen y qué
+datos o niveles podrían cambiar el orden. La explicación no debe
+presentarse como magia ni como intuición artificial: se deriva de los
+valores declarados, las funciones de nivelación, los niveles de prioridad
+de los aspectos y la tabla resultante.
+
+Una salida explicativa puede tener esta forma:
+
+```text
+Recomendación: enfocar la tarea A.
+Razón principal: A tiene menor margen de postergación y bloquea más
+trabajo futuro.
+Por qué no B: B parece urgente, pero conserva más alternativas de
+ejecución y su efecto de bloqueo es menor.
+Qué cambiaría el resultado: si el impacto en cliente tuviera un nivel de
+prioridad de aspecto mayor, B podría subir.
+Preguntas de revisión: ¿existe un compromiso con cliente no modelado?;
+¿los niveles de prioridad de los aspectos reflejan la política real?
+```
+
+Cuando la intuición contradice el resultado, Prioriza no debe ocultar la
+tensión. Debe formularla como diagnóstico: la intuición puede contener
+conocimiento no modelado, pero también puede expresar sesgo, presión o
+costumbre. La respuesta correcta no es obedecer ciegamente al cálculo ni
+descartarlo; es revisar qué información falta o qué parte de la
+estructura de prioridad no representa la decisión real.
 
 ## Resumen de la sección
 

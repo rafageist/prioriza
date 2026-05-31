@@ -24,6 +24,23 @@ trazable que pueda usarse como entrada de otra tabla, columna derivada,
 vector de niveles de prioridad de los aspectos, referencia de comparación u objetivo de ingeniería
 inversa.
 
+El objeto de resultado también debe incluir una capa de explicación
+humana. Como mínimo, debería reservar campos para:
+
+- `recommendation`: recomendación o grupo prioritario;
+- `main_reasons`: aspectos y contribuciones que dominan el resultado;
+- `runner_up_comparison`: comparación con las alternativas cercanas;
+- `ties`: empates locales y globales relevantes;
+- `contradictions`: tensiones con valores, políticas o intuición
+  declarada;
+- `sensitivity_notes`: cambios que podrían alterar el orden;
+- `review_questions`: preguntas sugeridas para completar o corregir el
+  modelo.
+
+Estos campos no dependen de una IA generativa. Pueden derivarse
+directamente de valores, niveles, niveles de prioridad de aspectos,
+criterios y diferencias entre alternativas.
+
 ## Formato JSON/YAML
 
 Una especificación JSON/YAML permitiría transportar tablas Prioriza
