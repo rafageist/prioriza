@@ -31,6 +31,9 @@ humana. Como mínimo, debería reservar campos para:
 - `main_reasons`: aspectos y contribuciones que dominan el resultado;
 - `runner_up_comparison`: comparación con las alternativas cercanas;
 - `ties`: empates locales y globales relevantes;
+- `tie_breaker`: regla externa aplicada, conjunto candidato, elemento
+  seleccionado, fecha, usuario o política habilitante, y semilla o
+  evidencia cuando se requiera auditabilidad;
 - `contradictions`: tensiones con valores, políticas o intuición
   declarada;
 - `sensitivity_notes`: cambios que podrían alterar el orden;

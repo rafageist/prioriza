@@ -134,7 +134,10 @@ metodológicamente correcto es el empate. Si la situación práctica obliga
 a escoger una de las dos alternativas, puede aplicarse una regla externa
 de desempate. Una de esas reglas puede ser el azar.
 
-Esta posibilidad debe usarse con cautela. El azar puede ser razonable
+Esta posibilidad debe usarse con cautela. El azar no debe ser la primera
+respuesta automática ante un empate; primero debe evaluarse si el empate
+es legítimo, si falta un aspecto relevante o si conviene aceptar la
+equivalencia. El azar puede ser razonable
 cuando el empate es legítimo, cuando agregar nuevos aspectos cuesta más
 que el valor de la decisión, cuando se quiere evitar favoritismo o
 cuando el sistema necesita explorar soluciones alternativas. No debe
