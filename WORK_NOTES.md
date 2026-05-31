@@ -20,6 +20,9 @@
   available in PATH.
 - Render commands to run after installing Quarto:
   `quarto render`, `quarto render --to html`, and `quarto render --to pdf`.
+- The GitHub Actions workflow renders HTML first, then attempts PDF with
+  TinyTeX. The PDF step is non-blocking so HTML artifacts remain available if
+  PDF-specific LaTeX issues appear.
 
 ## DOCX conversion notes
 

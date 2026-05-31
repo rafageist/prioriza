@@ -1,53 +1,50 @@
-﻿name: Build Prioriza PDF
+name: Build Quarto Book
 
 on:
+  push:
+    branches:
+      - master
+      - main
+      - docs/quarto-book-v0.4
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  generate-pdf:
-    permissions:
-      contents: write
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Pandoc and dependencies
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install TinyTeX
+        run: quarto install tinytex --update-path
+
+      - name: Render HTML
+        run: quarto render --to html
+
+      - name: Render PDF
+        id: render_pdf
+        continue-on-error: true
+        run: quarto render --to pdf
+
+      - name: Record PDF render limitation
+        if: steps.render_pdf.outcome == 'failure'
         run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended fonts-dejavu-core
+          {
+            echo "PDF render failed in CI.";
+            echo "HTML render completed before the PDF attempt.";
+            echo "Check the Quarto and LaTeX logs for missing packages or PDF-specific errors.";
+          } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Set version info
-        run: |
-          VERSION=$(python -c "import pathlib,re; default='0.0.0'; path=pathlib.Path('manifest.yml'); text=path.read_text(encoding='utf-8') if path.exists() else ''; match=re.search(r'^version:\s*(.+)$', text, re.MULTILINE); value=(match.group(1).strip() if match else default); value=value.strip('\"').strip(\"'\"); print(value)")
-          echo "BOOK_VERSION=$VERSION" >> $GITHUB_ENV
-          echo "BOOK_TAG=$VERSION" >> $GITHUB_ENV
-          echo "BOOK_DATE=$(date +%Y-%m-%d)" >> $GITHUB_ENV
-
-      - name: Ensure version tag is unique
-        run: |
-          git fetch --tags
-          if git rev-parse "$BOOK_TAG" >/dev/null 2>&1; then
-            echo "Tag $BOOK_TAG already exists. Update manifest.yml version before rerunning."
-            exit 1
-          fi
-
-      - name: Build PDF
-        run: bash scripts/build_pdf.sh
-
-      - name: Upload PDF as artifact
+      - name: Upload Quarto output
         uses: actions/upload-artifact@v4
         with:
-          name: prioriza-method
-          path: prioriza-method-*.pdf
-
-      - name: Create GitHub Release with PDF
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ env.BOOK_TAG }}
-          name: "Prioriza Method - v${{ env.BOOK_VERSION }}"
-          body: "Automated PDF export of the Prioriza Method theoretical corpus."
-          files: "prioriza-method-*.pdf"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: prioriza-quarto-output
+          path: _output/
+          if-no-files-found: error
