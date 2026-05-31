@@ -1,0 +1,347 @@
+# Justificación del procedimiento
+
+La justificación de Prioriza no debe presentarse como una demostración
+de optimalidad universal. Prioriza no prueba que una decisión sea la
+mejor en sentido absoluto. Su justificación debe construirse de otra
+manera: como un procedimiento explícito, reproducible y auditable para
+transformar información disponible en una estructura de prioridad.
+
+La pregunta central no es si Prioriza descubre una verdad objetiva
+final, sino si, dados ciertos elementos, aspectos, valores, criterios y
+niveles de prioridad de los aspectos, el método produce una prioridad
+coherente con esa estructura declarada.
+
+## Por qué comparar
+
+Toda decisión no vacía implica alguna forma de comparación. Decidir
+entre alternativas significa distinguirlas bajo algún aspecto: cuál
+cuesta menos, cuál aporta más, cuál es más urgente, cuál tiene mayor
+riesgo, cuál deja más posibilidades futuras, cuál está más alineada con
+una política o cuál satisface mejor una necesidad.
+
+Incluso cuando una decisión parece intuitiva, esa intuición suele
+contener comparaciones implícitas. Prioriza obliga a hacerlas
+explícitas.
+
+Comparar se justifica porque los recursos, el tiempo, la atención y la
+capacidad de acción son limitados. Si todo pudiera hacerse al mismo
+tiempo, con recursos infinitos y sin consecuencias, no habría necesidad
+de priorizar. La priorización aparece cuando hay escasez, conflicto,
+secuencia, restricción o preferencia.
+
+En este sentido, Prioriza parte de una premisa práctica:
+
+    si hay alternativas y no pueden tratarse todas de la misma manera, entonces existe una necesidad de comparación.
+
+## Por qué separar la decisión en aspectos
+
+Una decisión compleja rara vez depende de un solo valor. Decidir qué
+actividad colocar en un horario, qué proveedor seleccionar, qué tarea
+ejecutar primero o qué riesgo atender suele implicar varios aspectos
+simultáneos.
+
+Separar la decisión en aspectos permite evitar que una impresión global
+o una preferencia no examinada domine toda la decisión. Cada aspecto
+representa una pregunta parcial:
+
+    ¿Qué dice este criterio sobre esta alternativa?
+
+La decisión global se construye después, a partir de esas respuestas
+parciales.
+
+Esta separación tiene tres ventajas:
+
+1.  Hace explícita la estructura de la decisión.
+2.  Permite mezclar valores heterogéneos sin confundir sus unidades
+    originales.
+3.  Permite revisar qué aspecto influyó en el resultado y en qué medida.
+
+## Por qué nivelar
+
+Nivelar significa transformar los valores de un aspecto en niveles de
+prioridad. Esta operación se justifica porque los valores originales
+pueden pertenecer a dominios distintos y no siempre son directamente
+comparables entre sí.
+
+Por ejemplo, una decisión puede incluir dinero, distancia, porcentaje de
+satisfacción, cantidad de restricciones, urgencia subjetiva, impacto
+institucional y disponibilidad de recursos. Esos valores no pueden
+sumarse directamente en su forma original. No tiene sentido sumar
+dólares, kilómetros, porcentajes y juicios cualitativos como si fueran
+la misma magnitud.
+
+La nivelación resuelve este problema de forma pragmática: no intenta
+convertir todas las magnitudes a una unidad física común, sino a una
+unidad decisional común.
+
+Esa unidad común es el nivel de prioridad dentro de cada aspecto.
+
+    valor original -> interpretación por criterio -> nivel de prioridad
+
+La nivelación no afirma que las diferencias cardinales originales
+desaparezcan ontológicamente. Afirma que, para la decisión actual, lo
+que se necesita primero es conocer la posición prioritaria relativa de
+cada elemento dentro de cada aspecto.
+
+Esto es especialmente útil cuando el valor exacto no importa tanto como
+su relación con los demás valores. Si se sabe que un valor es menor,
+mayor o equivalente a otro bajo el criterio definido, esa relación puede
+ser suficiente para decidir.
+
+## Qué se gana y qué se pierde al nivelar
+
+La nivelación gana simplicidad, trazabilidad y capacidad de mezclar
+dominios heterogéneos. También protege contra falsas precisiones: en
+muchos problemas prácticos, valores aparentemente exactos no son
+realmente exactos, o no justifican una comparación cardinal sofisticada.
+
+Pero la nivelación también pierde información. Si dos valores quedan en
+niveles consecutivos, el método puede no reflejar si entre ellos había
+una diferencia pequeña o enorme. Del mismo modo, convertir valores
+cardinales en niveles puede hacer que un método sea más robusto y
+explicable, pero menos sensible a ciertas diferencias cuantitativas.
+
+Por eso Prioriza debe reconocer esta tensión:
+
+    nivelar simplifica la decisión, pero puede perder intensidad cardinal.
+
+La decisión de nivelar es adecuada cuando el objetivo principal es
+ordenar, priorizar y explicar, no medir utilidad cardinal exacta.
+
+## Por qué el nivel 1 representa la mayor prioridad
+
+Usar el nivel 1 como mayor prioridad es una convención semántica y
+operativa. Se corresponde con la forma natural de hablar de prioridad:
+primer lugar, primera opción, primer turno, prioridad número uno.
+
+No hay una necesidad matemática absoluta de usar 1 como mejor nivel. Se
+podría usar el número mayor como mejor valor, como hacen otros métodos.
+Sin embargo, Prioriza adopta la convención de que menor nivel significa
+mayor prioridad.
+
+Esta convención tiene una consecuencia importante: el resultado global
+también se interpreta como una carga acumulada. Menor suma significa
+menor carga decisional y, por tanto, mayor prioridad.
+
+    nivel 1 = mejor prioridad local
+    menor suma = mejor prioridad global
+
+## Por qué asignar niveles de prioridad a los aspectos
+
+No todos los aspectos tienen la misma prioridad dentro de una decisión.
+En una decisión real, salud puede tener mayor nivel de prioridad que
+dinero, seguridad mayor prioridad que velocidad, impacto estratégico
+mayor prioridad que facilidad operativa, o urgencia mayor prioridad que
+comodidad.
+
+Asignar niveles de prioridad a los aspectos se justifica porque Prioriza
+no solo necesita saber cómo se comporta cada elemento dentro de cada
+aspecto, sino qué importancia tiene ese aspecto dentro de la decisión
+global.
+
+El nivel de prioridad del aspecto responde a una pregunta diferente del
+nivel local del elemento:
+
+    nivel local: ¿qué prioridad tiene este elemento dentro de este aspecto?
+    nivel del aspecto: ¿qué prioridad tiene este aspecto dentro de esta decisión?
+
+Por tanto, nivelar valores y asignar prioridad a aspectos no son la
+misma operación, aunque usan el mismo concepto general de nivel de
+prioridad. La nivelación ordena elementos dentro de cada aspecto. La
+prioridad del aspecto ordena la importancia de los aspectos dentro de la
+decisión global.
+
+## Por qué multiplicar nivel del elemento por nivel del aspecto
+
+La multiplicación expresa que la contribución de un nivel local debe
+combinarse con el nivel de prioridad del aspecto. En términos externos
+puede verse como ponderación; dentro de Prioriza es una composición
+entre dos niveles de prioridad situados en planos distintos.
+
+Si un elemento tiene mal nivel en un aspecto poco importante, el impacto
+global debe ser menor. Si tiene mal nivel en un aspecto muy importante,
+el impacto global debe ser mayor.
+
+En Prioriza, la multiplicación produce una contribución por aspecto:
+
+    contribución = nivel del elemento en el aspecto * nivel de prioridad del aspecto
+
+Esta operación no debe interpretarse como una ley física, sino como una
+regla de agregación decisional. Su función es expresar que la posición
+de una alternativa dentro de un criterio no tiene el mismo nivel de prioridad del aspecto en todos
+los criterios.
+
+Multiplicar permite distinguir estos casos:
+
+    mal nivel en aspecto poco importante -> penalización menor
+    mal nivel en aspecto muy importante -> penalización mayor
+    buen nivel en aspecto importante -> ventaja significativa
+
+## Por qué sumar
+
+La suma horizontal se justifica cuando los aspectos se tratan como
+contribuciones separables a una carga decisional agregada.
+
+Cada aspecto aporta una contribución ajustada por su nivel de prioridad.
+La suma reúne esas
+contribuciones en una señal global:
+
+    prioridad global = suma de las contribuciones por aspecto
+
+Como en Prioriza los niveles menores son mejores, la suma puede
+interpretarse como una acumulación de penalizaciones, cargas o
+distancias ordinales respecto a lo prioritario. El elemento con menor
+suma es el que acumula menor carga decisional bajo los criterios y niveles de prioridad de los aspectos
+definidos.
+
+Esta interpretación es más prudente que decir que la suma mide una
+utilidad objetiva absoluta. Prioriza no suma magnitudes físicas. Suma
+contribuciones decisionales construidas dentro del modelo.
+
+## Bajo qué supuestos la suma es aceptable
+
+La suma es aceptable bajo ciertas condiciones explícitas.
+
+Primero, los aspectos deben poder tratarse como contribuciones
+separables. Esto no significa que sean totalmente independientes en la
+realidad, pero sí que el modelo acepta evaluarlos por separado y
+agregarlos después.
+
+Segundo, debe aceptarse cierto grado de compensabilidad. Es decir, un
+peor nivel en un aspecto puede ser compensado por mejores niveles en
+otros aspectos, según los niveles de prioridad de los aspectos
+definidos. Si una decisión no admite compensación, entonces Prioriza
+debe incorporar restricciones duras, vetos o reglas especiales antes de
+aplicar la suma.
+
+Tercero, los niveles deben entenderse como una escala decisional
+construida, no como una escala de medición natural. La suma no afirma
+que la diferencia entre nivel 1 y nivel 2 sea físicamente igual a la
+diferencia entre nivel 3 y nivel 4. Afirma que, para operar el método,
+los niveles funcionan como posiciones discretas de prioridad.
+
+Cuarto, los niveles de prioridad de los aspectos deben expresar la
+política de importancia del modelo. Si esos niveles son arbitrarios, el
+resultado también será arbitrario. Prioriza no elimina la
+responsabilidad de definir adecuadamente la prioridad de los aspectos.
+
+Quinto, el decisor debe aceptar que el resultado es una prioridad
+coherente con el modelo, no una garantía de óptimo universal.
+
+## Cuándo la suma no es suficiente
+
+La suma puede no ser suficiente cuando existen restricciones absolutas,
+incompatibilidades, condiciones mínimas obligatorias o criterios no
+compensables.
+
+Por ejemplo, si una actividad requiere obligatoriamente un recurso que
+no existe, no basta con que tenga buena suma global. Si un proveedor
+incumple una condición legal, no debe ser seleccionado solo porque tenga
+buen precio y buen tiempo de entrega. Si una decisión médica tiene un
+riesgo inaceptable, no debe compensarse ingenuamente con comodidad o
+costo.
+
+En estos casos, Prioriza debe distinguir entre:
+
+    restricciones duras: condiciones que deben cumplirse antes de priorizar
+    criterios blandos: aspectos que pueden combinarse y agregarse
+
+La forma correcta no es abandonar Prioriza, sino aplicarlo en el nivel
+adecuado: primero se filtran o invalidan alternativas imposibles;
+después se priorizan las alternativas viables.
+
+## Por qué el menor total es mejor
+
+El menor total es mejor porque Prioriza interpreta los niveles como
+posiciones de prioridad donde 1 es el mejor nivel. Al multiplicar
+niveles por niveles de prioridad de los aspectos y sumarlos, se acumulan cargas de prioridad. Una suma
+menor significa que el elemento ha ocupado mejores posiciones combinadas
+en el conjunto de aspectos.
+
+En forma simple:
+
+    menor nivel local -> mejor posición en un aspecto
+    menor contribución por aspecto -> mejor aporte en un aspecto importante
+    menor suma total -> mejor prioridad global
+
+Esta lógica es consistente con la convención inicial del método.
+
+## Qué significa una buena decisión en Prioriza
+
+Una buena decisión en Prioriza no significa necesariamente una decisión
+perfecta, óptima global o verdadera en sentido absoluto.
+
+Una buena decisión significa, primero, que es coherente con los valores,
+criterios, niveles locales y niveles de prioridad de aspectos definidos.
+Segundo, que puede explicarse. Tercero, que puede revisarse si el
+resultado contradice la experiencia, la política o la intuición experta.
+Cuarto, que puede repetirse bajo las mismas condiciones y producir el
+mismo resultado.
+
+Por tanto, Prioriza garantiza principalmente:
+
+- trazabilidad;
+- reproducibilidad;
+- explicitación de la subjetividad;
+- conservación de empates;
+- ordenamiento razonado;
+- capacidad de revisión;
+- capacidad de comparación entre ejecuciones.
+
+Prioriza no garantiza por sí solo:
+
+- optimalidad global;
+- verdad absoluta;
+- independencia real entre criterios;
+- ausencia de sesgo;
+- corrección de valores mal medidos;
+- corrección de niveles de prioridad de los aspectos mal definidos;
+- superioridad frente a métodos especializados.
+
+## La contradicción como resultado útil
+
+Si Prioriza produce un resultado que el decisor considera incorrecto,
+eso no implica necesariamente que el método falló. Puede indicar una
+contradicción entre los valores, niveles de prioridad de aspectos,
+criterios y preferencias declaradas.
+
+Por ejemplo, una organización puede afirmar que la seguridad es
+prioritaria, pero asignar niveles de prioridad de aspectos y criterios
+que favorecen siempre el costo o la rapidez. En ese caso, Prioriza puede
+revelar la distancia entre el discurso y la estructura real de decisión.
+
+La contradicción puede aparecer por varias causas:
+
+- faltan aspectos importantes;
+- los niveles de prioridad de los aspectos no representan la prioridad
+  real;
+- los valores fueron mal medidos;
+- la función de nivelación no representa el criterio deseado;
+- existen restricciones duras tratadas erróneamente como criterios
+  blandos;
+- la decisión intuitiva del usuario responde a un criterio que no fue
+  modelado.
+
+Así, Prioriza no solo ayuda a decidir. También ayuda a diagnosticar por
+qué una decisión no coincide con lo esperado.
+
+## Justificación pragmática general
+
+Prioriza se justifica como un método práctico cuando se cumplen estas
+condiciones:
+
+1.  Hay alternativas que deben priorizarse.
+2.  Hay aspectos que permiten valorarlas.
+3.  Los valores pueden transformarse en niveles de prioridad.
+4.  Los aspectos tienen una importancia relativa explícita.
+5.  El decisor acepta una agregación aditiva de contribuciones por
+    aspecto.
+6.  El resultado necesita ser trazable, reproducible y revisable.
+
+Bajo estas condiciones, Prioriza ofrece una estructura mínima de
+decisión:
+
+    comparar -> nivelar -> aplicar prioridad de aspectos -> sumar -> ordenar -> revisar
+
+Su fuerza no está en ocultar la complejidad de la decisión, sino en
+exponerla de forma manejable.

@@ -1,0 +1,127 @@
+# Límites y críticas
+
+Un documento serio sobre Prioriza debe tratar sus límites de forma
+explícita. Esto no debilita el método; lo hace defendible. Un método que
+promete decidir todo sin restricciones ni crítica termina siendo menos
+creíble.
+
+## Suma de niveles ordinales
+
+<!-- TODO: citation needed: ordinal aggregation, additive scoring limits, and rank-based MCDA critiques. -->
+
+La crítica principal es que Prioriza suma niveles que, en principio, son
+ordinales. Una escala ordinal indica orden, pero no necesariamente
+distancia igual entre niveles. Si nivel 1 es mejor que nivel 2, eso no
+implica automáticamente que la distancia entre 1 y 2 sea igual a la
+distancia entre 3 y 4.
+
+La defensa prudente es afirmar que Prioriza no suma magnitudes
+naturales, sino contribuciones decisionales construidas por el modelo.
+La suma es aceptable cuando el decisor acepta tratar los niveles como
+posiciones discretas de prioridad agregables para una decisión práctica.
+
+## Pérdida de información
+
+Al nivelar, se pierde información cardinal. Una diferencia pequeña y una
+diferencia grande pueden traducirse en niveles consecutivos. También
+puede ocurrir que valores distintos queden empatados si la función de
+nivelación los agrupa.
+
+Esto no siempre es un defecto. En contextos con datos inciertos o
+heterogéneos, la simplificación puede ser deseable. Pero debe
+reconocerse que Prioriza sacrifica sensibilidad cuantitativa a cambio de
+claridad ordinal.
+
+## Sensibilidad a niveles de prioridad de los aspectos
+
+El resultado puede depender fuertemente de los niveles de prioridad de
+los aspectos. Si los niveles de prioridad de los aspectos no representan
+la prioridad real de los aspectos, el resultado será formalmente
+correcto pero decisionalmente débil.
+
+Por eso los niveles de prioridad de los aspectos deben ser explícitos,
+justificables y revisables. La recursividad o métodos externos de
+ponderación pueden ayudar a derivarlos, pero no eliminan la
+responsabilidad de validarlos.
+
+## Rank reversal y dependencia del conjunto comparado
+
+<!-- TODO: citation needed: rank reversal in AHP/TOPSIS/MCDA and rank aggregation methods. -->
+
+Como la nivelación se hace dentro de la columna y respecto al conjunto
+de elementos presentes, agregar o eliminar alternativas puede cambiar
+niveles relativos. En un ranking estático esto puede ser criticado como
+rank reversal.
+
+En aplicaciones dinámicas, sin embargo, esta dependencia puede ser una
+propiedad esperada: si el contexto cambia, la prioridad también debe
+poder cambiar. La clave es distinguir entre uso estático, recurrente y
+dinámico.
+
+## Compensabilidad
+
+<!-- TODO: citation needed: compensatory vs non-compensatory multicriteria models and veto/constraint handling. -->
+
+La suma por niveles de prioridad de aspectos permite que un mal nivel en un aspecto sea compensado
+por buenos niveles en otros aspectos. Esto es aceptable en algunas
+decisiones, pero no en todas.
+
+Cuando existen condiciones no negociables, Prioriza debe separar
+restricciones duras de criterios blandos. Las alternativas inviables
+deben filtrarse antes de la priorización o marcarse como no elegibles.
+
+## Independencia entre aspectos
+
+La agregación aditiva funciona mejor cuando los aspectos pueden tratarse
+como contribuciones separables. Si los aspectos están fuertemente
+acoplados, la suma simple puede ocultar interacciones.
+
+En esos casos, puede ser necesario redefinir aspectos, crear subtablas,
+introducir reglas especiales o usar otro método complementario.
+
+## Riesgo de manipulación
+
+Como los niveles de prioridad de aspectos, criterios y niveles pueden
+definirse subjetivamente, también pueden manipularse para justificar una
+decisión ya tomada. La ingeniería inversa aumenta este riesgo si se usa
+para ajustar el modelo hasta que produzca el resultado deseado.
+
+La mitigación consiste en versionar tablas, documentar cambios, exigir
+justificación y conservar trazabilidad de valores, niveles de prioridad
+de aspectos, criterios y resultados.
+
+## No garantía de óptimo global
+
+<!-- TODO: citation needed: scheduling/timetabling heuristics, dispatching rules, constructive heuristics, and empirical validation. -->
+
+Prioriza produce una prioridad coherente con el modelo declarado. No
+garantiza por sí solo la solución óptima global de un problema
+combinatorio. En dominios como timetabling, puede ser una heurística
+útil, pero no una prueba de optimalidad.
+
+Esta validación no pertenece al núcleo matemático del método, pero sí es
+necesaria para demostrar valor organizacional. Prioriza puede ser
+coherente internamente y aun así necesitar ajustes si su uso real no
+mejora el proceso de decisión.
+
+Una validación empírica podría comparar datos históricos antes de usar
+Prioriza con datos posteriores: tareas planificadas contra tareas
+completadas, cantidad de tareas reprogramadas, tiempo de decisión,
+cumplimiento de fechas, conflictos de prioridad, retrabajo, estabilidad
+del plan y percepción de justicia o claridad por parte de los usuarios.
+
+Además de la validez interna del método, debe estudiarse su rendimiento
+práctico. En una empresa, no basta con que Prioriza produzca una
+prioridad coherente; también debe evaluarse si mejora la planificación,
+reduce arrastres, disminuye conflictos de prioridad, acelera decisiones
+o mejora la satisfacción del equipo.
+
+## Validación empírica del rendimiento
+
+## Resumen de límites
+
+Prioriza es más fuerte cuando se presenta como método práctico,
+transparente y auditable. Es más débil si se presenta como método
+universal, exacto o inmune a sesgos. Su validez depende de buenos
+aspectos, buenos valores, criterios adecuados, niveles de prioridad de los aspectos defendibles y una
+interpretación honesta del resultado.

@@ -1,0 +1,311 @@
+# Reutilización de tablas Prioriza
+
+La reutilización es una propiedad central de Prioriza. Consiste en
+definir una estructura de decisión una vez y aplicarla repetidamente a
+conjuntos cambiantes de elementos.
+
+La reutilización no debe confundirse con la recursividad. Reutilizar una
+tabla significa aplicar la misma tabla o plantilla a diferentes
+ejecuciones. Recursividad significa usar el resultado de una tabla como
+entrada, valor, nivel o nivel de prioridad de aspecto en otra tabla. La reutilización es más
+simple y más inmediata para entornos organizacionales.
+
+## Qué es una tabla Prioriza reutilizable
+
+Una tabla Prioriza reutilizable es una plantilla de decisión que
+conserva:
+
+- el propósito de la decisión;
+- el tipo de elementos que se van a priorizar;
+- los aspectos usados para evaluarlos;
+- las funciones de nivelación de cada aspecto;
+- los niveles de prioridad de los aspectos;
+- las reglas de desempate;
+- las restricciones previas, si existen;
+- la forma de interpretar la salida.
+
+La tabla no contiene necesariamente siempre los mismos elementos. Lo que
+se mantiene estable es la estructura de decisión.
+
+Ejemplo:
+
+    Tabla: Priorización semanal de tareas
+    Elementos: tareas abiertas del proyecto
+    Aspectos: urgencia, impacto, bloqueo, riesgo, esfuerzo, compromiso
+    Frecuencia: semanal
+    Salida: ranking de tareas por prioridad
+
+Cada semana las tareas pueden cambiar, pero la tabla puede seguir siendo
+la misma.
+
+## Por qué reutilizar
+
+En las organizaciones, muchas decisiones no ocurren una sola vez. Se
+repiten constantemente con elementos distintos:
+
+- priorizar tareas;
+- priorizar tickets de soporte;
+- seleccionar proveedores;
+- ordenar riesgos;
+- decidir controles de seguridad;
+- seleccionar requisitos para una iteración;
+- priorizar procesos a mejorar;
+- decidir qué deuda técnica atender;
+- ordenar iniciativas estratégicas;
+- seleccionar candidatos, propuestas o inversiones.
+
+Sin una estructura reutilizable, cada decisión se vuelve dependiente del
+momento, la presión, el jefe, la urgencia aparente o la intuición no
+documentada.
+
+La reutilización permite convertir decisiones recurrentes en procesos
+explícitos.
+
+## Reutilización como reducción de arbitrariedad
+
+Cuando una organización no tiene un método de priorización, las
+decisiones tienden a parecer arbitrarias. Una tarea puede pasar de una
+semana a otra sin explicación. Un ticket puede atenderse antes que otro
+porque alguien presionó más. Un proyecto puede recibir recursos porque
+parece más visible, no porque sea más importante.
+
+Una tabla Prioriza reutilizable reduce esa arbitrariedad porque obliga a
+declarar:
+
+    qué se evalúa,
+    con qué criterios,
+    con qué niveles de prioridad de los aspectos,
+    con qué reglas,
+    y con qué resultado.
+
+Esto no elimina la subjetividad, pero la hace visible y revisable.
+
+## Ejecución de una tabla reutilizable
+
+Cada aplicación concreta de una tabla Prioriza puede llamarse ejecución.
+
+Una ejecución contiene:
+
+- fecha y hora;
+- usuario o sistema que ejecuta;
+- versión de la tabla;
+- conjunto de elementos evaluados;
+- valores usados;
+- niveles calculados;
+- niveles de prioridad de aspectos aplicados;
+- resultado final;
+- explicación y trazabilidad.
+
+Esto permite comparar ejecuciones en el tiempo.
+
+Ejemplo:
+
+    Semana 21: tarea A queda en prioridad 1.
+    Semana 22: tarea A baja a prioridad 3 porque apareció una incidencia crítica.
+    Semana 23: tarea A vuelve a prioridad 1 porque ya está vencida y bloquea entrega.
+
+La decisión deja de ser una opinión momentánea y se convierte en un
+historial auditable.
+
+## Plantillas y versiones
+
+Una tabla reutilizable debe poder versionarse. Los criterios, niveles de prioridad de los aspectos y
+funciones de nivelación pueden cambiar con el tiempo. Si esos cambios no
+se registran, no se puede explicar por qué una decisión tomada bajo una
+versión produjo un resultado distinto a otra decisión posterior.
+
+Una plantilla Prioriza debe tener, como mínimo:
+
+    nombre
+    propósito
+    tipo de elemento
+    aspectos
+    funciones de nivelación
+    niveles de prioridad de los aspectos
+    reglas de desempate
+    versión
+    estado: borrador, activa, archivada
+
+La versión es importante porque permite decir:
+
+    esta decisión fue tomada con la tabla X, versión 1.3
+
+No basta con guardar el resultado. Hay que guardar también la estructura
+usada para producirlo.
+
+## Ejemplo: priorización de tareas de proyecto
+
+Una tabla para priorizar tareas de proyecto podría definirse así:
+
+| Aspecto | Interpretación | Criterio |
+|:---|:---|:---|
+| Fecha límite | Mientras más cercana o vencida, mayor prioridad | mínimo de días restantes |
+| Impacto cliente | Mientras mayor impacto, mayor prioridad | máximo |
+| Bloqueo | Mientras más tareas bloquea, mayor prioridad | máximo |
+| Riesgo de no hacerla | Mientras mayor riesgo, mayor prioridad | máximo |
+| Esfuerzo | Depende de la política: menor esfuerzo para quick wins o mayor esfuerzo si desbloquea entregables | configurable |
+| Compromiso externo | Si fue prometida, aumenta prioridad | máximo o regla |
+
+El resultado no solo ordena tareas. También explica por qué una tarea
+subió o bajó.
+
+## Ejemplo: priorización de tickets de soporte
+
+Una tabla para tickets podría usar:
+
+| Aspecto                        | Interpretación                            |
+|:-------------------------------|:------------------------------------------|
+| Severidad                      | Impacto técnico o funcional del incidente |
+| Urgencia                       | Tiempo máximo tolerable para resolver     |
+| Cliente afectado               | Importancia contractual o estratégica     |
+| Cantidad de usuarios afectados | Alcance del problema                      |
+| Riesgo operativo               | Consecuencia de no resolver               |
+| Antigüedad                     | Tiempo desde la creación                  |
+| Reincidencia                   | Si el problema se repite                  |
+
+En vez de decidir por presión del usuario más ruidoso, la organización
+decide con una estructura visible.
+
+## Ejemplo: priorización de riesgos
+
+Una tabla para riesgos podría usar:
+
+| Aspecto                | Interpretación                                  |
+|:-----------------------|:------------------------------------------------|
+| Probabilidad           | Qué tan probable es que ocurra                  |
+| Impacto                | Consecuencia si ocurre                          |
+| Detectabilidad         | Qué tan fácil es detectarlo antes del daño      |
+| Reversibilidad         | Qué tan fácil es recuperarse                    |
+| Exposición             | Cuánto tiempo o cuántos activos están expuestos |
+| Obligación regulatoria | Si existe presión legal o normativa             |
+| Costo de mitigación    | Costo de tratarlo                               |
+
+Aquí Prioriza no reemplaza un marco de gestión de riesgos. Puede actuar
+como mecanismo de priorización dentro de ese marco.
+
+## Reutilización y aprendizaje organizacional
+
+Cuando una tabla se reutiliza, la organización puede aprender.
+
+Puede observar:
+
+- qué criterios dominan siempre;
+- qué niveles de prioridad de los aspectos producen resultados no deseados;
+- qué aspectos casi nunca influyen;
+- qué criterios generan demasiados empates;
+- qué decisiones fueron luego consideradas correctas o incorrectas;
+- qué valores fueron difíciles de medir;
+- qué partes del modelo necesitan revisión.
+
+Esto convierte a Prioriza en una herramienta de aprendizaje
+organizacional. La tabla no solo decide. También registra cómo la
+organización decide.
+
+## Reutilización y gobernanza
+
+En contextos de gobernanza, la reutilización permite alinear decisiones
+con políticas institucionales.
+
+Si una organización declara que ciertos valores son importantes, esos
+valores deben aparecer en sus tablas de decisión. Si la organización
+dice que la seguridad, la continuidad, el bienestar del usuario o el
+cumplimiento normativo son prioritarios, esos aspectos deben tener
+presencia y nivel de prioridad explícito en las tablas correspondientes.
+
+Si no aparecen, Prioriza puede revelar una contradicción entre la
+política declarada y la práctica de decisión.
+
+## Reutilización en software
+
+En una implementación de software, la reutilización exige separar al
+menos tres conceptos:
+
+**Plantilla de decisión:** define la estructura estable.
+
+**Ejecución:** aplica la plantilla a un conjunto concreto de elementos
+en un momento dado.
+
+**Resultado:** almacena niveles, niveles de prioridad de los aspectos, sumas, empates, explicaciones y
+advertencias.
+
+Una arquitectura mínima podría incluir:
+
+    PriorizaTemplate
+    PriorizaAspect
+    PriorizaLevelingRule
+    PriorizaWeight
+    PriorizaRun
+    PriorizaRunItem
+    PriorizaResult
+    PriorizaExplanation
+
+Esta separación permite que la misma plantilla se aplique a muchas
+ejecuciones sin perder trazabilidad.
+
+## Reutilización en Odoo
+
+En Odoo, Prioriza podría utilizarse como motor de priorización para
+modelos existentes.
+
+Ejemplos:
+
+- project.task: priorización de tareas;
+- helpdesk.ticket: priorización de tickets;
+- crm.lead: priorización de oportunidades;
+- purchase.order o proveedores: selección y evaluación;
+- risk registers: priorización de riesgos;
+- quality.alert: priorización de problemas de calidad;
+- requirements: priorización de requisitos;
+- software inventory: priorización de releases, issues o deuda técnica.
+
+La tabla Prioriza no sustituye el modelo de Odoo. Opera sobre sus
+registros y devuelve una estructura de prioridad que puede almacenarse,
+mostrarse o usarse para ordenar acciones.
+
+## Reutilización frente a decisión por IA
+
+Una organización podría pedir a una IA que decida qué tarea, ticket o
+riesgo atender primero. Pero esa decisión dependería del prompt, del
+contexto disponible, del modelo usado y de una lógica parcialmente
+opaca.
+
+Una tabla Prioriza reutilizable ofrece otra estrategia: la IA puede
+ayudar a extraer valores, resumir información o explicar resultados,
+pero la decisión se calcula mediante una estructura aprobada y
+versionada.
+
+Esto permite una división de responsabilidades:
+
+    IA: interpretar, resumir, extraer, sugerir, explicar
+    Prioriza: calcular prioridad según criterios declarados
+    Humano: validar criterios, niveles de prioridad de aspectos, valores y decisiones finales
+
+La reutilización convierte a Prioriza en una pieza útil para sistemas
+asistidos por IA, especialmente cuando se necesita trazabilidad.
+
+## Reutilización no significa rigidez
+
+Una tabla reutilizable no debe ser rígida en el sentido negativo. Puede
+y debe evolucionar.
+
+Si una tabla produce malos resultados, se revisan sus aspectos, niveles de prioridad de los aspectos,
+funciones de nivelación o reglas de desempate. La ventaja es que la
+revisión ocurre sobre una estructura visible, no sobre intuiciones
+dispersas.
+
+La reutilización correcta combina estabilidad y mejora:
+
+    estabilidad para decidir de forma consistente
+    revisión para aprender y corregir el modelo
+
+## Resumen de la sección
+
+La reutilización de tablas Prioriza permite transformar decisiones
+recurrentes en estructuras explícitas, versionadas y auditables.
+
+No exige recursividad. Basta con definir una plantilla de decisión y
+aplicarla repetidamente a conjuntos cambiantes de elementos.
+
+En una organización, esta propiedad puede reducir arbitrariedad, mejorar
+trazabilidad, revelar contradicciones y crear aprendizaje sobre la forma
+real en que se toman decisiones.

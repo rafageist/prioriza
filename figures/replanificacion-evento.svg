@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Replanificación priorizada por evento</title>
+  <desc id="desc">Una tarea en curso y un evento urgente se comparan como cursos de acción antes de recalcular.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f3a44"/>
+    </marker>
+    <style>
+      .box { fill: #f7f9fb; stroke: #2f3a44; stroke-width: 2; rx: 8; }
+      .event { fill: #fff4df; stroke: #9b5a00; }
+      .context { fill: #edf4ff; stroke: #315c9c; }
+      .ok { fill: #eaf4ef; stroke: #1f6f4a; }
+      .text { font: 18px Arial, sans-serif; fill: #17212b; text-anchor: middle; }
+      .small { font: 14px Arial, sans-serif; fill: #34424f; text-anchor: middle; }
+      .arrow { stroke: #2f3a44; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="box" x="35" y="56" width="160" height="80"/>
+  <text class="text" x="115" y="90">Tarea B</text>
+  <text class="small" x="115" y="114">en curso</text>
+
+  <rect class="event" x="35" y="208" width="160" height="80" rx="8"/>
+  <text class="text" x="115" y="240">Evento C</text>
+  <text class="small" x="115" y="264">aparentemente urgente</text>
+
+  <rect class="context" x="270" y="72" width="185" height="200" rx="8"/>
+  <text class="text" x="362" y="108">Actualizar</text>
+  <text class="text" x="362" y="132">contexto</text>
+  <text class="small" x="362" y="166">avance de B</text>
+  <text class="small" x="362" y="190">costo de interrupción</text>
+  <text class="small" x="362" y="214">riesgo de postergar C</text>
+  <text class="small" x="362" y="238">umbral de estabilidad</text>
+
+  <rect class="box" x="525" y="50" width="170" height="244"/>
+  <text class="text" x="610" y="84">Cursos de acción</text>
+  <text class="small" x="610" y="120">continuar B</text>
+  <text class="small" x="610" y="146">pausar B y hacer C</text>
+  <text class="small" x="610" y="172">terminar B luego C</text>
+  <text class="small" x="610" y="198">delegar C</text>
+  <text class="small" x="610" y="224">acción mínima de C</text>
+  <text class="small" x="610" y="250">replanificar bloque</text>
+
+  <rect class="ok" x="745" y="98" width="125" height="140" rx="8"/>
+  <text class="text" x="808" y="138">Recalcular</text>
+  <text class="small" x="808" y="166">y explicar</text>
+  <text class="small" x="808" y="194">mantener o</text>
+  <text class="small" x="808" y="216">interrumpir</text>
+
+  <path class="arrow" d="M195 96 H268"/>
+  <path class="arrow" d="M195 248 H248 C258 248 264 235 270 225"/>
+  <path class="arrow" d="M455 172 H523"/>
+  <path class="arrow" d="M695 172 H743"/>
+</svg>

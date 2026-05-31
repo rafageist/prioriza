@@ -1,0 +1,104 @@
+# Introducción
+
+Prioriza surge como respuesta a un problema práctico: tomar decisiones
+ordenadas cuando existen varias alternativas, varios criterios,
+información incompleta o heterogénea, restricciones y necesidad de
+actuar. Su primera aplicación documentada se desarrolló en el contexto
+de la generación y organización de horarios docentes, dentro del
+proyecto Áncora GOH, trabajado entre 2005 y 2010.
+
+El problema original no era abstracto. Se trataba de construir horarios
+en un entorno donde había actividades docentes, profesores, grupos,
+lugares, recursos, restricciones de tiempo, preferencias,
+disponibilidades y limitaciones reales. Cada actividad debía ser
+colocada en un horario, pero no todas tenían las mismas posibilidades ni
+la misma urgencia de ser colocadas primero. Colocar una actividad
+modificaba las posibilidades de las demás. Por tanto, la decisión no
+podía reducirse a una lista estática preparada una sola vez.
+
+En ese contexto apareció una pregunta práctica: ¿qué actividad conviene
+colocar primero? La respuesta no podía depender solamente de un criterio
+aislado. Una actividad podía tener pocos profesores disponibles, otra
+podía tener pocos lugares posibles, otra podía requerir recursos
+imprescindibles, otra podía estar muy restringida por su asignatura o
+por el periodo docente. Era necesario combinar varias dimensiones del
+problema y producir un orden de prioridad que orientara la construcción
+del horario.
+
+Prioriza nació como una forma de convertir valores heterogéneos en
+niveles de prioridad, combinarlos con los niveles de prioridad de los
+aspectos y obtener una estructura de prioridad. En su forma inicial fue
+utilizado como parte de un algoritmo mayor: Prioriza ayudaba a decidir
+qué actividad debía intentarse colocar primero, mientras otros
+procedimientos específicos decidían dónde colocarla y con qué recursos.
+Después de cada colocación, el contexto cambiaba y era necesario
+recalcular.
+
+Esa aplicación histórica es importante, pero no agota el método. Con el
+tiempo se hizo evidente que la estructura de Prioriza podía aplicarse
+más allá de la generación de horarios. Allí donde existan alternativas,
+aspectos, valores, criterios de interpretación, niveles de prioridad de los aspectos y necesidad de
+priorizar, puede plantearse una tabla Prioriza. El método puede
+utilizarse para decisiones simples, como comparar dos opciones, o para
+decisiones más complejas, como priorizar tareas, riesgos, requisitos,
+proveedores, controles, iniciativas empresariales o acciones dentro de
+un proceso.
+
+La tesis central de este documento es que Prioriza no debe entenderse
+solamente como un algoritmo de timetabling ni como una simple tabla de
+puntuación. Debe entenderse como un marco de priorización ordinal por
+niveles de prioridad, capaz de combinar valores objetivos, subjetivos o
+derivados dentro de una estructura explícita, trazable y revisable.
+
+Esta afirmación requiere prudencia. Prioriza no inventa la decisión
+multicriterio, la ponderación ni las formas de agregación multicriterio.
+Todos esos elementos tienen antecedentes claros en el
+estado del arte. Su posible aporte está en la integración operativa:
+nivelar valores por criterio, conservar empates, expresar subjetividad
+mediante niveles de prioridad de aspectos y reglas, reutilizar tablas,
+componer resultados, aplicar ingeniería inversa y extender el método a
+rangos continuos mediante particiones por tramos.
+
+Por esa razón, este documento separa tres niveles:
+
+1.  El núcleo del método: elementos, aspectos, valores, criterios,
+    niveles, niveles de prioridad de los aspectos, agregación y resultado.
+2.  Las formas generales de uso: reutilización, composición,
+    recursividad, ingeniería inversa, comparación de ejecuciones y uso
+    iterativo con recálculo.
+3.  Las aplicaciones específicas: timetabling, asignación de recursos,
+    gestión empresarial, gobernanza, arquitectura, sistemas de
+    información e inteligencia artificial.
+
+Esta separación es necesaria para evitar dos errores. El primer error
+sería reducir Prioriza a su aplicación original en horarios docentes. El
+segundo sería inflarlo como si fuera una teoría universal que reemplaza
+a todos los métodos de decisión. Prioriza debe posicionarse en un punto
+más preciso: como un procedimiento práctico, explícito y auditable para
+construir prioridades cuando existe algo que decidir y alguna forma de
+valorar las alternativas.
+
+El documento tiene también una intención histórica. Prioriza fue
+concebido en un contexto de escasez de información y acceso limitado a
+bibliografía especializada. Por ello, algunas ideas fueron desarrolladas
+por necesidad práctica antes de poder compararse rigurosamente con
+métodos existentes. La reconstrucción actual exige revisar el método con
+mayor madurez: identificar qué partes coinciden con el estado del arte,
+qué partes son integraciones propias, qué partes requieren mejor
+justificación y qué afirmaciones deben evitarse.
+
+El objetivo final no es solo preservar una idea antigua. Es preparar una
+base formal para futuras publicaciones, implementaciones y herramientas.
+Antes de construir librerías, módulos de Odoo, APIs o servidores MCP
+para inteligencia artificial, es necesario definir con claridad qué es
+Prioriza, cómo opera, qué garantiza, qué no garantiza y bajo qué
+condiciones debe usarse.
+
+Prioriza se justifica, en última instancia, por una necesidad
+recurrente: las personas y las organizaciones toman decisiones
+constantemente, pero muchas veces lo hacen sin una estructura explícita.
+Cuando no existe un método especializado disponible o cuando la decisión
+está dispersa entre intuiciones, presiones y criterios implícitos,
+Prioriza ofrece una forma mínima de ordenar el problema: declarar
+alternativas, separar aspectos, valorar, nivelar, aplicar niveles de
+prioridad de aspectos, sumar, comparar, revisar y explicar.

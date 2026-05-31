@@ -1,0 +1,79 @@
+# Estado del arte
+
+<!-- TODO: citation needed: MCDA/MCDM classical methods: SAW/WSM, AHP/ANP, TOPSIS, ELECTRE, PROMETHEE, VIKOR, MAUT/MAVT/SMART. -->
+
+El estado del arte debe situar Prioriza con prudencia. El método no
+nació en un vacío conceptual. Antes de 2010 ya existían familias maduras
+de decisión multicriterio, ponderación, ranking, métodos ordinales,
+heurísticas de scheduling, programación por restricciones y
+metaheurísticas. Por tanto, la contribución de Prioriza no debe
+presentarse como invención de todos sus componentes, sino como una
+integración operacional específica.
+
+## Familias cercanas antes de 2010
+
+| **Familia** | **Qué comparte con Prioriza** | **Diferencia principal** |
+|:---|:---|:---|
+| WSM / SAW | Alternativas, criterios, niveles de prioridad de aspectos y suma ponderada. | Suele trabajar con valores normalizados o puntuaciones cardinales; Prioriza nivela ordinalmente por columna y conserva empates. |
+| AHP / ANP | Subjetividad explícita, prioridades, jerarquías y criterios ponderados. | Usa comparaciones pareadas y consistencia; Prioriza usa tabla de valores y nivelación por criterio. |
+| TOPSIS | Ranking multicriterio con niveles de prioridad de aspectos y criterios heterogéneos. | Decide por distancia a solución ideal y anti-ideal; Prioriza usa niveles ordinales y suma ponderada. |
+| ELECTRE / PROMETHEE | Preferencias, niveles de prioridad de aspectos, indiferencias y relaciones entre alternativas. | Son métodos de sobreclasificación; Prioriza usa agregación aditiva más simple y explícita. |
+| VIKOR | Ranking y compromiso entre criterios. | Usa lógica de solución compromiso y regret; Prioriza no usa ideal/anti-ideal ni regret formal. |
+| MAUT / MAVT / SMART | Valoración de alternativas y agregación de criterios. | Trabajan con funciones de utilidad o valor más cardinales; Prioriza usa niveles de prioridad. |
+| Borda / rank aggregation | Uso de posiciones ordinales agregadas. | Borda agrega rankings; Prioriza nivela cada criterio y luego pondera criterios. |
+| Métodos de timetabling | Construcción o mejora de horarios bajo restricciones. | Resuelven o buscan soluciones del dominio; Prioriza actúa como política de priorización dentro de un proceso. |
+
+## Métodos posteriores a 2010
+
+<!-- TODO: citation needed: post-2010 MCDA/MCDM methods and decision intelligence / explainable AI literature. -->
+
+Después de 2010 aparecieron o se popularizaron métodos como BWM, OPA,
+SWARA, FUCOM, EDAS, CODAS, MABAC, MARCOS, WASPAS y varias extensiones
+fuzzy, grey o neutrosophic. Muchos de estos métodos refinan la
+ponderación, la agregación, el tratamiento de incertidumbre o la forma
+de ranking.
+
+Esto no invalida Prioriza. Al contrario, ayuda a posicionarlo. Prioriza
+puede compararse con ellos como un marco más ligero y operativo,
+especialmente cuando se busca trazabilidad, baja carga de elicitation y
+facilidad de implementación.
+
+## Método más cercano por componente
+
+| **Componente de Prioriza** | **Parientes en el estado del arte** | **Lectura** |
+|:---|:---|:---|
+| Suma ponderada | SAW, WSM, MAVT, scoring models | No es nuevo. Debe reconocerse como componente heredado o convergente. |
+| Niveles ordinales | Rank aggregation, métodos ordinales, DEX, OPA | Hay antecedentes. Prioriza usa una forma propia de nivelación por columna. |
+| Empates conservados | Outranking, ranking con empates, métodos ordinales | No es único, pero es una propiedad explícita del procedimiento. |
+| Subjetividad explícita | AHP, SMART, MAUT, métodos de gobernanza | No es nuevo, pero Prioriza la operacionaliza en niveles de prioridad de aspectos, criterios y niveles. |
+| Reutilización de tablas | Scoring models empresariales, reglas de decisión | Común en la práctica, menos tratado como parte formal del método. |
+| Recursividad/composición | AHP/ANP, jerarquías de decisión, modelos compuestos | Hay analogías, pero Prioriza permite usar salidas como niveles de prioridad de aspectos, valores o referencias. |
+| Ingeniería inversa | Sensitivity analysis, preference learning, inverse optimization | Hay antecedentes parciales; en Prioriza conviene formularlo como análisis de condiciones. |
+| Recálculo dinámico | Heurísticas constructivas, dispatching rules, CSP heuristics | No es exclusivo, pero se integra con tabla multicriterio explícita. |
+
+## Qué no debe afirmarse
+
+- Que Prioriza inventó la decisión multicriterio.
+
+- Que Prioriza inventó la ponderación.
+
+- Que Prioriza inventó la suma ponderada.
+
+- Que Prioriza inventó los rankings ordinales.
+
+- Que Prioriza garantiza la decisión óptima universal.
+
+- Que Prioriza reemplaza a métodos especializados como AHP, TOPSIS,
+  ELECTRE, programación por restricciones o metaheurísticas.
+
+## Formulación académica prudente
+
+La formulación prudente es considerar Prioriza como un marco integrador
+de priorización ordinal ponderada. Su núcleo matemático se acerca a MCDA
+aditiva basada en niveles o rankings; su uso operativo se acerca a
+heurísticas constructivas y modelos de decisión trazables.
+
+La contribución defendible está en la integración: nivelación ordinal
+por criterio, empates explícitos, niveles de prioridad de aspectos,
+reutilización, composición, ingeniería inversa, variante continua por
+tramos y uso iterativo con recálculo.

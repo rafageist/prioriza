@@ -1,0 +1,198 @@
+# Problema general de decisión
+
+Prioriza parte de un problema de decisión no vacío. Esto significa que
+deben existir, como mínimo, alternativas y alguna forma de valoración.
+La valoración puede ser objetiva, subjetiva, intuitiva, normativa,
+derivada de otra tabla Prioriza o proveniente de experiencia experta.
+
+Una decisión no existe en abstracto. Decidir implica escoger, ordenar,
+aceptar, rechazar, posponer o asignar algo entre alternativas posibles.
+Si no hay alternativas, no hay decisión. Si hay alternativas pero no
+existe ningún criterio, valor, preferencia, restricción o intuición que
+permita distinguirlas, el problema carece de materia prima decisional.
+
+En Prioriza, un problema de decisión se modela mediante los siguientes
+conceptos.
+
+## Elemento o alternativa
+
+Un elemento es aquello que se desea priorizar, comparar o seleccionar.
+Puede ser una actividad docente, una tarea, un proyecto, un proveedor,
+una ciudad, un riesgo, un ticket, un requisito, un recurso, una política
+pública, una solución informática o cualquier objeto de decisión.
+
+Denotamos el conjunto de elementos como:
+
+    E = {e1, e2, ..., en}, con n >= 1
+
+Cuando n = 1, no existe competencia entre alternativas. El método puede
+describir el elemento, pero la priorización comparativa es trivial.
+
+## Aspecto, parámetro o criterio de evaluación
+
+Un aspecto es una dimensión desde la cual se evalúan los elementos.
+Puede expresar costo, distancia, riesgo, urgencia, satisfacción,
+disponibilidad, restricciones, impacto, valor estratégico, posibilidad,
+necesidad, calidad, duración o cualquier dimensión relevante para
+decidir.
+
+Denotamos el conjunto de aspectos como:
+
+    A = {a1, a2, ..., am}, con m >= 1
+
+Cuando m = 1, la decisión se reduce a priorizar por un solo aspecto. El
+problema puede ser simple, pero sigue siendo válido para Prioriza.
+
+## Valor
+
+Un valor es la información que tiene un elemento respecto a un aspecto.
+El valor del elemento ei en el aspecto aj se denota como vij.
+
+Los valores forman una matriz de valores:
+
+    V = [vij], matriz de n filas por m columnas
+
+Los valores pueden pertenecer a dominios heterogéneos: números, fechas,
+porcentajes, categorías, rangos, respuestas binarias, etiquetas
+cualitativas, escalas subjetivas o resultados derivados de otros
+métodos.
+
+Prioriza no exige que todos los valores tengan la misma unidad física.
+Lo que exige es que cada aspecto tenga una regla que permita interpretar
+sus valores como niveles de prioridad.
+
+## Criterio o función de nivelación
+
+Cada aspecto necesita una regla que indique cómo transformar sus valores
+en niveles de prioridad. A esta regla se le llama criterio o función de
+nivelación.
+
+La forma básica admite criterios de mínimo y máximo:
+
+- Criterio mínimo: el menor valor recibe mejor nivel de prioridad.
+- Criterio máximo: el mayor valor recibe mejor nivel de prioridad.
+
+Sin embargo, la forma general puede admitir funciones de nivelación más
+complejas: cercanía a un valor ideal, pertenencia a un rango,
+penalización por distancia, categorías ordinales, reglas de negocio o
+funciones definidas por expertos.
+
+Denotamos la función de nivelación del aspecto aj como Fj.
+
+## Nivel de prioridad
+
+El nivel de prioridad es el resultado de interpretar los valores de un
+aspecto según su función de nivelación. El nivel 1 representa la mayor
+prioridad dentro del aspecto. Los niveles mayores representan menor
+prioridad.
+
+El nivel del elemento ei respecto al aspecto aj se denota como lij.
+
+Los niveles forman una matriz de niveles:
+
+    L = [lij], matriz de n filas por m columnas
+
+El nivel de prioridad no es necesariamente una medida física ni una
+utilidad cardinal. Es una posición decisional dentro de un aspecto,
+construida para ordenar alternativas según una regla explícita.
+
+Esta unidad conceptual permite explicar la recursividad del método: una
+salida de Prioriza puede convertirse en nivel de prioridad de una
+columna, en nivel de prioridad de un aspecto o en referencia para otra
+ejecución. El resultado conserva la misma naturaleza decisional que
+varias de sus entradas.
+
+En terminología externa de MCDA, el nivel de prioridad del aspecto puede
+interpretarse como peso. Sin embargo, en Prioriza conviene conservar la
+interpretación propia: no se trata simplemente de multiplicar por un
+coeficiente, sino de combinar dos niveles de prioridad de naturaleza
+análoga situados en planos distintos del modelo.
+
+Una corrección terminológica importante es distinguir el lenguaje interno
+de Prioriza del lenguaje externo de otros métodos de decisión
+multicriterio. En Prioriza, el concepto central no es el peso como
+coeficiente independiente, sino el nivel de prioridad. Ese mismo concepto
+aparece en tres planos: el nivel de prioridad de un elemento dentro de un
+aspecto, el nivel de prioridad de un aspecto dentro de la decisión, y el
+nivel de prioridad resultante de un elemento dentro del conjunto
+comparado.
+
+## Nivel de prioridad del aspecto
+
+El nivel de prioridad del aspecto expresa la importancia relativa de un
+aspecto dentro de la decisión. En la forma original de Prioriza, no se
+trata de un concepto separado del nivel de prioridad, sino de la
+aplicación del mismo concepto al plano de los aspectos.
+
+Denotamos el nivel de prioridad del aspecto aj como paj.
+
+Los niveles de prioridad de los aspectos forman un vector:
+
+    pA = (pa1, pa2, ..., pam)
+
+En Prioriza, el nivel de prioridad del aspecto no debe entenderse como
+un simple coeficiente técnico neutral. Representa una decisión
+subjetiva, normativa, política, estratégica o derivada sobre la
+importancia de ese aspecto. Puede ser asignado directamente por el
+decisor, calculado mediante otra tabla Prioriza o producido por otro
+método de ponderación externo.
+
+## Prioridad global
+
+La prioridad global de un elemento se obtiene agregando sus
+contribuciones por aspecto.
+
+En la forma discreta básica, se calcula como:
+
+    si = suma(lij * paj), para j = 1..m
+
+Donde si representa la carga decisional agregada del elemento ei, lij es
+el nivel del elemento en el aspecto aj, y paj es el nivel de prioridad
+del aspecto aj.
+
+Como el nivel 1 representa mejor prioridad, el menor valor de si indica
+mayor prioridad global.
+
+## Empate
+
+Existe empate cuando dos o más elementos obtienen el mismo nivel o la
+misma prioridad global. Prioriza debe conservar el empate como resultado
+válido.
+
+El empate no es una falla del método. Significa que, bajo los valores,
+criterios y niveles de prioridad de aspectos definidos, esos elementos
+son indistinguibles o equivalentes para la decisión actual.
+
+## Solución
+
+En el núcleo del método, una solución puede ser:
+
+- un único elemento priorizado;
+- un conjunto de elementos con igual prioridad;
+- una lista ordenada de niveles de prioridad;
+- una estructura de prioridad por grupos;
+- un tramo óptimo o prioritario en la forma continua.
+
+Prioriza no debe definirse como un método que siempre devuelve un único
+ganador, sino como un método que devuelve una estructura de prioridad.
+
+Cuando Prioriza se aplica a un dominio concreto, esa estructura de
+prioridad puede usarse para ejecutar acciones específicas del dominio,
+como asignar recursos, ordenar tareas, mover actividades, seleccionar
+controles o recomendar intervenciones. Esas acciones pertenecen a la
+aplicación, no al núcleo del método.
+
+## Contexto de decisión
+
+El contexto de decisión contiene las condiciones bajo las cuales se
+aplica Prioriza: elementos disponibles, aspectos considerados, valores
+conocidos, criterios de nivelación, niveles de prioridad de los aspectos, restricciones previas y
+propósito de la priorización.
+
+En el núcleo del método, el contexto define qué se va a priorizar y bajo
+qué reglas.
+
+En aplicaciones dinámicas, el contexto puede cambiar después de cada
+acción. En ese caso puede hablarse de estados sucesivos del sistema,
+pero esa noción pertenece a la aplicación operacional del método. No
+toda aplicación de Prioriza requiere estados dinámicos.

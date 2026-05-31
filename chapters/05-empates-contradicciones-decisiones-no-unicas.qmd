@@ -1,0 +1,451 @@
+# Empates, contradicciones y decisiones no únicas
+
+Prioriza no debe entenderse como un método obligado a devolver siempre
+una alternativa única. Una decisión formal puede producir varios tipos
+de salida: una alternativa priorizada, un conjunto de alternativas
+equivalentes, una lista ordenada, una estructura de niveles, una
+advertencia de insuficiencia de criterios o una contradicción entre lo
+declarado y lo obtenido.
+
+Esta sección formaliza esos casos.
+
+## Decidir no siempre significa escoger un único elemento
+
+En el uso cotidiano, decidir suele asociarse con escoger una sola
+opción. Sin embargo, en un método de priorización, el resultado puede
+ser más rico. Prioriza puede decir:
+
+- este elemento tiene mayor prioridad;
+- estos dos o más elementos tienen igual prioridad;
+- este grupo pertenece al primer nivel de prioridad;
+- este otro grupo pertenece al segundo nivel;
+- no existen criterios suficientes para distinguir alternativas;
+- el resultado contradice las preferencias declaradas;
+- deben agregarse nuevos aspectos o reglas de desempate.
+
+Por tanto, Prioriza produce una estructura de prioridad, no
+necesariamente un ganador único.
+
+## Empate local
+
+Existe empate local cuando dos o más elementos tienen el mismo valor
+bajo un mismo aspecto y, por tanto, reciben el mismo nivel de prioridad
+en esa columna.
+
+Ejemplo con criterio mínimo:
+
+| Elemento | Valor | Nivel |
+|:---------|:------|:------|
+| A        | 10    | 1     |
+| B        | 10    | 1     |
+| C        | 15    | 2     |
+| D        | 30    | 3     |
+
+El empate entre A y B no debe romperse artificialmente. Si ambos tienen
+el mismo valor bajo ese aspecto, ambos reciben el mismo nivel.
+
+Este comportamiento es importante porque Prioriza no inventa diferencias
+donde el modelo no las ha definido.
+
+## Empate global
+
+Existe empate global cuando dos o más elementos obtienen la misma suma
+final de contribuciones por aspecto.
+
+Ejemplo:
+
+| Elemento | Aspecto 1 | Aspecto 2 | Total |
+|:---------|:----------|:----------|:------|
+| A        | 1         | 2         | 3     |
+| B        | 2         | 1         | 3     |
+| C        | 3         | 2         | 5     |
+
+Si los niveles de prioridad de los aspectos son iguales, A y B tienen la
+misma prioridad global. Prioriza debe devolver ambos como elementos de
+primer nivel.
+
+El empate global puede aparecer aunque los elementos no sean idénticos
+en cada aspecto. Basta con que la agregación por niveles de prioridad de
+aspectos produzca el mismo
+total.
+
+## El empate como solución válida
+
+Un empate no es una ausencia de decisión. Es una decisión con resultado
+no único.
+
+Cuando Prioriza devuelve un empate, afirma que, bajo los valores,
+niveles, criterios y niveles de prioridad de los aspectos definidos, las alternativas empatadas son
+equivalentes para la decisión actual.
+
+Eso puede conducir a varias acciones posteriores:
+
+1.  Aceptar cualquiera de las alternativas empatadas.
+2.  Ejecutar todas si los recursos lo permiten.
+3.  Dividir recursos entre ellas.
+4.  Aplicar un criterio secundario de desempate.
+5.  Agregar un nuevo aspecto a la tabla.
+6.  Escalar la decisión a juicio humano.
+7.  Posponer hasta obtener más información.
+
+El punto central es que el desempate no debe ocultarse dentro del método
+si no existe una razón explícita para romperlo.
+
+## Desempate
+
+El desempate es una decisión adicional. No debe confundirse con el
+resultado original de Prioriza.
+
+Si dos alternativas quedan empatadas y se introduce un criterio
+adicional para escoger una de ellas, entonces se ha modificado el modelo
+de decisión. Ese criterio puede ser legítimo, pero debe quedar
+explícito.
+
+Ejemplos de criterios de desempate:
+
+- orden de llegada;
+- menor costo operativo;
+- mayor urgencia legal;
+- mayor impacto estratégico;
+- menor esfuerzo;
+- decisión aleatoria;
+- juicio experto;
+- preferencia de un usuario autorizado;
+- regla institucional.
+
+Prioriza puede incorporar desempates de dos maneras:
+
+1.  Como aspectos adicionales dentro de la tabla principal.
+2.  Como una segunda tabla Prioriza aplicada solamente a los elementos
+    empatados.
+
+La segunda opción es importante porque evita sobrecargar la tabla
+principal con criterios que solo importan en casos de empate.
+
+### Desempate por azar
+
+Prioriza puede admitir el azar como regla de desempate, pero solo
+después de declarar explícitamente que existe equivalencia bajo el
+modelo actual. El azar no debe presentarse como una prioridad superior
+ni como justificación racional de que una alternativa es mejor que otra.
+
+Si A y B obtienen el mismo nivel de prioridad, el resultado
+metodológicamente correcto es el empate. Si la situación práctica obliga
+a escoger una de las dos alternativas, puede aplicarse una regla externa
+de desempate. Una de esas reglas puede ser el azar.
+
+Esta posibilidad debe usarse con cautela. El azar no debe ser la primera
+respuesta automática ante un empate; primero debe evaluarse si el empate
+es legítimo, si falta un aspecto relevante o si conviene aceptar la
+equivalencia. El azar puede ser razonable
+cuando el empate es legítimo, cuando agregar nuevos aspectos cuesta más
+que el valor de la decisión, cuando se quiere evitar favoritismo o
+cuando el sistema necesita explorar soluciones alternativas. No debe
+usarse para ocultar un modelo incompleto ni para evitar la revisión de
+criterios importantes.
+
+La explicación debe conservar la diferencia entre prioridad y selección
+operativa. No debe decirse que A ganó si A fue seleccionada
+aleatoriamente entre opciones empatadas. Debe decirse que A y B tienen
+la misma prioridad bajo el modelo, y que A fue seleccionada por una
+regla de desempate aleatorio.
+
+En software, el desempate aleatorio debe registrarse: alternativas
+empatadas, regla aplicada, usuario o política que la permitió, fecha, y
+si corresponde, semilla o evidencia reproducible del sorteo. Esto
+protege la trazabilidad del método y evita que el azar se convierta en
+una caja negra secundaria.
+
+![Desempate por azar como regla externa a la estructura de prioridad.](../figures/desempate-azar.svg){#fig-desempate-azar}
+
+@fig-desempate-azar resume la regla: el azar selecciona operativamente
+entre alternativas equivalentes, pero no modifica la prioridad declarada
+por el modelo.
+
+## Insuficiencia de criterios
+
+Existe insuficiencia de criterios cuando las alternativas no pueden
+distinguirse porque faltan aspectos relevantes o porque los valores
+disponibles no capturan diferencias importantes.
+
+La insuficiencia puede manifestarse de varias formas:
+
+- demasiados empates;
+- resultados que contradicen sistemáticamente la intuición experta;
+- alternativas claramente distintas que aparecen como equivalentes;
+- decisiones que dependen de factores no modelados;
+- necesidad constante de intervención manual.
+
+En estos casos, el problema no es necesariamente el cálculo de Prioriza.
+Puede ser que el modelo esté incompleto.
+
+Prioriza debe permitir identificar esa situación y formular una pregunta
+metodológica:
+
+    ¿Qué aspecto falta para que esta decisión sea distinguible?
+
+## Contradicción
+
+Una contradicción aparece cuando el resultado obtenido por Prioriza
+entra en conflicto con una preferencia, política, expectativa o
+intuición declarada.
+
+Ejemplo: una empresa afirma que la seguridad es el criterio más
+importante, pero sus niveles de prioridad de aspectos y reglas producen
+siempre decisiones que favorecen costo y rapidez por encima de
+seguridad.
+
+En ese caso, Prioriza no solo produce un ranking. También revela una
+tensión entre el discurso y la estructura real de decisión.
+
+La contradicción puede aparecer en varios niveles:
+
+- contradicción entre valores declarados y niveles de prioridad de los aspectos asignados;
+- contradicción entre criterios de nivelación y objetivos reales;
+- contradicción entre decisión intuitiva y modelo explícito;
+- contradicción entre política institucional y práctica operativa;
+- contradicción entre resultados esperados y valores disponibles;
+- contradicción entre restricciones duras y criterios blandos.
+
+## La contradicción no siempre es un error
+
+Una contradicción no significa automáticamente que Prioriza esté
+equivocado.
+
+Puede significar que el modelo está mostrando algo que antes estaba
+oculto. La decisión intuitiva puede estar usando un criterio no
+declarado. La política oficial puede no coincidir con los niveles de
+prioridad de los aspectos reales. Los valores disponibles pueden estar
+mal medidos. La función de nivelación puede no representar lo que se
+quería representar.
+
+Por eso, una contradicción debe tratarse como una señal de análisis.
+
+Ante una contradicción, conviene preguntar:
+
+1.  ¿Los valores usados son correctos?
+2.  ¿La función de nivelación representa el criterio real?
+3.  ¿Los niveles de prioridad de los aspectos representan la prioridad
+    declarada?
+4.  ¿Faltan aspectos importantes?
+5.  ¿Hay restricciones duras tratadas como criterios blandos?
+6.  ¿La intuición del decisor contiene información que no fue modelada?
+7.  ¿El resultado contradice la política o revela la política real?
+
+## Contradicción subjetiva y objetividad operativa
+
+Prioriza combina subjetividad y objetividad. Los valores pueden ser
+objetivos, pero su interpretación como prioridad depende de criterios.
+Los niveles de prioridad de los aspectos pueden ser subjetivos, pero una
+vez declarados producen resultados reproducibles.
+
+Esto permite distinguir dos planos:
+
+    subjetividad declarada: niveles de prioridad de aspectos, criterios, preferencias, reglas, políticas
+    objetividad operativa: cálculo reproducible a partir de lo declarado
+
+Prioriza no elimina la subjetividad. La convierte en una parte visible
+del modelo. Esa visibilidad permite discutirla, modificarla, auditarla y
+compararla.
+
+## Decisión vacía, decisión insuficiente y decisión empatada
+
+Conviene diferenciar tres casos que pueden confundirse.
+
+**Decisión vacía:** no hay alternativas o no hay nada que valorar.
+Prioriza no aplica.
+
+**Decisión insuficiente:** hay alternativas, pero faltan criterios,
+valores o preferencias suficientes para distinguirlas de manera útil.
+Prioriza puede indicar insuficiencia del modelo.
+
+**Decisión empatada:** hay alternativas, criterios y valores, pero el
+resultado formal muestra equivalencia bajo el modelo. Prioriza aplica y
+devuelve empate legítimo.
+
+Esta distinción evita exigir al método una salida única cuando no hay
+base para producirla.
+
+## Estructura de salida recomendada
+
+Para conservar esta riqueza, la salida de Prioriza debe incluir más que
+una alternativa ganadora.
+
+Una salida completa debería incluir:
+
+- tabla de valores original;
+- funciones de nivelación usadas;
+- tabla de niveles;
+- niveles de prioridad de los aspectos;
+- tabla de contribuciones por aspecto;
+- suma final por elemento;
+- grupos de prioridad;
+- empates locales;
+- empates globales;
+- advertencias de insuficiencia;
+- explicación del resultado;
+- aspectos dominantes;
+- comparación con alternativas cercanas;
+- sensibilidad básica del resultado;
+- preguntas de revisión;
+- posibles contradicciones detectadas.
+
+En software, esto significa que Prioriza no debe devolver solamente un
+ID o una fila. Debe devolver un objeto de decisión trazable.
+
+## Ejemplo de salida por niveles
+
+Supóngase la siguiente suma final:
+
+| Elemento | Total |
+|:---------|:------|
+| A        | 4     |
+| B        | 4     |
+| C        | 7     |
+| D        | 9     |
+| E        | 9     |
+
+La salida estructurada sería:
+
+| Nivel final | Elementos | Total |
+|:------------|:----------|:------|
+| 1           | A, B      | 4     |
+| 2           | C         | 7     |
+| 3           | D, E      | 9     |
+
+Esta salida es más informativa que decir simplemente que A ganó. A y B
+comparten el primer nivel, D y E comparten el tercero, y C queda en un
+nivel intermedio.
+
+## Importancia metodológica de no forzar el resultado
+
+Un método de decisión pierde valor si oculta empates, fuerza desempates
+arbitrarios o presenta como objetivas decisiones que dependen de
+criterios no declarados.
+
+Prioriza debe hacer lo contrario: mostrar hasta dónde llega el modelo y
+dónde empieza la necesidad de nuevos criterios, juicio humano o decisión
+política.
+
+En este sentido, el método no solo ayuda a decidir. También ayuda a
+saber cuándo no se debe fingir una diferencia que el modelo no puede
+justificar.
+
+Prioriza ataca esa brecha de coherencia decisional. Si el resultado del
+método dice B, pero el humano insiste en A, la pregunta no es solo cuál
+opción es correcta, sino qué contradicción existe entre los valores
+declarados, los niveles de prioridad asignados y la decisión intuitiva.
+El método no elimina el error humano; lo hace visible y discutible.
+
+Uno de los errores humanos más frecuentes al decidir es actuar en contra
+del propio sistema de valores declarado. Una persona o una organización
+puede decir que prioriza seguridad, impacto futuro o bloqueo del equipo,
+pero terminar actuando por urgencia aparente, presión inmediata,
+facilidad o visibilidad.
+
+## Brecha de coherencia decisional
+
+Si el nuevo aspecto tampoco desempata, el proceso continúa: se agrega
+otro aspecto, se revisan los niveles de prioridad de los aspectos, se
+acepta el empate o se reconoce que falta información. En este sentido,
+Prioriza no solo genera respuestas; también genera preguntas útiles para
+completar el modelo de decisión.
+
+Prioriza puede comenzar con una estructura mínima y refinarse
+progresivamente. Si dos tiendas están a la misma distancia, el aspecto
+distancia produce empate. Ese empate no es un fallo: genera la siguiente
+pregunta. ¿Qué otro aspecto importa ahora? Puede ser precio, seguridad,
+disponibilidad del producto, calidad del servicio, horario o preferencia
+personal.
+
+## Refinamiento progresivo de la decisión
+
+Prioriza debe convertir esa tensión en una pregunta revisable: ¿qué está
+viendo la intuición que no aparece en la tabla?, ¿qué aspecto falta?,
+¿qué nivel de prioridad fue asignado de forma incoherente?, ¿el
+resultado revela un sesgo operativo o una preferencia oculta?
+
+Cuando el resultado de Prioriza contradice la intuición del usuario, no
+debe tratarse automáticamente como error del método ni como error del
+usuario. Esa contradicción puede indicar que falta un aspecto, que un
+valor fue mal estimado, que el nivel de prioridad de un aspecto no
+representa la política real, o que la intuición está usando información
+no declarada.
+
+## Intuición, resultado y revisión del modelo
+
+Una explicación útil no debe decir solamente “A ganó porque tiene menor
+total”. Debe decir, por ejemplo: “A queda primero porque vence antes,
+bloquea más trabajo futuro y tiene menos margen de postergación. B
+parece urgente, pero conserva más alternativas de ejecución y no bloquea
+a otros elementos”.
+
+La salida debe incluir una justificación humana: qué alternativa fue
+priorizada, qué aspectos fueron decisivos, por qué otras alternativas
+quedaron debajo, qué empates existen y qué tendría que cambiar para
+alterar el resultado. La explicación matemática es necesaria para
+auditar; la explicación humana es necesaria para aceptar, discutir y
+corregir.
+
+Prioriza no debe limitarse a devolver una prioridad calculada. Si el
+usuario recibe únicamente la frase “atienda esta tarea primero”, el
+método puede ser percibido como una caja negra, incluso cuando
+internamente conserva todos los valores, niveles y operaciones.
+
+## Explicabilidad humana del resultado
+
+La trazabilidad técnica y la explicación humana no son lo mismo. La
+trazabilidad permite reconstruir valores, criterios, funciones de
+nivelación, niveles de prioridad de aspectos, contribuciones por aspecto
+y suma final. Esa reconstrucción es necesaria para auditar, pero no
+alcanza para que una persona entienda por qué conviene actuar de una
+forma y no de otra.
+
+Una explicación humana debe traducir la estructura de prioridad en
+razones revisables. Debe indicar qué alternativa queda recomendada, qué
+aspectos dominaron el resultado, por qué la alternativa siguiente no
+quedó primera, qué empates existen, qué contradicciones aparecen y qué
+datos o niveles podrían cambiar el orden. La explicación no debe
+presentarse como magia ni como intuición artificial: se deriva de los
+valores declarados, las funciones de nivelación, los niveles de prioridad
+de los aspectos y la tabla resultante.
+
+Una salida explicativa puede tener esta forma:
+
+![Capa de explicación humana derivada del cálculo Prioriza.](../figures/explicacion-humana.svg){#fig-explicacion-humana}
+
+Como muestra @fig-explicacion-humana, la explicación no reemplaza la
+trazabilidad técnica; la traduce en razones, comparaciones y preguntas
+que el usuario puede revisar.
+
+```text
+Recomendación: enfocar la tarea A.
+Razón principal: A tiene menor margen de postergación y bloquea más
+trabajo futuro.
+Por qué no B: B parece urgente, pero conserva más alternativas de
+ejecución y su efecto de bloqueo es menor.
+Qué cambiaría el resultado: si el impacto en cliente tuviera un nivel de
+prioridad de aspecto mayor, B podría subir.
+Preguntas de revisión: ¿existe un compromiso con cliente no modelado?;
+¿los niveles de prioridad de los aspectos reflejan la política real?
+```
+
+Cuando la intuición contradice el resultado, Prioriza no debe ocultar la
+tensión. Debe formularla como diagnóstico: la intuición puede contener
+conocimiento no modelado, pero también puede expresar sesgo, presión o
+costumbre. La respuesta correcta no es obedecer ciegamente al cálculo ni
+descartarlo; es revisar qué información falta o qué parte de la
+estructura de prioridad no representa la decisión real.
+
+## Resumen de la sección
+
+Prioriza puede producir decisiones no únicas. Esto no es una debilidad;
+es una propiedad necesaria de un método transparente.
+
+Los empates indican equivalencia bajo el modelo. Las contradicciones
+indican tensión entre valores, niveles de prioridad de aspectos,
+criterios, expectativas o políticas. La insuficiencia de criterios
+indica que el modelo necesita más información o mejor estructura.
+
+La salida correcta de Prioriza debe conservar estos resultados en lugar
+de ocultarlos.

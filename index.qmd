@@ -1,0 +1,10 @@
+# Prefacio
+
+Este libro Quarto es la fuente editable canónica del Método Prioriza.
+
+El material conceptual más reciente fue archivado como DOCX en
+`archive/source-docx/` y convertido a capítulos Quarto para continuar el
+trabajo de forma versionable, revisable y reproducible.
+
+Los archivos generados por renderizado deben producirse en `_output/` y no se
+versionan.

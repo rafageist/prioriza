@@ -1,53 +1,91 @@
-﻿name: Build Prioriza PDF
+name: Release Quarto PDF
 
 on:
+  push:
+    branches:
+      - master
+      - main
   workflow_dispatch:
 
 jobs:
-  generate-pdf:
+  release:
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Install Pandoc and dependencies
+      - name: Read manifest version
+        id: manifest
         run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended fonts-dejavu-core
+          VERSION=$(python - <<'PY'
+          import pathlib
+          import re
 
-      - name: Set version info
-        run: |
-          VERSION=$(python -c "import pathlib,re; default='0.0.0'; path=pathlib.Path('manifest.yml'); text=path.read_text(encoding='utf-8') if path.exists() else ''; match=re.search(r'^version:\s*(.+)$', text, re.MULTILINE); value=(match.group(1).strip() if match else default); value=value.strip('\"').strip(\"'\"); print(value)")
-          echo "BOOK_VERSION=$VERSION" >> $GITHUB_ENV
-          echo "BOOK_TAG=$VERSION" >> $GITHUB_ENV
-          echo "BOOK_DATE=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+          text = pathlib.Path("manifest.yml").read_text(encoding="utf-8")
+          match = re.search(r"^version:\s*['\"]?([^'\"\n]+)['\"]?\s*$", text, re.MULTILINE)
+          if not match:
+              raise SystemExit("manifest.yml does not contain a version field")
+          print(match.group(1).strip())
+          PY
+          )
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Ensure version tag is unique
+      - name: Ensure release tag is new
         run: |
-          git fetch --tags
-          if git rev-parse "$BOOK_TAG" >/dev/null 2>&1; then
-            echo "Tag $BOOK_TAG already exists. Update manifest.yml version before rerunning."
+          git fetch --tags --force
+          if git rev-parse "${{ steps.manifest.outputs.tag }}" >/dev/null 2>&1; then
+            echo "Tag ${{ steps.manifest.outputs.tag }} already exists. Update manifest.yml before releasing."
             exit 1
           fi
 
-      - name: Build PDF
-        run: bash scripts/build_pdf.sh
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Upload PDF as artifact
+      - name: Install PDF dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+          quarto install tinytex --update-path
+
+      - name: Render HTML
+        run: quarto render --to html
+
+      - name: Preserve HTML output
+        run: |
+          rm -rf quarto-html-output
+          cp -R _output quarto-html-output
+
+      - name: Render PDF
+        run: quarto render --to pdf
+
+      - name: Prepare release PDF
+        run: |
+          PDF=$(find _output -maxdepth 1 -type f -name '*.pdf' | head -n 1)
+          if [ -z "$PDF" ]; then
+            echo "No PDF was generated under _output/."
+            exit 1
+          fi
+          cp "$PDF" "prioriza-method-${{ steps.manifest.outputs.version }}.pdf"
+
+      - name: Upload Quarto output artifact
         uses: actions/upload-artifact@v4
         with:
-          name: prioriza-method
-          path: prioriza-method-*.pdf
+          name: prioriza-quarto-output-${{ steps.manifest.outputs.version }}
+          path: |
+            quarto-html-output/
+            prioriza-method-${{ steps.manifest.outputs.version }}.pdf
+          if-no-files-found: error
 
-      - name: Create GitHub Release with PDF
-        uses: softprops/action-gh-release@v1
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.BOOK_TAG }}
-          name: "Prioriza Method - v${{ env.BOOK_VERSION }}"
-          body: "Automated PDF export of the Prioriza Method theoretical corpus."
-          files: "prioriza-method-*.pdf"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.manifest.outputs.tag }}
+          name: "Prioriza Method - ${{ steps.manifest.outputs.version }}"
+          body: "Automated Quarto PDF release for Prioriza Method ${{ steps.manifest.outputs.version }}."
+          files: prioriza-method-${{ steps.manifest.outputs.version }}.pdf

@@ -1,0 +1,122 @@
+# Propósito, tesis y posicionamiento
+
+## Propósito del documento
+
+Este documento tiene como propósito reconstruir, formalizar y posicionar
+el método Prioriza como un marco de priorización y decisión aplicable a
+problemas prácticos, especialmente aquellos donde existen alternativas,
+criterios heterogéneos, subjetividad explícita y necesidad de
+trazabilidad. Los dominios concretos de aplicación —como asignación de
+recursos, timetabling, gestión empresarial, gobernanza o inteligencia
+artificial— deben tratarse como aplicaciones del método, no como parte
+de su definición esencial.
+
+La primera meta no es construir una librería ni una aplicación, sino
+fijar la teoría: qué es Prioriza, qué no es, qué problema resuelve, cómo
+se justifica, cómo se compara con el estado del arte y bajo qué
+condiciones puede utilizarse de manera responsable.
+
+## Tesis central preliminar
+
+Prioriza es un marco de priorización ordinal por niveles de prioridad
+que transforma valores objetivos, subjetivos o derivados en niveles de
+prioridad por criterio, preserva empates, combina dichos niveles con los
+niveles de prioridad de los aspectos y produce una estructura de
+prioridad trazable, reutilizable y ajustable. En terminología externa de
+decisión multicriterio, esta operación puede describirse como
+ponderación; en la terminología propia de Prioriza, el concepto central
+sigue siendo el nivel de prioridad.
+
+Como aplicación operacional, Prioriza puede utilizarse dentro de
+algoritmos constructivos o procesos dinámicos, por ejemplo en asignación
+de recursos o timetabling. En esos casos se evalúa el estado del
+problema, se priorizan elementos pendientes, se ejecuta una acción del
+dominio y se recalcula si el estado cambia. Esta aplicación dinámica es
+importante históricamente, pero no debe confundirse con la definición
+esencial del método.
+
+Su aporte no está en inventar la decisión multicriterio, los niveles de
+prioridad de los aspectos ni la suma por niveles de prioridad de aspectos como se conocen en otros
+métodos. Su aporte potencial está en integrar, de manera simple y
+operativa, nivelación ordinal por criterio, niveles de prioridad de
+aspectos, subjetividad explícita, conservación de empates, reutilización
+de tablas, recursividad, análisis inverso y variante continua por
+tramos. Las aplicaciones dinámicas deben presentarse como usos del
+método en dominios específicos.
+
+## Formulación prudente del posicionamiento
+
+Prioriza no pretende reemplazar métodos como AHP, TOPSIS, ELECTRE,
+PROMETHEE, VIKOR, programación por restricciones, graph coloring,
+metaheurísticas de timetabling ni marcos empresariales como BPM, TOGAF,
+ITIL 4, NIST, RUP o UML.
+
+Prioriza puede presentarse como una capa de decisión y priorización que
+puede operar dentro de esos métodos, marcos o sistemas cuando se
+necesita tomar decisiones recurrentes, explicables, auditables y
+ajustables.
+
+## Principios iniciales
+
+1.  **Principio de decisión no vacía**
+
+- Prioriza requiere alternativas y al menos una forma de valoración. Sin
+  alternativas no hay decisión. Sin valores, criterios, preferencias,
+  restricciones, intuición o información derivada, no hay materia prima
+  para priorizar.
+
+2.  **Principio de información derivada**
+
+- Prioriza puede crear información decisional nueva, como rankings,
+  empates, contradicciones, justificaciones y prioridades, pero no crea
+  información desde la nada. Toda salida deriva de valores, criterios,
+  niveles, niveles de prioridad de los aspectos o reglas previamente definidos.
+
+3.  **Principio de nivelación ordinal**
+
+- Los valores de cada aspecto se transforman en niveles de prioridad. El
+  nivel 1 representa la mejor prioridad dentro del criterio. Los empates
+  conservan el mismo nivel.
+
+4.  **Principio de subjetividad explícita**
+
+- La subjetividad no se elimina ni se oculta. Se expresa en niveles de
+  prioridad de los aspectos, criterios de nivelación, reglas, niveles
+  dados, preferencias, políticas y decisiones de modelado.
+
+5.  **Principio de empate legítimo**
+
+- Prioriza no está obligado a producir un único ganador. Si dos o más
+  alternativas son indistinguibles bajo los criterios definidos, el
+  empate es un resultado válido.
+
+6.  **Principio de trazabilidad**
+
+- Toda prioridad debe poder explicarse a partir de sus valores, niveles,
+  niveles de prioridad de los aspectos, criterios y operaciones.
+
+7.  **Principio de reutilización**
+
+- Una tabla Prioriza puede definirse como plantilla de decisión y
+  aplicarse repetidamente a conjuntos cambiantes de elementos.
+
+8.  **Principio de recursividad acotada**
+
+- Una salida de Prioriza puede convertirse en entrada, nivel o nivel de prioridad del aspecto para
+  otra aplicación de Prioriza. Esta recursividad debe ser finita,
+  explícita y controlada.
+
+9.  **Principio de separación entre método y dominio**
+
+- La definición esencial de Prioriza debe separarse de sus aplicaciones.
+  Timetabling, asignación de recursos, priorización de tareas, selección
+  de proveedores, gobernanza empresarial o inteligencia artificial son
+  dominios donde el método puede aplicarse, pero no forman parte de su
+  núcleo conceptual.
+
+10. **Principio de extensión operacional**
+
+Prioriza puede integrarse en procesos dinámicos donde el estado cambia
+después de cada acción. En esos casos, la recomputación, la asignación
+de soluciones o la preservación de alternativas futuras pertenecen a la
+aplicación operacional del método, no a su definición básica.

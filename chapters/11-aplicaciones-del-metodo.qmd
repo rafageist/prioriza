@@ -1,0 +1,425 @@
+# Aplicaciones del método
+
+Las aplicaciones del método son dominios concretos donde Prioriza puede
+utilizarse para estructurar decisiones. No forman parte del núcleo
+conceptual ni de las formas generales de uso. Son contextos donde el
+método se instancia con elementos, aspectos, valores, criterios y
+niveles de prioridad de aspectos propios del dominio.
+
+Esta distinción es importante. Prioriza no es, por definición, un método
+de timetabling, un sistema de tickets, un gestor de riesgos, una
+herramienta de arquitectura empresarial ni un motor de inteligencia
+artificial. Puede operar dentro de esos contextos como mecanismo de
+priorización.
+
+## Criterio para identificar una aplicación válida
+
+Un dominio es candidato a usar Prioriza cuando cumple estas condiciones:
+
+1.  Existen elementos o alternativas que deben compararse.
+2.  Existen aspectos relevantes para evaluar esos elementos.
+3.  Los aspectos pueden recibir valores objetivos, subjetivos, derivados
+    o estimados.
+4.  Los valores pueden transformarse en niveles de prioridad.
+5.  Los aspectos tienen distinta importancia o requieren niveles de
+    prioridad explícitos.
+6.  El resultado necesita ser explicable, revisable o auditable.
+
+Si no hay alternativas, no hay decisión. Si no hay valoración posible,
+Prioriza no tiene materia prima. Si hay alternativas y criterios, pero
+existe un método especializado más adecuado y disponible, Prioriza puede
+usarse como complemento, método de arranque, método de comparación o
+capa de trazabilidad.
+
+## Priorización de tareas
+
+Una de las aplicaciones más directas es la priorización de tareas.
+
+Elementos:
+
+    tareas pendientes
+
+Aspectos posibles:
+
+- urgencia;
+- fecha límite;
+- impacto en el cliente;
+- bloqueo de otras tareas;
+- riesgo de no ejecutarla;
+- esfuerzo estimado;
+- valor estratégico;
+- compromiso externo;
+- dependencia técnica;
+- disponibilidad del responsable.
+
+La salida puede usarse para ordenar una lista de trabajo, planificar una
+semana, justificar por qué una tarea se posterga o comparar prioridades
+entre equipos.
+
+Prioriza no reemplaza la gestión de proyectos. Aporta una política
+explícita para ordenar decisiones dentro de esa gestión.
+
+## Priorización de tickets e incidencias
+
+En soporte, helpdesk u operaciones, los tickets suelen priorizarse por
+urgencia aparente, presión del usuario o criterios informales. Prioriza
+puede convertir esa decisión en una estructura explícita.
+
+Elementos:
+
+    tickets, incidencias, solicitudes o problemas reportados
+
+Aspectos posibles:
+
+- severidad;
+- cantidad de usuarios afectados;
+- cliente afectado;
+- impacto económico;
+- riesgo operativo;
+- antigüedad;
+- recurrencia;
+- existencia de workaround;
+- cumplimiento de SLA;
+- dependencia de terceros.
+
+La salida permite separar prioridad real de ruido operacional. También
+permite explicar por qué un ticket aparentemente urgente puede quedar
+por debajo de otro con mayor impacto o riesgo.
+
+## Priorización de riesgos
+
+En gestión de riesgos, Prioriza puede ayudar a ordenar riesgos o
+tratamientos de riesgo.
+
+Elementos:
+
+    riesgos, amenazas, vulnerabilidades, controles o tratamientos
+
+Aspectos posibles:
+
+- probabilidad;
+- impacto;
+- exposición;
+- detectabilidad;
+- reversibilidad;
+- criticidad del activo;
+- obligación regulatoria;
+- costo de mitigación;
+- tiempo de implementación;
+- dependencia de otros controles.
+
+El método no reemplaza un marco de riesgos. Puede operar como mecanismo
+de priorización dentro del marco.
+
+## Selección de proveedores o soluciones
+
+Prioriza puede aplicarse a la selección de proveedores, herramientas,
+paquetes de software o soluciones tecnológicas.
+
+Elementos:
+
+    proveedores, productos, servicios, plataformas o soluciones candidatas
+
+Aspectos posibles:
+
+- costo;
+- calidad;
+- soporte;
+- riesgo contractual;
+- experiencia del proveedor;
+- compatibilidad técnica;
+- facilidad de implementación;
+- dependencia futura;
+- cumplimiento normativo;
+- satisfacción de usuarios;
+- disponibilidad local.
+
+Esta aplicación fue una de las extensiones naturales del método después
+del problema original de horarios: la misma lógica de comparar elementos
+bajo varios aspectos puede utilizarse para decidir entre soluciones
+informáticas.
+
+## Priorización de requisitos
+
+En ingeniería de software, no todos los requisitos pueden implementarse
+al mismo tiempo. Prioriza puede apoyar la selección de requisitos para
+iteraciones, releases o roadmap.
+
+Elementos:
+
+    requisitos, casos de uso, historias de usuario, features o cambios solicitados
+
+Aspectos posibles:
+
+- valor de negocio;
+- riesgo técnico;
+- urgencia;
+- dependencia arquitectónica;
+- esfuerzo;
+- impacto en usuarios;
+- obligación contractual;
+- reducción de deuda técnica;
+- alineación estratégica;
+- aprendizaje esperado.
+
+La salida puede usarse para construir un backlog más explicable, evitar
+decisiones arbitrarias y justificar por qué ciertos requisitos entran o
+salen de una iteración.
+
+## Priorización de deuda técnica
+
+La deuda técnica suele ser difícil de priorizar porque compite con
+funcionalidades visibles. Prioriza permite expresar criterios técnicos y
+de negocio en una misma estructura.
+
+Elementos:
+
+    deudas técnicas, refactorizaciones, migraciones, defectos estructurales o mejoras internas
+
+Aspectos posibles:
+
+- riesgo acumulado;
+- frecuencia de cambio del componente;
+- impacto en mantenibilidad;
+- impacto en seguridad;
+- costo de retrasar la corrección;
+- esfuerzo estimado;
+- dependencia de otros módulos;
+- probabilidad de fallos futuros;
+- efecto sobre la velocidad del equipo.
+
+El método permite hacer visible por qué una deuda técnica debe atenderse
+antes que una funcionalidad aparentemente más urgente.
+
+## Priorización de procesos de negocio
+
+En BPM o mejora organizacional, una empresa puede necesitar decidir qué
+proceso analizar, rediseñar o automatizar primero.
+
+Elementos:
+
+    procesos, subprocesos, actividades o cuellos de botella
+
+Aspectos posibles:
+
+- impacto en clientes;
+- costo operativo;
+- frecuencia de ejecución;
+- cantidad de errores;
+- tiempo de ciclo;
+- riesgo regulatorio;
+- potencial de automatización;
+- dependencia de personas clave;
+- impacto financiero;
+- dificultad de cambio.
+
+Prioriza puede funcionar como mecanismo de selección antes de iniciar un
+proyecto de mejora de procesos.
+
+## Priorización de iniciativas estratégicas
+
+En dirección empresarial, las iniciativas suelen competir por
+presupuesto, personas y atención ejecutiva.
+
+Elementos:
+
+    proyectos, programas, iniciativas estratégicas o inversiones
+
+Aspectos posibles:
+
+- alineación estratégica;
+- retorno esperado;
+- riesgo;
+- costo;
+- urgencia;
+- impacto reputacional;
+- dependencia de capacidades existentes;
+- cumplimiento normativo;
+- impacto en clientes;
+- factibilidad técnica.
+
+Prioriza puede ayudar a hacer explícito el razonamiento que justifica un
+roadmap estratégico.
+
+## Priorización en arquitectura empresarial
+
+En arquitectura empresarial, Prioriza puede ayudar a ordenar gaps,
+capacidades, sistemas, migraciones o decisiones de roadmap.
+
+Elementos:
+
+    capacidades, aplicaciones, componentes, gaps, work packages, decisiones arquitectónicas
+
+Aspectos posibles:
+
+- criticidad de negocio;
+- obsolescencia tecnológica;
+- riesgo operativo;
+- dependencia de otros sistemas;
+- costo de mantenimiento;
+- impacto en procesos;
+- alineación con arquitectura objetivo;
+- dificultad de migración;
+- cumplimiento de estándares;
+- exposición de seguridad.
+
+Aquí Prioriza no reemplaza marcos de arquitectura. Puede actuar como
+instrumento de decisión dentro de ellos.
+
+## Priorización de controles de seguridad
+
+En seguridad de la información, no todos los controles pueden
+implementarse inmediatamente. Prioriza puede ordenar controles según
+riesgos, activos y restricciones.
+
+Elementos:
+
+    controles, medidas de mitigación, vulnerabilidades o acciones correctivas
+
+Aspectos posibles:
+
+- criticidad del activo protegido;
+- severidad de la amenaza;
+- probabilidad de explotación;
+- impacto potencial;
+- costo de implementación;
+- tiempo de implementación;
+- dependencia técnica;
+- obligación regulatoria;
+- reducción de exposición;
+- facilidad de adopción.
+
+El resultado puede ayudar a justificar por qué ciertos controles deben
+implementarse antes que otros.
+
+## Priorización en inteligencia artificial y agentes
+
+Prioriza puede usarse en sistemas asistidos por inteligencia artificial
+como capa externa de decisión explícita.
+
+Elementos posibles:
+
+    acciones, herramientas, evidencias, tareas, riesgos, respuestas, controles o rutas de análisis
+
+Aspectos posibles:
+
+- confianza de la evidencia;
+- riesgo de error;
+- impacto de la acción;
+- costo de ejecución;
+- necesidad de consulta humana;
+- urgencia;
+- reversibilidad;
+- sensibilidad de los datos;
+- cumplimiento de política;
+- utilidad esperada.
+
+En este contexto, la IA puede ayudar a extraer valores o generar
+explicaciones, mientras Prioriza calcula la prioridad según criterios
+declarados. Esto permite separar la capacidad interpretativa de la IA de
+la política de decisión de la organización.
+
+## Decisiones personales
+
+Prioriza también puede aplicarse a decisiones personales, siempre que
+existan alternativas y criterios.
+
+Elementos:
+
+    opciones de vida, compras, estudios, empleo, lugares para vivir, hábitos o decisiones familiares
+
+Aspectos posibles:
+
+- salud;
+- dinero;
+- tiempo;
+- bienestar familiar;
+- riesgo;
+- estabilidad;
+- satisfacción personal;
+- impacto futuro;
+- reversibilidad;
+- esfuerzo.
+
+En este tipo de aplicación, la subjetividad es especialmente visible.
+Prioriza no pretende eliminarla, sino ayudar a hacerla explícita.
+
+## Priorización educativa
+
+En educación, Prioriza puede aplicarse para decidir contenidos,
+actividades, intervenciones o recursos.
+
+Elementos:
+
+    contenidos, temas, estudiantes, actividades, recursos, intervenciones o necesidades educativas
+
+Aspectos posibles:
+
+- dificultad;
+- urgencia;
+- impacto en aprendizaje;
+- brecha de conocimiento;
+- tiempo disponible;
+- dependencia con otros contenidos;
+- riesgo de atraso;
+- motivación del estudiante;
+- disponibilidad de materiales.
+
+Esto puede ayudar a planificar refuerzos, diagnósticos, rutas de estudio
+o asignación de recursos educativos.
+
+## Criterios para no aplicar Prioriza
+
+Prioriza no debe aplicarse mecánicamente a todo.
+
+Puede no ser adecuado cuando:
+
+- no existen alternativas reales;
+- no hay ningún criterio de valoración;
+- existe una regla legal o técnica que determina la decisión sin
+  necesidad de priorización;
+- el problema requiere optimización exacta y existe un solver apropiado;
+- los criterios son no compensables y no se han modelado restricciones
+  duras;
+- los valores son deliberadamente manipulados;
+- el decisor no acepta hacer explícitos sus niveles de prioridad de
+  aspectos o criterios;
+- el costo de modelar la decisión supera el valor de priorizarla.
+
+En esos casos, Prioriza puede ser innecesario, insuficiente o incluso
+peligroso si se usa para dar apariencia de racionalidad a una decisión
+mal planteada.
+
+## Cómo presentar una aplicación de Prioriza
+
+Para describir una aplicación del método, conviene usar una ficha
+uniforme:
+
+    Nombre de la aplicación
+    Dominio
+    Elementos a priorizar
+    Aspectos usados
+    Tipo de valores
+    Funciones de nivelación
+    Niveles de prioridad de los aspectos
+    Restricciones previas
+    Tipo de salida
+    Uso del resultado
+    Riesgos de mal uso
+
+Esta ficha permite comparar aplicaciones distintas sin confundirlas con
+el método general.
+
+### Resumen de la sección
+
+Prioriza puede aplicarse en muchos dominios porque su núcleo es
+abstracto: alternativas, aspectos, valores, niveles locales, niveles de
+prioridad de aspectos y estructura de prioridad.
+
+Sin embargo, cada aplicación debe declarar su propio contexto,
+elementos, aspectos, criterios, niveles de prioridad de los aspectos y forma de uso del resultado.
+
+La amplitud de aplicación no significa que Prioriza sea siempre el mejor
+método. Significa que puede proporcionar una estructura mínima de
+priorización cuando el dominio necesita decisiones explícitas, trazables
+y revisables.

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Forma continua por partición común de tramos</title>
+  <desc id="desc">Los cortes de cada aspecto generan una partición común y una tabla de intervalos normalizados.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f3a44"/>
+    </marker>
+    <style>
+      .axis { stroke: #2f3a44; stroke-width: 4; }
+      .cut1 { stroke: #315c9c; stroke-width: 3; }
+      .cut2 { stroke: #9b5a00; stroke-width: 3; }
+      .box { fill: #f7f9fb; stroke: #2f3a44; stroke-width: 2; rx: 8; }
+      .part { fill: #eaf4ef; stroke: #1f6f4a; }
+      .text { font: 17px Arial, sans-serif; fill: #17212b; text-anchor: middle; }
+      .small { font: 13px Arial, sans-serif; fill: #34424f; text-anchor: middle; }
+      .arrow { stroke: #2f3a44; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <text class="text" x="230" y="42">Rango continuo</text>
+  <line class="axis" x1="60" y1="80" x2="400" y2="80"/>
+  <text class="small" x="60" y="106">0</text>
+  <text class="small" x="400" y="106">100</text>
+  <line class="cut1" x1="150" y1="55" x2="150" y2="105"/>
+  <line class="cut1" x1="270" y1="55" x2="270" y2="105"/>
+  <text class="small" x="210" y="130">cortes aspecto A</text>
+  <line class="cut2" x1="210" y1="150" x2="210" y2="200"/>
+  <line class="cut2" x1="335" y1="150" x2="335" y2="200"/>
+  <line class="axis" x1="60" y1="175" x2="400" y2="175"/>
+  <text class="small" x="272" y="225">cortes aspecto B</text>
+
+  <path class="arrow" d="M420 130 H485"/>
+
+  <rect class="part" x="505" y="55" width="320" height="82" rx="8"/>
+  <text class="text" x="665" y="86">Partición común</text>
+  <text class="small" x="665" y="114">[0,25] [25,45] [45,65] [65,80] [80,100]</text>
+
+  <rect class="box" x="505" y="175" width="320" height="130"/>
+  <text class="text" x="665" y="205">Tabla de tramos normalizados</text>
+  <line class="axis" x1="535" y1="226" x2="795" y2="226" style="stroke-width:2"/>
+  <text class="small" x="575" y="250">Tramo</text>
+  <text class="small" x="665" y="250">Aspecto A</text>
+  <text class="small" x="755" y="250">Aspecto B</text>
+  <text class="small" x="575" y="278">T1</text>
+  <text class="small" x="665" y="278">nivel</text>
+  <text class="small" x="755" y="278">nivel</text>
+</svg>

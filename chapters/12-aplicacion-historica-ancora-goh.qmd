@@ -1,0 +1,345 @@
+# Aplicación histórica: Áncora GOH / timetabling
+
+La primera aplicación documentada de Prioriza se encuentra en el
+contexto de Áncora GOH, un sistema para la generación y organización de
+horarios docentes. Este caso es históricamente importante porque muestra
+el método operando dentro de un problema real, con restricciones,
+recursos limitados y necesidad de construir una solución paso a paso.
+
+Debe quedar claro desde el inicio: Áncora GOH no define todo lo que es
+Prioriza. Áncora GOH es una aplicación del método dentro de un dominio
+específico: timetabling. Sin embargo, esa aplicación revela propiedades
+importantes del método, especialmente su uso iterativo, su relación con
+la asignación de recursos y su capacidad para operar en contextos donde
+cada decisión modifica las posibilidades futuras.
+
+## El problema de horarios como problema práctico
+
+La confección de horarios docentes puede formularse de muchas maneras:
+como problema de satisfacción de restricciones, como problema de
+optimización combinatoria, como asignación de recursos, como coloración
+de grafos, como búsqueda heurística o como programación matemática.
+
+Pero en la práctica institucional, el problema aparece de forma
+concreta:
+
+- existen actividades docentes que deben colocarse;
+- existen profesores disponibles o restringidos;
+- existen grupos de estudiantes;
+- existen lugares o aulas;
+- existen recursos necesarios;
+- existen turnos, días y periodos;
+- existen restricciones duras y preferencias blandas;
+- cada colocación consume posibilidades del sistema.
+
+La dificultad no está solo en colocar una actividad, sino en colocar
+todas de forma coherente. Una actividad colocada en un turno puede
+quitarle a otra su mejor posibilidad. Por tanto, el orden de colocación
+importa.
+
+## Pregunta central dentro de GOH
+
+Dentro de Áncora GOH, Prioriza aparece para responder una pregunta
+operativa:
+
+    ¿Qué actividad conviene colocar primero?
+
+Esta pregunta es distinta de otra pregunta posterior:
+
+    ¿Dónde conviene colocar esa actividad?
+
+La primera pregunta corresponde a Prioriza. La segunda corresponde al
+algoritmo específico de colocación del dominio de horarios.
+
+Esta separación es crucial. Prioriza no genera por sí solo el horario
+completo. Prioriza guía el orden de construcción del horario.
+
+## Actividades como elementos de Prioriza
+
+En esta aplicación, los elementos de la tabla Prioriza son las
+actividades docentes pendientes de colocar.
+
+    Elementos = actividades pendientes
+
+Cada actividad puede representar una clase, asignatura, encuentro
+docente, bloque de docencia u otra unidad que deba ser colocada en el
+horario.
+
+Mientras una actividad no ha sido colocada, compite con otras
+actividades por turnos, profesores, aulas, grupos y recursos.
+
+## Aspectos usados para priorizar actividades
+
+La tabla Prioriza de GOH evalúa cada actividad mediante aspectos
+relacionados con sus posibilidades y restricciones.
+
+Entre los aspectos identificados en la implementación histórica aparecen
+criterios como:
+
+- cantidad de profesores asignados;
+- restricciones de profesores;
+- lugares asignados;
+- restricciones de lugares;
+- cantidad de actividades asociadas a la asignatura;
+- recursos imprescindibles;
+- recursos asignados;
+- restricciones de la asignatura;
+- otros valores derivados del contexto docente.
+
+La lógica general es que una actividad con menos posibilidades o más
+restricciones puede necesitar ser colocada antes, porque si se espera
+demasiado puede quedar sin solución viable.
+
+## Priorizar al más necesitado
+
+Una idea importante de esta aplicación es priorizar aquello que corre
+mayor riesgo de quedarse sin solución.
+
+En un problema de horarios, no siempre conviene colocar primero la
+actividad más cómoda, más fácil o más visible. Muchas veces conviene
+atender primero la actividad con menos posibilidades de colocación.
+
+Esto puede resumirse así:
+
+    priorizar al elemento más necesitado o más restringido
+    para preservar la posibilidad de solución global.
+
+Esta idea conecta Prioriza con heurísticas conocidas en problemas de
+restricciones, donde suele ser útil atender primero variables difíciles
+o más restringidas. La diferencia es que Prioriza permite combinar
+varias señales de dificultad en una tabla explícita de niveles de los elementos y niveles de prioridad de los aspectos.
+
+## Ciclo general de uso en GOH
+
+La aplicación de Prioriza dentro de GOH puede describirse como un ciclo.
+
+    1. Identificar actividades pendientes.
+    2. Calcular valores relevantes para cada actividad.
+    3. Construir la tabla Prioriza.
+    4. Nivelar los aspectos.
+    5. Aplicar niveles de prioridad de aspectos y sumar niveles.
+    6. Seleccionar la actividad priorizada.
+    7. Aplicar el subalgoritmo de colocación.
+    8. Actualizar el horario y los recursos disponibles.
+    9. Recalcular Prioriza para las actividades restantes.
+    10. Repetir hasta terminar o hasta detectar imposibilidad.
+
+Lo importante es que el ranking inicial no se usa hasta el final sin
+cambios. Después de colocar una actividad, el contexto cambia.
+Profesores, turnos, aulas y recursos pueden quedar ocupados. Algunas
+actividades pierden posibilidades y otras pueden cambiar de nivel
+relativo.
+
+Por eso se recalcula.
+
+## Prioriza como política de selección, no como colocador completo
+
+En GOH deben distinguirse dos niveles de decisión.
+
+Primer nivel:
+
+    seleccionar qué actividad intentar colocar ahora
+
+Segundo nivel:
+
+    seleccionar en qué turno, lugar, profesor o combinación de recursos colocarla
+
+Prioriza opera principalmente en el primer nivel. El segundo nivel
+pertenece al algoritmo específico de horarios.
+
+Esta distinción evita una confusión frecuente: decir que Prioriza
+“resuelve horarios” es impreciso. Lo más correcto es decir que Prioriza
+fue utilizado como política de selección dentro de un algoritmo
+constructivo de generación de horarios.
+
+## Recalcular porque el contexto cambia
+
+El uso de Prioriza en GOH es dinámico porque cada colocación modifica el
+problema.
+
+Antes de colocar una actividad, puede existir cierto conjunto de
+posibilidades. Después de colocarla, algunas posibilidades desaparecen y
+otras se vuelven más críticas.
+
+Ejemplo abstracto:
+
+    Estado inicial:
+    A tiene 5 posibilidades.
+    B tiene 2 posibilidades.
+    C tiene 4 posibilidades.
+
+    Se coloca B.
+    Nuevo estado:
+    A tiene 4 posibilidades.
+    C tiene 1 posibilidad.
+
+En ese nuevo estado, C puede pasar a ser más prioritaria que A, aunque
+no lo fuera inicialmente.
+
+Esta es la razón de fondo para no tratar la prioridad como lista fija.
+
+## Inserción y movimiento en un horario existente
+
+Una consecuencia interesante de este enfoque es que el mismo patrón
+puede aplicarse a problemas distintos dentro del dominio de horarios.
+
+No solo sirve para generar un horario desde cero. También puede servir
+para:
+
+- insertar una actividad nueva en un horario ya construido;
+- mover una actividad de un turno a otro;
+- recomponer una parte del horario;
+- reparar conflictos;
+- adaptar el horario ante cambios de profesores, lugares o recursos.
+
+Esto ocurre porque, desde el punto de vista del algoritmo, el problema
+sigue teniendo la misma forma abstracta:
+
+    hay un contexto actual,
+    hay elementos o acciones posibles,
+    hay restricciones y valores,
+    se prioriza,
+    se ejecuta una acción,
+    el contexto cambia,
+    se recalcula si hace falta.
+
+La diferencia está en el contexto inicial, no en la lógica general de
+uso.
+
+## Relación con asignación de recursos
+
+El timetabling puede verse como un caso específico de asignación de
+recursos.
+
+En GOH, los recursos incluyen tiempo, profesores, aulas, grupos, medios
+docentes y restricciones asociadas. Colocar una actividad implica
+asignar una combinación de esos recursos.
+
+Desde esta lectura, Prioriza no está limitado a horarios. La aplicación
+histórica muestra que el método puede orientar decisiones en problemas
+donde varios elementos compiten por recursos limitados.
+
+Sin embargo, esta conclusión debe formularse con cuidado. Prioriza no es
+por definición un algoritmo general de asignación de recursos. Es un
+método de priorización que puede utilizarse dentro de algoritmos o
+procesos de asignación.
+
+## Solución homóloga y preservación de posibilidades
+
+En problemas de asignación y horarios, seleccionar el elemento
+priorizado no basta. También importa qué solución concreta se le asigna.
+
+Si una actividad tiene varias colocaciones posibles, conviene escoger
+una que no destruya innecesariamente la única buena colocación de otra
+actividad.
+
+Esta idea puede formularse así:
+
+    no consumir una solución que otro elemento necesita de forma más crítica,
+    si existe una solución equivalente para el elemento actual.
+
+En el contexto de GOH, esto significa que después de priorizar una
+actividad, el subalgoritmo de colocación debe intentar ubicarla de
+manera compatible con la preservación de posibilidades futuras.
+
+Esta noción pertenece al dominio de asignación y timetabling, pero tiene
+valor conceptual como aplicación avanzada de Prioriza.
+
+## Relación con heurísticas constructivas
+
+La aplicación de Prioriza en GOH puede interpretarse como parte de una
+heurística constructiva.
+
+Una heurística constructiva no parte de una solución completa para
+mejorarla, sino que construye una solución paso a paso. En cada paso
+decide qué colocar o qué hacer a continuación.
+
+Prioriza cumple la función de política de selección:
+
+    elige el próximo elemento a tratar según una evaluación multicriterio explícita.
+
+Esto diferencia el enfoque de métodos que exploran muchas soluciones
+completas, como algunos algoritmos genéticos, recocido simulado o
+búsqueda tabú. Prioriza, en esta aplicación, opera de forma más directa
+y explicable.
+
+## Relación con programación dinámica y memoización
+
+El uso de Prioriza en GOH tiene estados sucesivos, porque cada
+colocación produce un nuevo contexto. Sin embargo, eso no basta para
+afirmar que el algoritmo sea programación dinámica en sentido clásico.
+
+La programación dinámica clásica suele requerir una función de valor
+sobre estados, una recurrencia y reutilización explícita de
+subproblemas. En GOH, según la reconstrucción disponible, Prioriza actúa
+más como heurística dinámica de selección que como programación dinámica
+formal.
+
+Puede existir memoización o caché si la implementación guarda y
+reutiliza cálculos parciales, como posibilidades de colocación,
+disponibilidad o evaluaciones de restricciones. Pero eso debe
+verificarse en el código y no afirmarse sin evidencia.
+
+La formulación prudente es:
+
+    Áncora GOH utiliza Prioriza dentro de un algoritmo constructivo con recálculo dinámico del contexto.
+    Puede incorporar técnicas de caché o memoización en subcálculos,
+    pero no debe describirse automáticamente como programación dinámica clásica.
+
+## Valor histórico del caso GOH
+
+El caso GOH tiene valor por varias razones.
+
+Primero, muestra que Prioriza no nació como especulación abstracta, sino
+como respuesta a un problema operativo.
+
+Segundo, muestra que el método fue implementado en software y usado
+dentro de un algoritmo real.
+
+Tercero, muestra la relación entre Prioriza y decisiones dinámicas: no
+basta con priorizar una vez; el contexto cambia y se recalcula.
+
+Cuarto, muestra que la nivelación por aspectos permite combinar señales
+heterogéneas: profesores, lugares, recursos, restricciones y cantidades.
+
+Quinto, muestra la transición natural desde timetabling hacia una visión
+más general de decisión y asignación.
+
+## Evidencia documental y técnica pendiente
+
+Para cerrar esta sección de forma rigurosa, deben incorporarse
+referencias exactas a las fuentes históricas:
+
+- tesis final de Áncora GOH 2.0;
+- perfiles o borradores previos;
+- presentación del Método Prioriza;
+- documentos antiguos del método;
+- código de la versión VB6;
+- código de la versión PHP/PLpgSQL;
+- funciones de nivelación y generación de horario.
+
+Esta evidencia debe usarse para distinguir tres capas:
+
+    1. Lo que la tesis afirma.
+    2. Lo que los documentos del método explican.
+    3. Lo que el código realmente implementa.
+
+Esa separación es necesaria para evitar reconstrucciones anacrónicas o
+atribuir al método original ideas que pertenecen a su reinterpretación
+posterior.
+
+## Resumen de la sección
+
+Áncora GOH es la aplicación histórica principal de Prioriza. En ese
+contexto, Prioriza se utilizó para decidir qué actividad colocar primero
+dentro de un algoritmo constructivo de generación de horarios.
+
+El método no sustituyó al algoritmo específico de colocación, sino que
+aportó una política explícita para ordenar actividades según múltiples
+aspectos.
+
+El valor del caso GOH está en mostrar Prioriza funcionando en un
+problema real, dinámico y restrictivo, donde cada decisión modifica las
+posibilidades de las decisiones siguientes.
+
+**\**

@@ -1,0 +1,6 @@
+_output/
+.quarto/
+tmp/
+figures/imported/
+prioriza-method-*.pdf
+md-order.txt

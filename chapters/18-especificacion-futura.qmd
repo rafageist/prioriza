@@ -1,0 +1,175 @@
+# Especificación futura
+
+Después de formalizar la teoría, Prioriza puede materializarse en
+software. La especificación futura debe mantener la separación entre
+núcleo, formas de uso y aplicaciones.
+
+## Objeto de tabla Prioriza
+
+Una tabla Prioriza debería incluir al menos: nombre, propósito,
+elementos, aspectos, funciones de nivelación, niveles de prioridad de los aspectos, reglas de
+desempate, restricciones previas, versión y estado.
+
+## Objeto de ejecución
+
+Cada ejecución debe registrar la plantilla usada, fecha, usuario o
+sistema ejecutor, valores de entrada, niveles calculados, niveles de
+prioridad de aspectos aplicados, sumas finales, empates, advertencias y
+explicación.
+
+Para uso dinámico, la ejecución también debe poder registrar recálculo
+disparado por evento. Los campos sugeridos son:
+
+- `trigger_event`: descripción y tipo del evento;
+- `current_action`: tarea o acción en curso antes del evento;
+- `candidate_actions`: cursos de acción evaluados;
+- `interruption_cost`: costo estimado de pausar o abandonar la acción en
+  curso;
+- `context_switch_cost`: costo de cambio de contexto;
+- `current_progress`: avance de la tarea interrumpida;
+- `postponement_risk`: riesgo de postergar el evento nuevo;
+- `planning_stability`: regla o umbral usado para no romper el plan ante
+  diferencias mínimas;
+- `recalculation_reason`: razón trazable por la que se recalculó.
+
+## Objeto de resultado
+
+El resultado no debe ser solo un número o ID. Debe ser un objeto
+trazable que pueda usarse como entrada de otra tabla, columna derivada,
+vector de niveles de prioridad de los aspectos, referencia de comparación u objetivo de ingeniería
+inversa.
+
+El objeto de resultado también debe incluir una capa de explicación
+humana. Como mínimo, debería reservar campos para:
+
+- `recommendation`: recomendación o grupo prioritario;
+- `main_reasons`: aspectos y contribuciones que dominan el resultado;
+- `runner_up_comparison`: comparación con las alternativas cercanas;
+- `ties`: empates locales y globales relevantes;
+- `tie_breaker`: regla externa aplicada, conjunto candidato, elemento
+  seleccionado, fecha, usuario o política habilitante, y semilla o
+  evidencia cuando se requiera auditabilidad;
+- `contradictions`: tensiones con valores, políticas o intuición
+  declarada;
+- `sensitivity_notes`: cambios que podrían alterar el orden;
+- `review_questions`: preguntas sugeridas para completar o corregir el
+  modelo.
+
+Estos campos no dependen de una IA generativa. Pueden derivarse
+directamente de valores, niveles, niveles de prioridad de aspectos,
+criterios y diferencias entre alternativas.
+
+## Formato JSON/YAML
+
+Una especificación JSON/YAML permitiría transportar tablas Prioriza
+entre lenguajes y sistemas. Esto facilitaría librerías en Python,
+JavaScript, PHP u otros lenguajes, además de integraciones con Odoo o
+servicios externos.
+
+```yaml
+prioriza_table:
+  name: Weekly Task Priority
+  version: 1.0
+  elements: [...]
+  aspects:
+    - name: urgency
+      leveling: min
+      aspect_priority_level: 1
+    - name: impact
+      leveling: max
+      aspect_priority_level: 2
+  result_policy: lower_total_is_better
+```
+
+## Librerías
+
+- prioriza-py para Python.
+
+- prioriza-js para JavaScript/TypeScript.
+
+- prioriza-php como continuación histórica y práctica.
+
+- Módulo PL/pgSQL si se desea ejecutar cerca de datos relacionales.
+
+- Adaptadores para Odoo u otros sistemas empresariales.
+
+## API y servicio
+
+Un servicio Prioriza podría exponer operaciones como evaluar tabla,
+explicar resultado, comparar ejecuciones, ejecutar ingeniería inversa,
+simular cambios de niveles de prioridad de los aspectos, detectar empates y exportar trazabilidad.
+
+## MCP server
+
+Un servidor MCP permitiría a agentes de IA consultar Prioriza como
+herramienta externa. Esto separaría la conversación probabilística del
+modelo de lenguaje de una política explícita de decisión.
+
+## Integración con Odoo
+
+En Odoo, Prioriza podría operar sobre modelos existentes como
+project.task, helpdesk.ticket, crm.lead, quality.alert, riesgos,
+requisitos, productos, proveedores o módulos de inventario de software.
+La prioridad calculada podría almacenarse como campo derivado o como
+historial de decisión.
+
+## Auditoría y explicabilidad
+
+Toda implementación debe permitir reconstruir por qué un elemento quedó
+en determinado nivel. Esto exige conservar valores originales, niveles,
+niveles de prioridad de aspectos, criterios, versión de la tabla y fecha
+de ejecución.
+
+## Roadmap sugerido
+
+## Explicación humana y preguntas sugeridas
+
+Una implementación futura debe generar explicaciones orientadas al
+usuario, no solo trazabilidad técnica. El resultado debe incluir razones
+dominantes, comparación contra alternativas cercanas, empates,
+contradicciones, sensibilidad básica y preguntas sugeridas para revisar
+el modelo.
+
+Ejemplos de preguntas automáticas: ¿qué aspecto falta para desempatar?,
+¿qué nivel de prioridad del aspecto hizo ganar a esta alternativa?, ¿qué
+valor tendría que cambiar para que el segundo lugar pase al primero?,
+¿el usuario está usando una intuición no modelada?
+
+1.  Cerrar documento teórico.
+
+2.  Definir especificación JSON/YAML.
+
+3.  Implementar librería de referencia en Python.
+
+4.  Crear pruebas unitarias con casos clásicos y casos históricos.
+
+5.  Implementar ejemplos de CLI y notebooks.
+
+6.  Desarrollar API mínima.
+
+7.  Crear módulo Odoo experimental.
+
+8.  Crear servidor MCP.
+
+9.  Publicar documentación y benchmarks.
+
+## Plan de ilustraciones para el libro
+
+La comprensión de Prioriza mejora si el documento incluye esquemas.
+Muchas ideas del método son más claras visualmente que en forma
+puramente textual: nivelación, empates, refinamiento progresivo,
+explicación humana, forma continua y replanificación por evento.
+
+Las ilustraciones deben cumplir una función conceptual, no decorativa.
+Cada figura debe ayudar a entender una operación del método o una
+tensión metodológica: por qué se empata, por qué se recalcula, por qué
+el resultado puede contradecir la intuición o cómo una nueva pregunta
+refina la decisión.
+
+Las figuras versionadas del libro están en `figures/`:
+
+- `refinamiento-progresivo.svg`;
+- `explicacion-humana.svg`;
+- `replanificacion-evento.svg`;
+- `desempate-azar.svg`;
+- `forma-continua-tramos.svg`.

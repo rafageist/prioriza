@@ -1,0 +1,208 @@
+# Forma discreta de Prioriza
+
+La forma discreta de Prioriza se aplica cuando existe un conjunto finito
+de elementos o alternativas que deben priorizarse según un conjunto
+finito de aspectos.
+
+## Entrada del método
+
+La entrada mínima de Prioriza discreto está compuesta por:
+
+1.  Un conjunto de elementos: E = {e1, e2, …, en}.
+2.  Un conjunto de aspectos: A = {a1, a2, …, am}.
+3.  Una matriz de valores: V = \[vij\].
+4.  Una función de nivelación para cada aspecto: F = {F1, F2, …, Fm}.
+5.  Un vector de niveles de prioridad de los aspectos:
+    pa = (pa1, pa2, …, pam).
+
+## Tabla de valores
+
+La tabla de valores contiene los valores originales de cada elemento
+respecto a cada aspecto.
+
+| **Elemento** | **Aspecto 1** | **Aspecto 2** | **…** | **Aspecto m** |
+|:-------------|:--------------|:--------------|:------|:--------------|
+| Elemento 1   | v11           | v12           | …     | v1m           |
+| Elemento 2   | v21           | v22           | …     | v2m           |
+| …            | …             | …             | …     | …             |
+| Elemento n   | vn1           | vn2           | …     | vnm           |
+
+Cada columna puede tener valores de una naturaleza distinta. La
+comparación se hace dentro de cada columna, no directamente entre
+columnas.
+
+## Nivelación por columnas
+
+Para cada aspecto aj, se toman los valores de esa columna y se aplica la
+función de nivelación Fj, produciendo niveles de prioridad para todos
+los elementos en ese aspecto.
+
+La nivelación básica funciona así:
+
+1.  Se identifica el valor óptimo de la columna según el criterio.
+2.  Todos los elementos con ese valor reciben nivel 1.
+3.  Se retiran o marcan esos elementos.
+4.  Se identifica el siguiente valor óptimo entre los restantes.
+5.  Todos los elementos con ese valor reciben nivel 2.
+6.  Se repite hasta asignar nivel a todos los elementos.
+
+Si el criterio es mínimo, el menor valor recibe nivel 1. Si el criterio
+es máximo, el mayor valor recibe nivel 1.
+
+## Conservación de empates
+
+Si dos o más elementos tienen el mismo valor bajo un aspecto, reciben el
+mismo nivel de prioridad para ese aspecto.
+
+Ejemplo con criterio mínimo:
+
+| **Valor** | **Nivel** |
+|:----------|:----------|
+| 20        | 1         |
+| 20        | 1         |
+| 30        | 2         |
+| 30        | 2         |
+| 40        | 3         |
+
+Prioriza no fuerza diferencias donde no existen diferencias bajo el
+criterio definido.
+
+## Tabla de niveles
+
+Después de nivelar todas las columnas, se obtiene la tabla de niveles:
+
+| **Elemento** | **Aspecto 1** | **Aspecto 2** | **…** | **Aspecto m** |
+|:-------------|:--------------|:--------------|:------|:--------------|
+| Elemento 1   | l11           | l12           | …     | l1m           |
+| Elemento 2   | l21           | l22           | …     | l2m           |
+| …            | …             | …             | …     | …             |
+| Elemento n   | ln1           | ln2           | …     | lnm           |
+
+Esta tabla expresa la posición relativa de cada elemento dentro de cada
+aspecto.
+
+## Combinación con niveles de prioridad de aspectos
+
+Cada nivel local se multiplica por el nivel de prioridad del aspecto
+correspondiente:
+
+    pij = lij * paj
+
+Donde pij es la contribución del aspecto aj al elemento ei después de
+combinar el nivel local con el nivel de prioridad del aspecto.
+
+Esto produce una matriz de niveles combinados P = \[pij\].
+
+## Suma horizontal
+
+Para cada elemento, se suman sus contribuciones por aspecto:
+
+$$
+s_i = \sum_{j=1}^{m} l_{ij} \cdot pa_j
+$$
+
+Donde:
+
+- $l_{ij}$ es el nivel de prioridad del elemento $e_i$ en el aspecto
+  $a_j$.
+- $pa_j$ es el nivel de prioridad del aspecto $a_j$.
+- Menor $s_i$ significa mayor prioridad global.
+
+El resultado si representa una carga de prioridad agregada. Como los
+niveles menores son mejores, el elemento con menor suma tiene mayor
+prioridad.
+
+## Resultado final
+
+El resultado de Prioriza puede expresarse como un ordenamiento de los
+elementos según si, en orden ascendente.
+
+El conjunto de elementos de mayor prioridad es:
+
+    E* = {ei en E | si = minimo(s1, s2, ..., sn)}
+
+Si E\* tiene un solo elemento, hay una prioridad única. Si tiene varios
+elementos, hay empate legítimo.
+
+## Salida como estructura de niveles
+
+La salida más completa de Prioriza no es únicamente el elemento ganador.
+Es una estructura de prioridad que puede agrupar elementos por niveles
+finales.
+
+Ejemplo:
+
+| **Nivel final** | **Elementos** |
+|:----------------|:--------------|
+| 1               | A, B          |
+| 2               | C             |
+| 3               | D, E          |
+
+Esto permite distinguir entre selección única, empate, lista ordenada y
+grupos de prioridad.
+
+## Algoritmo básico
+
+El algoritmo básico de Prioriza discreto puede describirse así:
+
+1.  Recibir la tabla de valores V.
+2.  Para cada aspecto aj, aplicar la función de nivelación Fj.
+3.  Construir la matriz de niveles L.
+4.  Multiplicar cada nivel lij por el nivel de prioridad del aspecto
+    paj.
+5.  Sumar horizontalmente las contribuciones por aspecto.
+6.  Ordenar los elementos por suma ascendente.
+7.  Devolver la estructura de prioridad resultante.
+
+## Ejemplo mínimo
+
+Supóngase una decisión entre fumar y no fumar, evaluada mediante salud,
+dinero y placer.
+
+| **Decisión** | **Salud** | **Dinero** | **Placer** |
+|:-------------|:----------|:-----------|:-----------|
+| Fumar        | 2         | 2          | 1          |
+| No fumar     | 1         | 1          | 2          |
+
+Supóngase que los niveles de prioridad de los aspectos son:
+
+| **Aspecto** | Nivel de prioridad del aspecto |
+|:------------|:-------------------------------|
+| Salud       | 1                              |
+| Dinero      | 3                              |
+| Placer      | 2                              |
+
+La tabla de contribuciones por aspecto sería:
+
+| **Decisión** | **Salud**  | **Dinero** | **Placer** | **Total** |
+|:-------------|:-----------|:-----------|:-----------|:----------|
+| Fumar        | 2 \* 1 = 2 | 2 \* 3 = 6 | 1 \* 2 = 2 | 10        |
+| No fumar     | 1 \* 1 = 1 | 1 \* 3 = 3 | 2 \* 2 = 4 | 8         |
+
+Bajo esos niveles de prioridad de los aspectos, no fumar tiene mayor
+prioridad porque tiene menor total.
+
+Si los niveles de prioridad de los aspectos cambian, el resultado puede
+cambiar. Esto no es una contradicción del método; expresa que la
+decisión depende de los valores y prioridades declaradas.
+
+## Interpretación de la forma discreta
+
+La forma discreta de Prioriza puede verse como una transformación en
+tres pasos:
+
+    Valores -> Niveles -> Prioridad agregada
+
+O de manera más explícita:
+
+    V -> F -> L -> pa -> P -> suma -> S -> orden -> Prioridad
+
+Donde:
+
+- V contiene los valores originales.
+- F contiene las funciones de nivelación.
+- L contiene los niveles de prioridad.
+- pa contiene los niveles de prioridad de los aspectos.
+- P contiene las contribuciones por aspecto.
+- S contiene las sumas finales.
+- La prioridad final se obtiene ordenando S de menor a mayor.
