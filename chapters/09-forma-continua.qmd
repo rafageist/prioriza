@@ -1,3 +1,417 @@
 # Forma continua de Prioriza
 
-Contenido pendiente de conversión desde el DOCX.
+La forma continua de Prioriza se aplica cuando la decisión no consiste
+en seleccionar un elemento dentro de un conjunto finito previamente
+dado, sino en seleccionar un tramo dentro de un rango continuo.
+
+En la forma discreta, los elementos ya existen:
+
+    E = {e1, e2, ..., en}
+
+En la forma continua, el objeto inicial de decisión es un rango:
+
+    R = [a, b]
+
+La pregunta cambia:
+
+    Forma discreta: ¿qué elemento tiene mayor prioridad?
+    Forma continua: ¿qué tramo del rango tiene mayor prioridad?
+
+La forma continua no abandona la lógica de Prioriza. La extiende.
+Convierte un rango continuo en una tabla discreta de tramos
+normalizados, construidos a partir de los puntos donde cambia la
+valoración de cualquier aspecto.
+
+## Intuición general
+
+En muchos problemas no se decide entre alternativas preexistentes, sino
+dentro de un rango.
+
+Ejemplos:
+
+- elegir un rango de precio aceptable;
+- seleccionar una edad objetivo para una política;
+- decidir un intervalo de tiempo óptimo;
+- escoger una capacidad de producción;
+- definir una cantidad de recursos;
+- seleccionar una temperatura, velocidad, distancia o duración;
+- determinar un umbral operativo;
+- decidir un tramo de inversión.
+
+En estos casos, no basta con listar alternativas como A, B y C. Primero
+hay que construir las alternativas a partir del propio rango.
+
+La forma continua de Prioriza hace precisamente eso: construye tramos de
+decisión.
+
+## Rango común de decisión
+
+La forma continua parte de un rango común:
+
+    R = [a, b]
+
+Ese rango debe representar el dominio completo donde se desea decidir.
+
+Ejemplo:
+
+    R = [0, 100]
+
+Puede tratarse de una escala porcentual, una cantidad monetaria, una
+duración, una edad, un nivel de capacidad o cualquier variable continua
+o cuasi continua.
+
+## Aspectos sobre el rango
+
+Cada aspecto evalúa el rango completo, pero puede dividirlo de manera
+diferente.
+
+Un aspecto puede decir:
+
+    De 0 a 30: nivel 1
+    De 30 a 70: nivel 2
+    De 70 a 100: nivel 3
+
+Otro aspecto puede decir:
+
+    De 0 a 50: nivel 3
+    De 50 a 80: nivel 1
+    De 80 a 100: nivel 2
+
+Cada aspecto define sus propios tramos porque cada aspecto puede cambiar
+de valoración en puntos distintos.
+
+## Regla de cobertura total
+
+Una regla esencial de la forma continua es que todo aspecto debe valorar
+todo el rango.
+
+No puede quedar una parte del rango sin nivel para un aspecto.
+
+    Para todo punto x en R,
+    cada aspecto aj debe tener un nivel definido en x.
+
+Esto evita zonas vacías, indefinidas o ambiguas.
+
+Si un aspecto no puede valorar una parte del rango, entonces el modelo
+está incompleto o debe declarar una regla especial: exclusión,
+restricción dura, penalización o no aplicabilidad. Pero en la forma
+continua básica, todos los aspectos cubren todo el rango.
+
+## Tramos propios de cada aspecto
+
+Cada aspecto aj define una partición propia del rango.
+
+Ejemplo:
+
+    Aspecto A1:
+    [0, 40)  -> nivel 1
+    [40, 100] -> nivel 2
+
+    Aspecto A2:
+    [0, 60)  -> nivel 2
+    [60, 100] -> nivel 1
+
+Los cortes de A1 y A2 no tienen que coincidir. Esa es precisamente la
+razón por la cual se necesita una normalización de tramos.
+
+## Puntos de cambio
+
+Un punto de cambio es un punto del rango donde al menos un aspecto
+cambia de nivel.
+
+En el ejemplo anterior:
+
+    A1 cambia en 40
+    A2 cambia en 60
+
+Además, los extremos del rango también se consideran puntos
+estructurales:
+
+    0 y 100
+
+Por tanto, el conjunto total de puntos relevantes es:
+
+    {0, 40, 60, 100}
+
+## Partición común del rango
+
+La partición común se obtiene uniendo todos los puntos de cambio
+definidos por todos los aspectos, más los extremos del rango.
+
+Si cada aspecto tiene sus propios cortes, la partición común usa todos
+los cortes.
+
+Ejemplo:
+
+    R = [0, 100]
+    Puntos de cambio = {0, 40, 60, 100}
+
+Entonces los tramos normalizados son:
+
+    T1 = [0, 40)
+    T2 = [40, 60)
+    T3 = [60, 100]
+
+Cada tramo normalizado tiene una propiedad clave: dentro de él, ningún
+aspecto cambia de nivel.
+
+Esto permite convertir cada tramo en un elemento discreto.
+
+## Tramos normalizados como elementos
+
+Después de construir la partición común, cada tramo normalizado se trata
+como un elemento de una tabla Prioriza discreta.
+
+    E* = {T1, T2, ..., Tk}
+
+Donde cada Ti es un tramo del rango original.
+
+La forma continua queda transformada en una forma discreta inducida por
+los propios aspectos.
+
+    rango continuo -> puntos de cambio -> tramos normalizados -> tabla discreta
+
+Esta es la idea central de Prioriza continuo.
+
+### Construcción de la tabla de tramos
+
+Para cada tramo normalizado Ti y cada aspecto aj, se determina qué nivel
+tiene ese aspecto en ese tramo.
+
+Ejemplo:
+
+    R = [0, 100]
+
+    A1:
+    [0, 40) -> nivel 1
+    [40, 100] -> nivel 2
+
+    A2:
+    [0, 60) -> nivel 2
+    [60, 100] -> nivel 1
+
+La partición común es:
+
+    T1 = [0, 40)
+    T2 = [40, 60)
+    T3 = [60, 100]
+
+La tabla resultante es:
+
+| Tramo            | A1  | A2  |
+|:-----------------|:----|:----|
+| T1 = \[0, 40)    | 1   | 2   |
+| T2 = \[40, 60)   | 2   | 2   |
+| T3 = \[60, 100\] | 2   | 1   |
+
+Esta tabla ya puede evaluarse con Prioriza discreto.
+
+## Aplicación de pesos y suma
+
+Una vez construida la tabla de tramos, el procedimiento continúa como en
+la forma discreta.
+
+Para cada tramo Ti:
+
+    si = suma(lij * paj), para j = 1..m
+
+Donde lij es el nivel del tramo Ti en el aspecto aj, y wj es el nivel de
+prioridad del aspecto.
+
+Si los niveles de prioridad de los aspectos son iguales a 1:
+
+| Tramo            | A1  | A2  | Total |
+|:-----------------|:----|:----|:------|
+| T1 = \[0, 40)    | 1   | 2   | 3     |
+| T2 = \[40, 60)   | 2   | 2   | 4     |
+| T3 = \[60, 100\] | 2   | 1   | 3     |
+
+En este ejemplo, T1 y T3 quedan empatados como mejores tramos.
+
+## Por qué no elegir un intervalo arbitrario
+
+Una pregunta natural es por qué el método no selecciona cualquier
+intervalo arbitrario, por ejemplo \[30, 70\], \[45, 75\] o \[70, 90\].
+
+La respuesta es que, en la forma continua básica, los tramos de decisión
+no son arbitrarios. Se derivan de los puntos donde cambia la valoración
+de los aspectos.
+
+Si un intervalo arbitrario atraviesa varios tramos normalizados,
+entonces contiene zonas con valoraciones distintas. Para evaluarlo haría
+falta una regla adicional: promedio, peor caso, mejor caso, integral,
+duración ponderada o alguna forma de agregación interna.
+
+La forma básica de Prioriza continuo evita esa ambigüedad y trabaja con
+tramos homogéneos: tramos donde ningún aspecto cambia de nivel.
+
+## Tramos compuestos
+
+Aunque la forma básica prioriza tramos normalizados, también puede ser
+útil unir tramos contiguos con el mismo resultado o con niveles
+compatibles.
+
+Ejemplo:
+
+| Tramo | Total |
+|:------|:------|
+| T1    | 3     |
+| T2    | 3     |
+| T3    | 5     |
+
+Si T1 y T2 son contiguos y tienen el mismo total, pueden presentarse
+como un tramo compuesto:
+
+    T1 + T2
+
+La unión es válida porque ambos tramos comparten prioridad global.
+
+Sin embargo, si los tramos tienen totales distintos, unirlos exige una
+regla adicional de evaluación.
+
+## Variante continua por funciones no constantes
+
+La forma descrita hasta aquí asume que cada aspecto asigna niveles
+constantes por tramo.
+
+También podría existir una variante más avanzada donde cada aspecto
+define una función continua o gradual sobre el rango.
+
+Ejemplo:
+
+    A1(x) = penalización creciente según x
+    A2(x) = cercanía a un valor ideal
+
+En ese caso, Prioriza tendría que usar otras operaciones: muestreo,
+integración, optimización o discretización por tolerancia.
+
+Esta variante funcional puede desarrollarse en el futuro, pero no debe
+confundirse con la forma continua básica por partición común de tramos.
+
+## Relación con la forma discreta
+
+La forma continua no reemplaza la forma discreta. La contiene como paso
+final.
+
+La diferencia está en cómo se obtienen los elementos.
+
+En la forma discreta, los elementos vienen dados desde el inicio.
+
+    A, B, C, D
+
+En la forma continua, los elementos se construyen a partir del rango y
+de los puntos de cambio.
+
+    R = [a, b] -> T1, T2, ..., Tk
+
+Después de esa construcción, se aplica Prioriza discreto.
+
+## Interpretación geométrica
+
+Visualmente, cada aspecto puede representarse como una barra que cubre
+todo el rango y que cambia de nivel en ciertos puntos.
+
+Al proyectar todos los puntos de cambio sobre el rango común, se trazan
+líneas de corte que atraviesan todos los aspectos. Esas líneas generan
+los tramos normalizados.
+
+Cada tramo normalizado queda asociado a una columna vertical de niveles:
+un nivel por cada aspecto.
+
+Esa columna vertical se convierte en una fila de la tabla Prioriza.
+
+    cortes horizontales sobre el rango -> columnas visuales -> filas tabulares
+
+Esta interpretación visual es importante porque hace que la forma
+continua sea fácil de explicar aunque su formalización parezca
+abstracta.
+
+## Aplicaciones posibles
+
+La forma continua puede utilizarse en problemas donde se busca un
+intervalo conveniente dentro de una variable.
+
+Ejemplos:
+
+- rango de precio recomendado;
+- intervalo de edad objetivo;
+- nivel de inversión;
+- duración óptima de una actividad;
+- cantidad de recursos a asignar;
+- capacidad operativa;
+- umbral de riesgo;
+- horario o franja temporal;
+- porcentaje de descuento;
+- nivel de inventario.
+
+En todos estos casos, cada aspecto puede valorar el rango de forma
+distinta, y la partición común permite construir alternativas de
+decisión.
+
+## Salida de la forma continua
+
+La salida de Prioriza continuo puede ser:
+
+- un tramo único de mayor prioridad;
+- varios tramos empatados;
+- un conjunto de tramos contiguos con la misma prioridad;
+- una tabla completa de tramos ordenados;
+- una advertencia de que ciertos aspectos no cubren todo el rango;
+- una recomendación de refinar cortes o criterios.
+
+La salida debe conservar la trazabilidad:
+
+    rango original
+    aspectos
+    tramos propios por aspecto
+    puntos de cambio
+    partición común
+    tabla de tramos
+    pesos
+    sumas finales
+    tramos priorizados
+
+## Relación con ingeniería inversa
+
+La forma continua se presta naturalmente a ingeniería inversa.
+
+Se puede preguntar:
+
+    ¿Qué cortes tendría que cambiar para que un tramo sea prioritario?
+    ¿Qué peso hace que un intervalo pase a primer nivel?
+    ¿Qué aspecto impide que un tramo sea óptimo?
+    ¿Qué parte del rango queda penalizada por más criterios?
+
+Esto permite analizar no solo cuál tramo gana, sino por qué gana y qué
+estructura de valoración lo hace posible.
+
+## Relación con subjetividad
+
+La subjetividad en la forma continua aparece en varios lugares:
+
+- selección del rango;
+- definición de cortes por aspecto;
+- asignación de niveles a los tramos;
+- niveles de prioridad de los aspectos;
+- reglas para unir o no unir tramos;
+- interpretación del tramo óptimo.
+
+Prioriza no oculta esa subjetividad. La obliga a quedar definida sobre
+el rango.
+
+## Resumen de la sección
+
+La forma continua de Prioriza permite decidir sobre un rango, no solo
+sobre alternativas discretas previamente dadas.
+
+Cada aspecto valora todo el rango mediante tramos propios. Se toman
+todos los puntos de cambio, se construye una partición común, y cada
+tramo normalizado se convierte en un elemento discreto. Luego se aplica
+Prioriza como en la forma básica.
+
+La idea central es:
+
+    rango -> tramos por aspecto -> puntos de cambio comunes -> tramos normalizados -> Prioriza discreto
+
+Esta forma mantiene la lógica del método y permite extenderlo a
+decisiones donde el objeto buscado es un intervalo óptimo o prioritario.

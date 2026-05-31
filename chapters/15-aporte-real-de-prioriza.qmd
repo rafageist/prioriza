@@ -1,3 +1,114 @@
 # Aporte real de Prioriza
 
-Contenido pendiente de conversión desde el DOCX.
+El aporte de Prioriza debe formularse evitando tanto la modestia
+excesiva como la exageración. No se trata de presentar el método como
+una revolución matemática sin antecedentes, ni de reducirlo a una simple
+tabla de suma ponderada.
+
+## Partes que ya existían
+
+- La idea de comparar alternativas bajo varios criterios.
+
+- La asignación de pesos a criterios.
+
+- La suma ponderada como forma de agregación.
+
+- El uso de rankings o niveles ordinales.
+
+- La mezcla de criterios objetivos y subjetivos.
+
+- La existencia de empates o indiferen­cias.
+
+- El uso de heurísticas en problemas de horarios y asignación.
+
+## Partes que parecen integradas de forma distintiva
+
+- Nivelar cada columna según su propio criterio y convertir valores
+  heterogéneos en niveles de prioridad.
+
+- Usar nivel 1 como mejor prioridad local y preservar empates de forma
+  natural.
+
+- Interpretar los niveles de prioridad de los aspectos como prioridades
+  de los aspectos, no solo como coeficientes técnicos.
+
+- Permitir que los niveles de prioridad de aspectos o valores provengan
+  de otras ejecuciones de Prioriza.
+
+- Reutilizar tablas como plantillas de decisión versionables.
+
+- Usar ingeniería inversa para analizar qué cambios producirían una
+  prioridad deseada.
+
+- Extender el método a un rango continuo mediante partición común de
+  tramos.
+
+- Aplicar la priorización dentro de procesos iterativos con recálculo
+  del contexto.
+
+## Aporte metodológico
+
+El aporte metodológico principal es ofrecer un procedimiento simple para
+convertir datos heterogéneos y preferencias explícitas en una estructura
+de prioridad auditable. Esto lo hace útil en contextos donde se necesita
+decidir sin construir modelos matemáticos demasiado pesados o sin
+depender de decisiones opacas.
+
+Prioriza no necesita que todos los valores originales estén en la misma
+escala. La nivelación por aspecto convierte cada columna en una escala
+decisional común. Esa operación es al mismo tiempo su fuerza práctica y
+una fuente de crítica matemática, porque simplifica la información
+original.
+
+## Aporte operativo
+
+El aporte operativo está en la facilidad de implementación y
+explicación. Una tabla Prioriza puede ser entendida por usuarios no
+matemáticos, revisada por expertos de dominio y ejecutada por software.
+Además, puede registrarse como evidencia de cómo se tomó una decisión.
+
+Esto resulta especialmente valioso en organizaciones donde las
+decisiones se toman de manera repetitiva, con presión, con criterios
+implícitos o con necesidad de justificación posterior.
+
+## Aporte histórico
+
+Históricamente, Prioriza tiene valor porque fue concebido y aplicado
+antes de 2010 en un contexto de acceso limitado a bibliografía
+especializada, y porque fue implementado en sistemas reales vinculados a
+Áncora GOH. Ese origen práctico debe documentarse con tesis, borradores,
+presentaciones y código.
+
+La originalidad histórica no debe medirse solo por si cada componente
+era desconocido en la literatura, sino por la forma en que esos
+componentes fueron integrados y usados para resolver un problema
+concreto.
+
+## Aporte para software y gobernanza
+
+Prioriza puede aportar una estructura de decisión versionable y
+trazable. Esto abre la puerta a librerías, APIs, módulos empresariales y
+servidores MCP para agentes de IA. La decisión no queda encerrada en un
+prompt ni en una conversación con un modelo, sino en una tabla explícita
+con valores, criterios y niveles de prioridad de aspectos auditables.
+
+## Formulaciones posibles del aporte
+
+## Aporte diagnóstico: producir preguntas, no solo respuestas
+
+Un aporte importante de Prioriza es que no siempre entrega una respuesta
+final. A veces entrega una pregunta mejor. Un empate pregunta qué
+criterio falta o si la indiferencia debe aceptarse. Una contradicción
+pregunta qué parte del modelo no coincide con el sistema de valores
+declarado. Un resultado contraintuitivo pregunta si la intuición
+contiene conocimiento no modelado o sesgo operativo.
+
+Este aporte diagnóstico diferencia el método de una simple tabla de
+puntuación. Prioriza puede ser usado para decidir, pero también para
+investigar por qué no se puede decidir todavía de manera coherente.
+
+| **Nivel** | **Formulación** |
+|:---|:---|
+| Conservadora | Prioriza es un procedimiento transparente de priorización ordinal ponderada para criterios heterogéneos, con conservación de empates y salida trazable. |
+| Moderada | Prioriza es un marco integrador que combina nivelación ordinal por criterio, ponderación explícita, reutilización de tablas, ingeniería inversa y formas de uso dinámicas. |
+| Ambiciosa | Prioriza es un marco de gobernanza decisional que permite componer, reutilizar, invertir y auditar decisiones multicriterio en sistemas humanos, empresariales y asistidos por IA. |

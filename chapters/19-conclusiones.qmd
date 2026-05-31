@@ -1,3 +1,46 @@
 # Conclusiones
 
-Contenido pendiente de conversión desde el DOCX.
+Prioriza debe entenderse como un marco práctico de priorización ordinal
+ponderada. Su valor no está en prometer una decisión perfecta ni en
+reemplazar métodos especializados, sino en hacer explícita la estructura
+de decisión cuando existen alternativas, aspectos, valores, criterios y
+niveles de prioridad de aspectos.
+
+El método transforma valores heterogéneos en niveles de prioridad,
+conserva empates, pondera aspectos, agrega contribuciones y produce una
+estructura de prioridad trazable. A partir de ese núcleo, puede
+reutilizarse, componerse, invertirse, recalcularse y aplicarse en
+dominios diversos.
+
+Su origen en Áncora GOH muestra que no nació como especulación
+abstracta. Fue creado para resolver un problema práctico de horarios,
+donde cada actividad competía por recursos y restricciones, y donde cada
+colocación modificaba el contexto.
+
+El estado del arte obliga a ser prudente. Prioriza no inventa la
+decisión multicriterio, la ponderación, el ranking ni la suma ponderada.
+Su contribución defendible está en integrar esos elementos con una
+lógica simple de nivelación ordinal, subjetividad explícita, empates,
+reutilización, recursividad, ingeniería inversa, forma continua y uso
+operacional trazable.
+
+En el futuro, Prioriza puede convertirse en software abierto: librerías,
+API, módulos empresariales y servidores MCP para IA. Pero esa
+materialización debe apoyarse primero en una teoría bien delimitada, con
+alcance, límites, justificación y comparación honesta con métodos
+existentes.
+
+La formulación final más prudente es esta: Prioriza no decide desde la
+nada; organiza información disponible en una estructura de prioridad. No
+elimina la subjetividad; la hace explícita. No garantiza el óptimo
+universal; produce una decisión trazable y revisable. Esa combinación
+puede ser suficiente para convertirlo en una herramienta útil para
+personas, organizaciones y sistemas asistidos por inteligencia
+artificial.
+
+La versión v0.3 incorpora además dos precisiones operativas: el azar
+puede usarse como desempate externo entre alternativas equivalentes, y
+la replanificación por evento permite incorporar urgencias sin destruir
+la estabilidad del plan por mera presión o intuición. Ambas precisiones
+refuerzan la tesis central: Prioriza no solo calcula prioridades; ayuda
+a justificar, revisar y gobernar la decisión.

@@ -1,3 +1,349 @@
 # Ingeniería inversa
 
-Contenido pendiente de conversión desde el DOCX.
+La ingeniería inversa en Prioriza consiste en partir de un resultado
+deseado o esperado y analizar qué valores, niveles, niveles de prioridad
+de aspectos, criterios o reglas harían posible ese resultado.
+
+En la forma directa, Prioriza responde:
+
+    Dados estos valores, criterios y niveles de prioridad de aspectos, ¿qué prioridad se obtiene?
+
+En la forma inversa, Prioriza pregunta:
+
+    Dada esta prioridad deseada, ¿qué tendría que cambiar en los valores, criterios o pesos para obtenerla?
+
+Esta propiedad es importante porque convierte a Prioriza en una
+herramienta de análisis, no solamente en un mecanismo de cálculo.
+
+## Forma directa y forma inversa
+
+La forma directa del método sigue el flujo normal:
+
+    valores -> niveles de elementos -> niveles de aspectos -> suma -> prioridad
+
+La forma inversa intenta recorrer el problema en sentido contrario:
+
+    prioridad deseada -> condiciones necesarias -> niveles de prioridad de aspectos, niveles, criterios o valores posibles
+
+No siempre existe una única respuesta inversa. De hecho, normalmente
+existen varias combinaciones de cambios que pueden producir el mismo
+resultado.
+
+Por eso, la ingeniería inversa de Prioriza no debe entenderse como una
+inversión matemática exacta y única, sino como una exploración de
+condiciones que harían posible una prioridad.
+
+## Qué puede invertirse
+
+En Prioriza pueden analizarse inversamente varios componentes.
+
+Primero, pueden invertirse los niveles de prioridad de los aspectos. Se
+pregunta qué pesos deberían tener los aspectos para que un elemento
+quede por encima de otro.
+
+Segundo, pueden invertirse los niveles. Se pregunta qué niveles tendría
+que obtener un elemento en ciertos aspectos para alcanzar una prioridad
+deseada.
+
+Tercero, pueden invertirse los valores. Se pregunta qué valores
+originales deberían cambiar para producir determinados niveles.
+
+Cuarto, pueden invertirse los criterios de nivelación. Se pregunta si el
+criterio usado representa realmente la intención decisional.
+
+Quinto, pueden invertirse los aspectos del modelo. Se pregunta qué
+aspecto falta si el resultado esperado no puede obtenerse razonablemente
+con la tabla actual.
+
+## Ingeniería inversa de pesos
+
+La ingeniería inversa de pesos pregunta qué importancia relativa
+tendrían que tener los aspectos para producir determinado orden de
+prioridad.
+
+Ejemplo: una organización espera que la tarea A quede por encima de la
+tarea B, pero Prioriza produce lo contrario.
+
+Entonces se puede preguntar:
+
+    ¿Qué pesos harían que A tenga mejor prioridad que B?
+
+Si A solo supera a B cuando se asigna un peso extremadamente alto a un
+aspecto secundario, eso revela que la preferencia esperada no está bien
+respaldada por el modelo actual.
+
+Si A supera a B con un pequeño ajuste razonable de pesos, entonces el
+problema puede estar en una calibración incorrecta.
+
+## Ingeniería inversa de niveles
+
+La ingeniería inversa de niveles pregunta qué posiciones debería ocupar
+un elemento dentro de ciertos aspectos para obtener una prioridad final.
+
+Ejemplo:
+
+    Para que el proyecto A quede en prioridad 1,
+    ¿en qué aspectos necesita mejorar de nivel?
+
+Esta pregunta permite convertir el método en una herramienta de
+diagnóstico.
+
+Si un proyecto no alcanza prioridad alta porque tiene mal nivel en
+riesgo, esfuerzo y alineación estratégica, la organización puede decidir
+si esos niveles son correctos o si deben revisarse los valores que los
+originan.
+
+## Ingeniería inversa de valores
+
+La ingeniería inversa de valores pregunta qué valores originales
+deberían cambiar para producir niveles diferentes.
+
+Ejemplo:
+
+    ¿Cuánto debería reducirse el esfuerzo estimado de una tarea
+    para que suba de nivel dentro del aspecto Esfuerzo?
+
+O:
+
+    ¿Cuántos usuarios afectados tendría que tener un ticket
+    para pasar al primer nivel de prioridad en Impacto?
+
+Esta forma de análisis permite conectar la prioridad con cambios
+concretos en la realidad o en los datos.
+
+## Ingeniería inversa de criterios
+
+A veces el problema no está en los niveles de prioridad de los aspectos
+ni en los valores, sino en la función de nivelación.
+
+Ejemplo: una organización usa criterio mínimo para esfuerzo, porque
+quiere priorizar tareas fáciles. Pero luego descubre que las tareas de
+mayor esfuerzo son las que desbloquean entregables críticos. En ese
+caso, la función de nivelación no representa correctamente la política
+real.
+
+La ingeniería inversa de criterios pregunta:
+
+    ¿El criterio mínimo, máximo, por rango, por cercanía o por regla
+    representa realmente la intención de decisión?
+
+Cambiar el criterio puede cambiar radicalmente los niveles y, por tanto,
+el resultado.
+
+## Ingeniería inversa de aspectos
+
+Cuando ningún ajuste razonable de niveles de prioridad de aspectos,
+niveles o criterios produce el resultado esperado, puede faltar un
+aspecto.
+
+Ejemplo: una empresa espera que una tarea sea prioritaria porque fue
+prometida a un cliente clave, pero la tabla solo incluye urgencia,
+esfuerzo y antigüedad. El resultado no refleja la expectativa porque el
+compromiso externo no está modelado.
+
+La ingeniería inversa permite detectar esa ausencia:
+
+    El resultado esperado depende de un criterio que no existe en la tabla.
+
+En ese caso, la corrección no consiste en manipular pesos, sino en
+agregar un aspecto nuevo.
+
+## Ingeniería inversa y contradicción
+
+La ingeniería inversa está estrechamente relacionada con la detección de
+contradicciones.
+
+Si el decisor espera un resultado y Prioriza produce otro, hay varias
+posibilidades:
+
+- el decisor está usando mentalmente un aspecto no declarado;
+- los niveles de prioridad de los aspectos no representan la política
+  real;
+- los valores están mal medidos;
+- el criterio de nivelación no expresa la intención real;
+- el resultado esperado es incompatible con los datos disponibles;
+- la preferencia declarada contradice otras preferencias más fuertes.
+
+La ingeniería inversa ayuda a localizar el origen de esa contradicción.
+
+## Ingeniería inversa como análisis de sensibilidad
+
+Una forma práctica de ingeniería inversa es el análisis de sensibilidad.
+
+En vez de buscar una solución inversa exacta, se modifican niveles de
+prioridad de aspectos, valores o criterios dentro de rangos razonables
+para observar cuándo cambia el resultado.
+
+Preguntas típicas:
+
+    ¿Qué peso mínimo necesita el aspecto Riesgo para que A supere a B?
+    ¿Qué variación del costo cambiaría la prioridad?
+    ¿Qué aspecto es más decisivo en el resultado?
+    ¿Qué tan estable es el ranking ante cambios pequeños?
+
+Si el resultado cambia con variaciones pequeñas, la decisión es
+sensible. Si se mantiene estable ante variaciones razonables, la
+decisión es robusta dentro del modelo.
+
+### Ingeniería inversa y explicación
+
+La ingeniería inversa también mejora la explicación del resultado.
+
+No solo se puede decir:
+
+    A quedó primero porque obtuvo menor suma ponderada.
+
+También se puede decir:
+
+    A dejaría de ser primero si el peso de Riesgo bajara por debajo de cierto umbral,
+    o si B mejorara un nivel en Impacto.
+
+Este tipo de explicación es más útil para gestión, auditoría y
+negociación, porque muestra qué condiciones sostienen la decisión.
+
+## Ingeniería inversa y negociación
+
+En una organización, las decisiones suelen involucrar actores con
+preferencias distintas. La ingeniería inversa permite mostrar qué
+tendría que ser cierto para justificar una preferencia.
+
+Ejemplo:
+
+    Si el área comercial quiere priorizar el proyecto B,
+    ¿qué niveles de prioridad de aspectos o criterios tendría que aceptar la organización?
+
+Esto desplaza la discusión desde opiniones personales hacia la
+estructura del modelo.
+
+La pregunta deja de ser:
+
+    ¿Por qué tú quieres B?
+
+Y pasa a ser:
+
+    ¿Qué criterios y pesos hacen razonable que B sea prioritario?
+
+## Ingeniería inversa y auditoría
+
+La ingeniería inversa puede servir para auditoría de decisiones.
+
+Si una organización toma una decisión y luego intenta justificarla,
+Prioriza puede analizar si esa decisión es coherente con los criterios
+declarados.
+
+Ejemplo:
+
+    La organización dice que seleccionó al proveedor C por calidad y riesgo.
+    Pero al reconstruir la tabla, C solo gana si se reduce artificialmente el peso de costo
+    o si se omite el historial de incumplimiento.
+
+En ese caso, la ingeniería inversa puede revelar una justificación
+débil, manipulada o incompleta.
+
+## Límites de la ingeniería inversa
+
+La ingeniería inversa de Prioriza tiene límites.
+
+Primero, puede haber muchas combinaciones distintas que produzcan el
+mismo resultado. Por tanto, no siempre hay una única explicación
+inversa.
+
+Segundo, algunos resultados deseados pueden ser imposibles bajo los
+valores y criterios definidos.
+
+Tercero, puede producirse una solución inversa matemáticamente posible
+pero decisionalmente absurda, por ejemplo asignar un peso extremo a un
+aspecto irrelevante.
+
+Cuarto, si los datos son falsos o incompletos, la ingeniería inversa
+puede explicar el modelo, pero no corregir la realidad.
+
+Quinto, si hay restricciones duras, no deben forzarse como simples
+cambios de peso.
+
+## Ingeniería inversa y manipulación
+
+La ingeniería inversa puede usarse de forma legítima para entender una
+decisión, pero también puede usarse para manipularla.
+
+Si alguien parte de un resultado deseado y ajusta niveles de prioridad
+de aspectos o criterios hasta obtenerlo, sin justificar esos cambios, el
+método deja de ser una herramienta de transparencia y se convierte en
+una herramienta de racionalización.
+
+Por eso, todo cambio derivado de ingeniería inversa debe documentarse:
+
+- qué resultado se quería obtener;
+- qué componente se modificó;
+- por qué la modificación es legítima;
+- quién la aprobó;
+- qué versión de la tabla la incorpora;
+- qué impacto tiene sobre decisiones anteriores o futuras.
+
+## Forma básica de análisis inverso
+
+Un procedimiento básico de ingeniería inversa puede seguir estos pasos:
+
+1.  Definir el resultado esperado o deseado.
+2.  Ejecutar Prioriza con la tabla actual.
+3.  Comparar el resultado actual con el resultado deseado.
+4.  Identificar los elementos o aspectos responsables de la diferencia.
+5.  Probar variaciones razonables de niveles de prioridad de aspectos,
+    valores, niveles o criterios.
+6.  Determinar si el resultado deseado es alcanzable.
+7.  Evaluar si los cambios necesarios son justificables.
+8.  Documentar la explicación o la contradicción encontrada.
+
+## Ejemplo simple
+
+Supóngase que una empresa espera priorizar la tarea A sobre la tarea B.
+
+Resultado actual:
+
+| Tarea | Urgencia | Impacto | Esfuerzo | Total |
+|:------|:---------|:--------|:---------|:------|
+| A     | 2        | 1       | 3        | 6     |
+| B     | 1        | 2       | 1        | 4     |
+
+B queda por encima de A porque tiene menor total.
+
+La ingeniería inversa puede preguntar:
+
+    ¿Qué tendría que cambiar para que A quede por encima de B?
+
+Posibles respuestas:
+
+- aumentar el peso de Impacto, donde A es mejor;
+- reducir el peso de Esfuerzo, donde A es peor;
+- revisar si el esfuerzo de A fue sobreestimado;
+- agregar un aspecto Compromiso externo si A fue prometida;
+- aceptar que, bajo la tabla actual, B debe ser prioritaria.
+
+El valor de la ingeniería inversa está en mostrar esas posibilidades y
+sus implicaciones.
+
+## Relación con la recursividad
+
+La ingeniería inversa puede conducir a recursividad.
+
+Si se descubre que el problema está en los niveles de prioridad de los
+aspectos, puede construirse una tabla Prioriza para justificar esos
+pesos. Si se descubre que el problema está en un valor complejo, puede
+construirse una tabla secundaria para calcularlo. Si se descubre que
+falta un aspecto, puede agregarse y luego priorizarse su importancia.
+
+Así, la ingeniería inversa no solo corrige una tabla. Puede revelar la
+necesidad de nuevas tablas.
+
+## Resumen de la sección
+
+La ingeniería inversa de Prioriza permite analizar qué condiciones
+harían posible una prioridad deseada. Puede aplicarse a niveles de
+prioridad de aspectos, niveles, valores, criterios y aspectos.
+
+Su utilidad principal no es forzar resultados, sino explicar
+diferencias, detectar contradicciones, evaluar sensibilidad, justificar
+cambios y mejorar la estructura de decisión.
+
+Debe usarse con disciplina, porque también puede ser utilizada para
+manipular decisiones si los cambios no se documentan ni se justifican.

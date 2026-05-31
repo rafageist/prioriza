@@ -1,3 +1,169 @@
 # Especificación futura
 
-Contenido pendiente de conversión desde el DOCX.
+Después de formalizar la teoría, Prioriza puede materializarse en
+software. La especificación futura debe mantener la separación entre
+núcleo, formas de uso y aplicaciones.
+
+## Objeto de tabla Prioriza
+
+Una tabla Prioriza debería incluir al menos: nombre, propósito,
+elementos, aspectos, funciones de nivelación, pesos, reglas de
+desempate, restricciones previas, versión y estado.
+
+## Objeto de ejecución
+
+Cada ejecución debe registrar la plantilla usada, fecha, usuario o
+sistema ejecutor, valores de entrada, niveles calculados, niveles de
+prioridad de aspectos aplicados, sumas finales, empates, advertencias y
+explicación.
+
+## Objeto de resultado
+
+El resultado no debe ser solo un número o ID. Debe ser un objeto
+trazable que pueda usarse como entrada de otra tabla, columna derivada,
+vector de pesos, referencia de comparación u objetivo de ingeniería
+inversa.
+
+## Formato JSON/YAML
+
+Una especificación JSON/YAML permitiría transportar tablas Prioriza
+entre lenguajes y sistemas. Esto facilitaría librerías en Python,
+JavaScript, PHP u otros lenguajes, además de integraciones con Odoo o
+servicios externos.
+
+prioriza_table:\
+name: Weekly Task Priority\
+version: 1.0\
+elements: \[...\]\
+aspects:\
+- name: urgency\
+leveling: min\
+weight: 1\
+- name: impact\
+leveling: max\
+weight: 2\
+result_policy: lower_total_is_better
+
+## Librerías
+
+- prioriza-py para Python.
+
+- prioriza-js para JavaScript/TypeScript.
+
+- prioriza-php como continuación histórica y práctica.
+
+- Módulo PL/pgSQL si se desea ejecutar cerca de datos relacionales.
+
+- Adaptadores para Odoo u otros sistemas empresariales.
+
+## API y servicio
+
+Un servicio Prioriza podría exponer operaciones como evaluar tabla,
+explicar resultado, comparar ejecuciones, ejecutar ingeniería inversa,
+simular cambios de pesos, detectar empates y exportar trazabilidad.
+
+## MCP server
+
+Un servidor MCP permitiría a agentes de IA consultar Prioriza como
+herramienta externa. Esto separaría la conversación probabilística del
+modelo de lenguaje de una política explícita de decisión.
+
+## Integración con Odoo
+
+En Odoo, Prioriza podría operar sobre modelos existentes como
+project.task, helpdesk.ticket, crm.lead, quality.alert, riesgos,
+requisitos, productos, proveedores o módulos de inventario de software.
+La prioridad calculada podría almacenarse como campo derivado o como
+historial de decisión.
+
+## Auditoría y explicabilidad
+
+Toda implementación debe permitir reconstruir por qué un elemento quedó
+en determinado nivel. Esto exige conservar valores originales, niveles,
+niveles de prioridad de aspectos, criterios, versión de la tabla y fecha
+de ejecución.
+
+## Roadmap sugerido
+
+## Explicación humana y preguntas sugeridas
+
+Una implementación futura debe generar explicaciones orientadas al
+usuario, no solo trazabilidad técnica. El resultado debe incluir razones
+dominantes, comparación contra alternativas cercanas, empates,
+contradicciones, sensibilidad básica y preguntas sugeridas para revisar
+el modelo.
+
+Ejemplos de preguntas automáticas: ¿qué aspecto falta para desempatar?,
+¿qué nivel de prioridad del aspecto hizo ganar a esta alternativa?, ¿qué
+valor tendría que cambiar para que el segundo lugar pase al primero?,
+¿el usuario está usando una intuición no modelada?
+
+1.  Cerrar documento teórico.
+
+2.  Definir especificación JSON/YAML.
+
+3.  Implementar librería de referencia en Python.
+
+4.  Crear pruebas unitarias con casos clásicos y casos históricos.
+
+5.  Implementar ejemplos de CLI y notebooks.
+
+6.  Desarrollar API mínima.
+
+7.  Crear módulo Odoo experimental.
+
+8.  Crear servidor MCP.
+
+9.  Publicar documentación y benchmarks.
+
+## Plan de ilustraciones para el libro
+
+La comprensión de Prioriza mejora si el documento incluye esquemas.
+Muchas ideas del método son más claras visualmente que en forma
+puramente textual: nivelación, empates, refinamiento progresivo,
+explicación humana, forma continua y replanificación por evento.
+
+Las ilustraciones deben cumplir una función conceptual, no decorativa.
+Cada figura debe ayudar a entender una operación del método o una
+tensión metodológica: por qué se empata, por qué se recalcula, por qué
+el resultado puede contradecir la intuición o cómo una nueva pregunta
+refina la decisión.
+
+<figure>
+<img src="figures/imported/media/image1.png"
+style="width:6.2in;height:3.4875in" />
+<figcaption><p>Figura A. Refinamiento progresivo: Prioriza puede
+producir una respuesta o una nueva pregunta cuando hay empate,
+contradicción o insuficiencia.</p></figcaption>
+</figure>
+
+<figure>
+<img src="figures/imported/media/image2.png"
+style="width:6.2in;height:3.4875in" />
+<figcaption><p>Figura B. Explicabilidad humana: el cálculo debe
+traducirse en razones comprensibles, comparaciones y preguntas de
+revisión.</p></figcaption>
+</figure>
+
+<figure>
+<img src="figures/imported/media/image3.png"
+style="width:6.2in;height:3.4875in" />
+<figcaption><p>Figura C. Reactividad: una tarea urgente entra al
+contexto y se evalúa antes de romper la planificación.</p></figcaption>
+</figure>
+
+<figure>
+<img src="figures/imported/media/image4.png"
+style="width:6.2in;height:3.4875in" />
+<figcaption><p>Figura D. Desempate aleatorio: el azar solo selecciona
+operativamente entre alternativas equivalentes; no crea prioridad
+superior.</p></figcaption>
+</figure>
+
+<figure>
+<img src="figures/imported/media/image5.png"
+style="width:6.2in;height:3.4875in" />
+<figcaption><p>Figura E. Forma continua: los cortes de todos los
+aspectos generan tramos normalizados que luego se evalúan como elementos
+discretos.</p></figcaption>
+</figure>

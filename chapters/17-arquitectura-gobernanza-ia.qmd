@@ -1,3 +1,106 @@
 # Prioriza en arquitectura empresarial, gobernanza e inteligencia artificial
 
-Contenido pendiente de conversión desde el DOCX.
+Prioriza puede posicionarse como una capa de decisión dentro de marcos
+empresariales y sistemas asistidos por IA. No reemplaza esos marcos. Les
+aporta un mecanismo explícito para priorizar cuando el marco exige
+decidir pero no prescribe una fórmula concreta.
+
+## BPM y mejora de procesos
+
+En BPM, Prioriza puede ayudar a decidir qué procesos mejorar,
+automatizar, auditar o rediseñar primero. Puede aplicarse sobre
+procesos, actividades, cuellos de botella o casos de negocio, usando
+criterios como impacto, costo, riesgo, frecuencia, tiempo de ciclo o
+potencial de automatización.
+
+## TOGAF y arquitectura empresarial
+
+En arquitectura empresarial, Prioriza puede apoyar decisiones sobre
+capacidades, gaps, work packages, aplicaciones, migraciones o deuda
+arquitectónica. Su papel sería ordenar decisiones dentro del ciclo de
+arquitectura, no reemplazar el marco arquitectónico.
+
+## ITIL 4 y gestión de servicios
+
+En ITIL 4, Prioriza puede ayudar a ordenar incidentes, problemas,
+cambios, mejoras de servicio o solicitudes. Su valor está en traducir
+criterios de valor, riesgo, urgencia, impacto y cumplimiento en una
+prioridad trazable.
+
+## NIST CSF 2.0 y ciberseguridad
+
+En ciberseguridad, Prioriza puede usarse para ordenar controles,
+vulnerabilidades, acciones de mitigación, gaps o activos críticos. El
+marco NIST aporta categorías y resultados esperados; Prioriza puede
+aportar una política explícita para decidir por dónde empezar.
+
+## NIST AI RMF e inteligencia artificial
+
+En gestión de riesgos de IA, Prioriza puede ordenar riesgos,
+evaluaciones, salvaguardas, evidencias, controles y acciones de
+mitigación. Esto es útil porque muchos riesgos de IA son multicriterio:
+combinan daño potencial, probabilidad, incertidumbre, exposición,
+reversibilidad, cumplimiento y sensibilidad de datos.
+
+## RUP/UML e ingeniería de software
+
+En procesos de ingeniería, Prioriza puede ayudar a ordenar requisitos,
+casos de uso, riesgos técnicos, entregables, defectos o decisiones
+arquitectónicas. UML modela estructura y comportamiento; Prioriza puede
+modelar la decisión sobre qué atender primero.
+
+## Prioriza e inteligencia artificial
+
+Prioriza no debe presentarse como alternativa a redes neuronales o
+modelos de lenguaje. Su papel más razonable es complementar la IA como
+capa externa de decisión explícita. La IA puede interpretar, resumir,
+extraer valores o sugerir aspectos; Prioriza puede calcular prioridades
+según una política declarada.
+
+La diferencia es importante: en un modelo neuronal los niveles de
+prioridad de los aspectos son parámetros aprendidos; en Prioriza los
+niveles de prioridad de los aspectos son prioridades declaradas o
+derivadas. Esto permite auditoría, explicación y alineación con política
+organizacional.
+
+## MCP y agentes
+
+Un servidor MCP de Prioriza podría permitir que agentes de IA consulten
+un motor de decisión externo en lugar de improvisar prioridades desde el
+prompt. El agente podría preguntar qué herramienta usar, qué riesgo
+atender, qué evidencia revisar o qué tarea ejecutar, y Prioriza
+devolvería una respuesta trazable basada en una tabla versionada.
+
+## Posicionamiento correcto
+
+## Prioriza como modelo computacional acotado de decisión humana
+
+Prioriza puede ubicarse dentro del campo amplio de la inteligencia
+artificial si se entiende IA como el intento de modelar
+computacionalmente actividades intelectuales humanas. La actividad
+modelada aquí no es conversar, percibir imágenes ni aprender patrones
+estadísticos, sino priorizar y decidir bajo criterios múltiples,
+información limitada y subjetividad explícita.
+
+Un ser humano decide considerando un número finito de aspectos: costo,
+urgencia, miedo, riesgo, oportunidad, esfuerzo, consecuencias,
+preferencia y experiencia. No puede sostener una cantidad infinita de
+variables en la cabeza. Prioriza toma esa limitación como parte del
+modelo: trabaja con un conjunto finito y declarado de aspectos, valores
+y niveles de prioridad.
+
+El resultado de Prioriza sigue siendo humano en un sentido importante:
+puede ser erróneo si los valores, niveles o criterios humanos son
+erróneos. Su fuerza no está en eliminar al humano, sino en hacer
+explícito el proceso que el humano suele ejecutar de manera implícita,
+emocional, limitada o contradictoria.
+
+Por tanto, Prioriza no debe presentarse como una IA autónoma que decide
+desde la nada. Debe presentarse como un modelo computacional
+humano-en-el-ciclo: el humano define aspectos, valores, funciones de
+nivelación y niveles de prioridad; el sistema calcula, explica, revela
+contradicciones y permite revisar la decisión.
+
+La frase correcta no es que Prioriza sustituye BPM, TOGAF, ITIL, NIST,
+RUP, UML o IA. La frase correcta es que Prioriza puede funcionar como
+capa de priorización, trazabilidad y decisión dentro de esos contextos.

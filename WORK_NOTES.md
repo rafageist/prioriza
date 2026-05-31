@@ -16,3 +16,13 @@
 
 - Quarto is not installed in the local PATH in this environment, so local
   `quarto render` commands cannot be executed here yet.
+
+## DOCX conversion notes
+
+- The archived DOCX was converted with Pandoc 3.9.0.2 into
+  `tmp/prioriza_raw.md` and split into the Quarto chapter files under
+  `chapters/`.
+- The generated `tmp/` Markdown and Pandoc-extracted `figures/imported/` media
+  are temporary conversion artifacts and are ignored by Git.
+- The conceptual figures are being recreated as versionable SVG files in the
+  canonical `figures/` directory instead of committing DOCX-extracted bitmaps.

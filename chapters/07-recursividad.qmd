@@ -1,3 +1,349 @@
 # Recursividad
 
-Contenido pendiente de conversión desde el DOCX.
+La recursividad en Prioriza aparece cuando el resultado de una
+aplicación del método se utiliza como entrada, valor, nivel, peso o
+criterio en otra aplicación del mismo método.
+
+Esta propiedad se deriva de una característica básica de Prioriza: su
+salida principal es una estructura de prioridad, y esa estructura puede
+tener la misma naturaleza que algunas de sus entradas. Un nivel de
+prioridad producido por una tabla puede alimentar otra tabla como peso
+de un aspecto, como valor derivado de un elemento o como criterio
+auxiliar de una decisión superior.
+
+La recursividad no significa repetir el método infinitamente. Debe
+entenderse como composición controlada de decisiones.
+
+## Diferencia entre reutilización y recursividad
+
+La reutilización consiste en aplicar una misma plantilla Prioriza varias
+veces a conjuntos cambiantes de elementos.
+
+La recursividad consiste en usar el resultado de una tabla Prioriza
+dentro de otra tabla Prioriza.
+
+Ejemplo de reutilización:
+
+    Cada semana se aplica la misma tabla para priorizar tareas abiertas.
+
+Ejemplo de recursividad:
+
+    Una tabla prioriza los criterios Salud, Dinero y Placer.
+    El resultado de esa tabla se usa como peso en otra tabla que decide entre Fumar y No fumar.
+
+La reutilización repite una estructura. La recursividad encadena
+estructuras.
+
+## Por qué la recursividad es posible
+
+La recursividad es posible porque Prioriza transforma una tabla de
+valores en una estructura de prioridad.
+
+Esa estructura puede expresarse como:
+
+- niveles;
+- ranking;
+- pesos derivados;
+- grupos de prioridad;
+- valores de referencia;
+- decisiones intermedias.
+
+Si una tabla produce un ranking de aspectos, ese ranking puede usarse
+como peso de esos aspectos en una tabla superior. Si una tabla produce
+un nivel de riesgo para un activo, ese nivel de riesgo puede usarse como
+valor en una tabla de priorización de controles. Si una tabla prioriza
+requisitos, su resultado puede alimentar una tabla de planificación de
+iteraciones.
+
+La salida de una decisión puede ser insumo de otra decisión.
+
+## Recursividad en los niveles de prioridad de los aspectos
+
+La forma más clara de recursividad ocurre cuando los niveles de
+prioridad de los aspectos de una tabla principal se obtienen aplicando
+Prioriza a los propios aspectos.
+
+En la forma primitiva, un decisor puede declarar directamente:
+
+    Salud = 1
+    Dinero = 3
+    Placer = 2
+
+Pero esa declaración puede ser cuestionada: ¿por qué salud tiene
+prioridad 1?, ¿por qué dinero tiene prioridad 3?, ¿qué criterio
+justifica ese orden?
+
+Entonces se puede construir una segunda tabla donde los elementos sean
+los aspectos de la primera tabla.
+
+Ejemplo:
+
+| Aspecto | Irreversibilidad | Impacto futuro | Dependencia vital | Nivel final |
+|:--------|:-----------------|:---------------|:------------------|:------------|
+| Salud   | 1                | 1              | 1                 | 1           |
+| Dinero  | 2                | 2              | 3                 | 2           |
+| Placer  | 3                | 3              | 2                 | 3           |
+
+La columna final de esta tabla puede convertirse en el vector de pesos
+de la tabla principal.
+
+Así, lo que antes parecía una preferencia arbitraria se convierte en una
+decisión explícita, discutible y trazable.
+
+## Recursividad en los valores de una columna
+
+Otra forma de recursividad ocurre cuando el valor de un aspecto no se
+mide directamente, sino que se calcula mediante otra tabla Prioriza.
+
+Ejemplo: una tabla principal contiene el aspecto Riesgo. Pero el riesgo
+puede depender de varios factores:
+
+- probabilidad;
+- impacto;
+- exposición;
+- detectabilidad;
+- reversibilidad;
+- obligaciones legales.
+
+En lugar de asignar el riesgo manualmente, se crea una tabla Prioriza
+para calcularlo. El resultado de esa tabla se usa como valor o nivel de
+riesgo en la tabla superior.
+
+Esto permite descomponer un aspecto complejo en subdecisiones más
+pequeñas.
+
+## Recursividad en decisiones empresariales
+
+En una organización, una decisión superior puede depender de varias
+decisiones previas.
+
+Ejemplo: priorizar proyectos estratégicos.
+
+La tabla principal puede tener aspectos como:
+
+- valor económico;
+- riesgo;
+- alineación estratégica;
+- madurez técnica;
+- impacto en clientes;
+- cumplimiento regulatorio.
+
+Pero algunos de esos aspectos pueden ser resultados de otras tablas:
+
+    Riesgo del proyecto -> calculado por una tabla Prioriza de riesgos.
+    Alineación estratégica -> calculada por una tabla Prioriza de capacidades empresariales.
+    Madurez técnica -> calculada por una tabla Prioriza de arquitectura y deuda técnica.
+    Impacto en clientes -> calculado por una tabla Prioriza de segmentos y contratos.
+
+La decisión final se construye componiendo decisiones parciales.
+
+## Recursividad y descomposición de complejidad
+
+La recursividad permite evitar tablas enormes donde todo se mezcla con
+todo.
+
+En vez de construir una única tabla con decenas de aspectos, Prioriza
+permite descomponer el problema:
+
+    problema complejo -> subproblemas -> tablas parciales -> resultado integrado
+
+Esto tiene varias ventajas:
+
+- cada tabla es más simple;
+- cada subdecisión puede tener expertos distintos;
+- los criterios quedan mejor organizados;
+- las explicaciones son más claras;
+- los resultados intermedios pueden auditarse;
+- los cambios se pueden hacer en el submodelo correcto.
+
+## Recursividad y subjetividad
+
+La recursividad ayuda a abrir la caja negra de la subjetividad.
+
+Cuando alguien asigna un peso directamente, esa asignación puede parecer
+arbitraria. Pero si ese peso se obtiene mediante otra tabla, la
+preferencia queda descompuesta en razones.
+
+Esto no convierte automáticamente la subjetividad en objetividad. Lo que
+hace es transformar una preferencia opaca en una estructura explícita de
+valoración.
+
+    preferencia opaca -> criterios declarados -> niveles -> peso derivado
+
+La subjetividad sigue existiendo, pero queda más visible y discutible.
+
+## Recursividad y trazabilidad
+
+Cuando una tabla depende del resultado de otra, la trazabilidad debe
+conservar la cadena completa.
+
+No basta con decir:
+
+    la tarea A quedó en prioridad 1
+
+Si el resultado depende de subtablas, debe poder explicarse:
+
+    la tarea A quedó en prioridad 1 porque su riesgo derivado fue alto,
+    y ese riesgo fue alto porque en la tabla de riesgos obtuvo mal nivel en exposición,
+    impacto y reversibilidad.
+
+Una implementación de Prioriza debe permitir navegar desde la decisión
+final hasta las decisiones parciales que la alimentaron.
+
+## Composición de tablas
+
+La recursividad puede modelarse como composición de tablas Prioriza.
+
+Una tabla P0 puede depender de los resultados de P1, P2 y P3.
+
+    P1 -> valor usado por P0
+    P2 -> peso usado por P0
+    P3 -> nivel usado por P0
+    P0 -> prioridad final
+
+La composición permite crear redes de decisión, no solamente árboles
+simples.
+
+Sin embargo, mientras más compleja sea la red, más importante se vuelve
+controlar dependencias, versiones y ciclos.
+
+### Recursividad acotada
+
+La recursividad debe ser acotada. Toda cadena de Prioriza debe terminar
+en algún punto en valores base, criterios base o decisiones explícitas.
+
+Una cadena válida puede verse así:
+
+    valores observados -> tabla parcial -> resultado derivado -> tabla superior -> decisión final
+
+Una cadena problemática sería:
+
+    tabla A depende de tabla B
+    tabla B depende de tabla C
+    tabla C depende de tabla A
+
+Este tipo de ciclo puede impedir una evaluación directa o producir
+dependencia circular.
+
+## Dependencia circular
+
+Existe dependencia circular cuando una tabla necesita el resultado de
+otra tabla que, directa o indirectamente, depende de la primera.
+
+Ejemplo:
+
+    La prioridad del proyecto depende del riesgo.
+    El riesgo depende de la prioridad del proyecto.
+
+Esto no siempre es inválido, pero ya no es una evaluación simple. Puede
+requerir iteración, convergencia, reglas de equilibrio o intervención
+humana.
+
+En una primera formalización de Prioriza, conviene prohibir o advertir
+las dependencias circulares salvo que estén explícitamente modeladas.
+
+## Recursividad directa e indirecta
+
+La recursividad directa ocurre cuando una tabla utiliza inmediatamente
+el resultado de otra.
+
+    Tabla de riesgos -> Tabla de proyectos
+
+La recursividad indirecta ocurre cuando existen varias capas
+intermedias.
+
+    Tabla de vulnerabilidades -> Tabla de riesgos -> Tabla de controles -> Tabla de proyectos
+
+Ambas son válidas si la cadena es explícita, finita y trazable.
+
+## Recursividad frente a métodos jerárquicos
+
+La recursividad de Prioriza se parece parcialmente a los métodos
+jerárquicos de decisión, pero no es idéntica.
+
+En un método jerárquico clásico, los criterios y subcriterios suelen
+organizarse en una estructura definida de arriba hacia abajo. En
+Prioriza, una tabla puede alimentar otra de manera más flexible: como
+peso, como valor, como nivel, como criterio auxiliar o como decisión
+intermedia.
+
+Esto permite una estructura jerárquica cuando conviene, pero también una
+red de decisiones reutilizables.
+
+## Recursividad y software
+
+En software, la recursividad exige que una tabla Prioriza pueda declarar
+dependencias.
+
+Una especificación mínima debería permitir:
+
+    este aspecto toma su valor de otra tabla Prioriza
+    este peso se calcula con otra tabla Prioriza
+    este criterio usa una salida de otra ejecución
+    esta ejecución depende de estas ejecuciones anteriores
+
+También debe guardar:
+
+- versiones de las tablas dependientes;
+- fecha de ejecución;
+- valores de entrada;
+- resultados intermedios;
+- advertencias de ciclos;
+- explicación acumulada.
+
+## Ejemplo simple de recursividad
+
+Supóngase una tabla principal para decidir entre tres proyectos:
+
+| Proyecto | Riesgo   | Valor estratégico | Esfuerzo |
+|:---------|:---------|:------------------|:---------|
+| A        | derivado | 1                 | 2        |
+| B        | derivado | 2                 | 1        |
+| C        | derivado | 1                 | 3        |
+
+El aspecto Riesgo no se asigna directamente. Se calcula con otra tabla:
+
+| Proyecto | Probabilidad | Impacto | Reversibilidad | Riesgo final |
+|:---------|:-------------|:--------|:---------------|:-------------|
+| A        | 2            | 1       | 3              | 2            |
+| B        | 1            | 2       | 2              | 1            |
+| C        | 3            | 3       | 1              | 3            |
+
+El resultado Riesgo final se inserta en la tabla principal y se calcula
+la prioridad de proyectos.
+
+Así, la tabla principal no necesita saber todos los detalles del cálculo
+de riesgo, pero la explicación puede recuperarlos si hace falta.
+
+## Recursividad como base para decisión compleja
+
+La importancia de la recursividad es que permite llevar Prioriza desde
+decisiones simples hasta decisiones complejas sin cambiar el principio
+básico del método.
+
+Una comparación entre A y B puede resolverse con una tabla pequeña. Una
+decisión empresarial puede resolverse con varias tablas conectadas. Una
+arquitectura de gobernanza puede usar muchas tablas versionadas, algunas
+independientes y otras dependientes.
+
+El método sigue siendo el mismo:
+
+    valores -> niveles de elementos -> niveles de aspectos -> suma -> prioridad
+
+Lo que cambia es la procedencia de los valores, niveles de elementos y
+niveles de prioridad de aspectos.
+
+## Resumen de la sección
+
+La recursividad de Prioriza consiste en reutilizar los resultados de una
+tabla como insumos de otra. Esta propiedad permite descomponer
+decisiones complejas, derivar pesos, calcular aspectos compuestos y
+construir cadenas de decisión trazables.
+
+La recursividad debe ser explícita, finita, versionada y controlada. No
+debe confundirse con repetir la misma tabla muchas veces, que pertenece
+al concepto de reutilización.
+
+Bien utilizada, la recursividad convierte a Prioriza en un marco de
+composición de decisiones, no solamente en una tabla aislada de
+priorización.
