@@ -157,6 +157,11 @@ aspecto cambia de nivel.
 
 Esto permite convertir cada tramo en un elemento discreto.
 
+![Construcción de tramos normalizados a partir de cortes por aspecto.](../figures/forma-continua-tramos.svg){#fig-forma-continua-tramos}
+
+@fig-forma-continua-tramos muestra cómo los cortes propios de cada
+aspecto producen una partición común y una tabla de tramos comparables.
+
 ## Tramos normalizados como elementos
 
 Después de construir la partición común, cada tramo normalizado se trata
@@ -215,7 +220,7 @@ Para cada tramo Ti:
 
     si = suma(lij * paj), para j = 1..m
 
-Donde lij es el nivel del tramo Ti en el aspecto aj, y wj es el nivel de
+Donde lij es el nivel del tramo Ti en el aspecto aj, y paj es el nivel de
 prioridad del aspecto.
 
 Si los niveles de prioridad de los aspectos son iguales a 1:

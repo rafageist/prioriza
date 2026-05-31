@@ -151,6 +151,12 @@ esperar a terminar B o replanificar el bloque. Prioriza debe comparar
 acciones posibles dentro del contexto actualizado, no solo insertar una
 nueva tarea en la lista.
 
+![Replanificación priorizada por evento durante una tarea en curso.](../figures/replanificacion-evento.svg){#fig-replanificacion-evento}
+
+@fig-replanificacion-evento muestra que la urgencia aparente se evalúa
+junto con el estado actual, el costo de interrupción y los cursos de
+acción disponibles.
+
 Para decidir correctamente, Prioriza debe incorporar información sobre
 la tarea en curso y sobre el costo de interrupción: avance actual de B,
 tiempo restante, costo de cambio de contexto, riesgo de dejar B

@@ -166,41 +166,10 @@ tensión metodológica: por qué se empata, por qué se recalcula, por qué
 el resultado puede contradecir la intuición o cómo una nueva pregunta
 refina la decisión.
 
-<figure>
-<img src="figures/imported/media/image1.png"
-style="width:6.2in;height:3.4875in" />
-<figcaption><p>Figura A. Refinamiento progresivo: Prioriza puede
-producir una respuesta o una nueva pregunta cuando hay empate,
-contradicción o insuficiencia.</p></figcaption>
-</figure>
+Las figuras versionadas del libro están en `figures/`:
 
-<figure>
-<img src="figures/imported/media/image2.png"
-style="width:6.2in;height:3.4875in" />
-<figcaption><p>Figura B. Explicabilidad humana: el cálculo debe
-traducirse en razones comprensibles, comparaciones y preguntas de
-revisión.</p></figcaption>
-</figure>
-
-<figure>
-<img src="figures/imported/media/image3.png"
-style="width:6.2in;height:3.4875in" />
-<figcaption><p>Figura C. Reactividad: una tarea urgente entra al
-contexto y se evalúa antes de romper la planificación.</p></figcaption>
-</figure>
-
-<figure>
-<img src="figures/imported/media/image4.png"
-style="width:6.2in;height:3.4875in" />
-<figcaption><p>Figura D. Desempate aleatorio: el azar solo selecciona
-operativamente entre alternativas equivalentes; no crea prioridad
-superior.</p></figcaption>
-</figure>
-
-<figure>
-<img src="figures/imported/media/image5.png"
-style="width:6.2in;height:3.4875in" />
-<figcaption><p>Figura E. Forma continua: los cortes de todos los
-aspectos generan tramos normalizados que luego se evalúan como elementos
-discretos.</p></figcaption>
-</figure>
+- `refinamiento-progresivo.svg`;
+- `explicacion-humana.svg`;
+- `replanificacion-evento.svg`;
+- `desempate-azar.svg`;
+- `forma-continua-tramos.svg`.

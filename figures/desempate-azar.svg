@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Desempate por azar como regla externa</title>
+  <desc id="desc">A y B son equivalentes bajo el modelo; una regla externa selecciona A sin cambiar la prioridad.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f3a44"/>
+    </marker>
+    <style>
+      .box { fill: #f7f9fb; stroke: #2f3a44; stroke-width: 2; rx: 8; }
+      .tie { fill: #edf4ff; stroke: #315c9c; }
+      .random { fill: #fff4df; stroke: #9b5a00; }
+      .ok { fill: #eaf4ef; stroke: #1f6f4a; }
+      .text { font: 18px Arial, sans-serif; fill: #17212b; text-anchor: middle; }
+      .small { font: 14px Arial, sans-serif; fill: #34424f; text-anchor: middle; }
+      .arrow { stroke: #2f3a44; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="tie" x="55" y="88" width="180" height="120" rx="8"/>
+  <text class="text" x="145" y="126">Empate</text>
+  <text class="text" x="145" y="154">{A, B}</text>
+  <text class="small" x="145" y="184">misma prioridad</text>
+
+  <rect class="box" x="305" y="88" width="185" height="120"/>
+  <text class="text" x="398" y="122">Declarar</text>
+  <text class="text" x="398" y="148">equivalencia</text>
+  <text class="small" x="398" y="178">sin forzar ganador</text>
+
+  <rect class="random" x="560" y="88" width="160" height="120" rx="8"/>
+  <text class="text" x="640" y="122">Regla externa</text>
+  <text class="text" x="640" y="150">azar</text>
+  <text class="small" x="640" y="180">registrar evidencia</text>
+
+  <rect class="ok" x="770" y="88" width="90" height="120" rx="8"/>
+  <text class="text" x="815" y="138">A</text>
+  <text class="small" x="815" y="168">seleccionada</text>
+
+  <path class="arrow" d="M235 148 H303"/>
+  <path class="arrow" d="M490 148 H558"/>
+  <path class="arrow" d="M720 148 H768"/>
+
+  <rect class="box" x="215" y="255" width="470" height="58"/>
+  <text class="text" x="450" y="289">La selección operativa no cambia la estructura de prioridad</text>
+</svg>

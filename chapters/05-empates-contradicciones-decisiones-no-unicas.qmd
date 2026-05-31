@@ -156,6 +156,12 @@ si corresponde, semilla o evidencia reproducible del sorteo. Esto
 protege la trazabilidad del método y evita que el azar se convierta en
 una caja negra secundaria.
 
+![Desempate por azar como regla externa a la estructura de prioridad.](../figures/desempate-azar.svg){#fig-desempate-azar}
+
+@fig-desempate-azar resume la regla: el azar selecciona operativamente
+entre alternativas equivalentes, pero no modifica la prioridad declarada
+por el modelo.
+
 ## Insuficiencia de criterios
 
 Existe insuficiencia de criterios cuando las alternativas no pueden
@@ -405,6 +411,12 @@ valores declarados, las funciones de nivelación, los niveles de prioridad
 de los aspectos y la tabla resultante.
 
 Una salida explicativa puede tener esta forma:
+
+![Capa de explicación humana derivada del cálculo Prioriza.](../figures/explicacion-humana.svg){#fig-explicacion-humana}
+
+Como muestra @fig-explicacion-humana, la explicación no reemplaza la
+trazabilidad técnica; la traduce en razones, comparaciones y preguntas
+que el usuario puede revisar.
 
 ```text
 Recomendación: enfocar la tarea A.
