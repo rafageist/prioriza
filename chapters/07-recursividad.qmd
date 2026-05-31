@@ -1,14 +1,14 @@
 # Recursividad
 
 La recursividad en Prioriza aparece cuando el resultado de una
-aplicación del método se utiliza como entrada, valor, nivel, peso o
+aplicación del método se utiliza como entrada, valor, nivel, nivel de prioridad de aspecto o
 criterio en otra aplicación del mismo método.
 
 Esta propiedad se deriva de una característica básica de Prioriza: su
 salida principal es una estructura de prioridad, y esa estructura puede
 tener la misma naturaleza que algunas de sus entradas. Un nivel de
-prioridad producido por una tabla puede alimentar otra tabla como peso
-de un aspecto, como valor derivado de un elemento o como criterio
+prioridad producido por una tabla puede alimentar otra tabla como nivel
+de prioridad de un aspecto, como valor derivado de un elemento o como criterio
 auxiliar de una decisión superior.
 
 La recursividad no significa repetir el método infinitamente. Debe
@@ -29,7 +29,7 @@ Ejemplo de reutilización:
 Ejemplo de recursividad:
 
     Una tabla prioriza los criterios Salud, Dinero y Placer.
-    El resultado de esa tabla se usa como peso en otra tabla que decide entre Fumar y No fumar.
+    El resultado de esa tabla se usa como nivel de prioridad de aspecto en otra tabla que decide entre Fumar y No fumar.
 
 La reutilización repite una estructura. La recursividad encadena
 estructuras.
@@ -43,13 +43,13 @@ Esa estructura puede expresarse como:
 
 - niveles;
 - ranking;
-- pesos derivados;
+- niveles de prioridad de los aspectos derivados;
 - grupos de prioridad;
 - valores de referencia;
 - decisiones intermedias.
 
 Si una tabla produce un ranking de aspectos, ese ranking puede usarse
-como peso de esos aspectos en una tabla superior. Si una tabla produce
+como nivel de prioridad de esos aspectos en una tabla superior. Si una tabla produce
 un nivel de riesgo para un activo, ese nivel de riesgo puede usarse como
 valor en una tabla de priorización de controles. Si una tabla prioriza
 requisitos, su resultado puede alimentar una tabla de planificación de
@@ -84,7 +84,7 @@ Ejemplo:
 | Dinero  | 2                | 2              | 3                 | 2           |
 | Placer  | 3                | 3              | 2                 | 3           |
 
-La columna final de esta tabla puede convertirse en el vector de pesos
+La columna final de esta tabla puede convertirse en el vector de niveles de prioridad de los aspectos
 de la tabla principal.
 
 Así, lo que antes parecía una preferencia arbitraria se convierte en una
@@ -160,15 +160,15 @@ Esto tiene varias ventajas:
 
 La recursividad ayuda a abrir la caja negra de la subjetividad.
 
-Cuando alguien asigna un peso directamente, esa asignación puede parecer
-arbitraria. Pero si ese peso se obtiene mediante otra tabla, la
+Cuando alguien asigna un nivel de prioridad del aspecto directamente, esa asignación puede parecer
+arbitraria. Pero si ese nivel de prioridad del aspecto se obtiene mediante otra tabla, la
 preferencia queda descompuesta en razones.
 
 Esto no convierte automáticamente la subjetividad en objetividad. Lo que
 hace es transformar una preferencia opaca en una estructura explícita de
 valoración.
 
-    preferencia opaca -> criterios declarados -> niveles -> peso derivado
+    preferencia opaca -> criterios declarados -> niveles -> nivel de prioridad del aspecto derivado
 
 La subjetividad sigue existiendo, pero queda más visible y discutible.
 
@@ -197,7 +197,7 @@ La recursividad puede modelarse como composición de tablas Prioriza.
 Una tabla P0 puede depender de los resultados de P1, P2 y P3.
 
     P1 -> valor usado por P0
-    P2 -> peso usado por P0
+    P2 -> nivel de prioridad del aspecto usado por P0
     P3 -> nivel usado por P0
     P0 -> prioridad final
 
@@ -264,7 +264,7 @@ jerárquicos de decisión, pero no es idéntica.
 En un método jerárquico clásico, los criterios y subcriterios suelen
 organizarse en una estructura definida de arriba hacia abajo. En
 Prioriza, una tabla puede alimentar otra de manera más flexible: como
-peso, como valor, como nivel, como criterio auxiliar o como decisión
+nivel de prioridad de aspecto, como valor, como nivel, como criterio auxiliar o como decisión
 intermedia.
 
 Esto permite una estructura jerárquica cuando conviene, pero también una
@@ -278,7 +278,7 @@ dependencias.
 Una especificación mínima debería permitir:
 
     este aspecto toma su valor de otra tabla Prioriza
-    este peso se calcula con otra tabla Prioriza
+    este nivel de prioridad del aspecto se calcula con otra tabla Prioriza
     este criterio usa una salida de otra ejecución
     esta ejecución depende de estas ejecuciones anteriores
 
@@ -337,7 +337,7 @@ niveles de prioridad de aspectos.
 
 La recursividad de Prioriza consiste en reutilizar los resultados de una
 tabla como insumos de otra. Esta propiedad permite descomponer
-decisiones complejas, derivar pesos, calcular aspectos compuestos y
+decisiones complejas, derivar niveles de prioridad de los aspectos, calcular aspectos compuestos y
 construir cadenas de decisión trazables.
 
 La recursividad debe ser explícita, finita, versionada y controlada. No

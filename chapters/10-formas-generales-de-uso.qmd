@@ -16,7 +16,7 @@ La ejecución simple es la forma básica de uso.
     una tabla -> un conjunto de elementos -> un resultado de prioridad
 
 En esta forma, se define una tabla Prioriza, se cargan los valores de
-los elementos, se nivelan los aspectos, se aplican pesos y se obtiene
+los elementos, se nivelan los aspectos, se aplican niveles de prioridad de los aspectos y se obtiene
 una estructura de prioridad.
 
 Es la forma más directa y corresponde al uso elemental del método.
@@ -47,7 +47,7 @@ El resultado puede tomar varias formas:
 - ranking de elementos;
 - grupos de prioridad;
 - lista de empates;
-- peso derivado;
+- nivel de prioridad del aspecto derivado;
 - valor derivado;
 - referencia para ingeniería inversa.
 
@@ -70,7 +70,7 @@ estructura recursiva compleja.
 Ejemplos de composición:
 
 - usar el resultado de una tabla como valor de un aspecto en otra tabla;
-- usar el resultado de una tabla para definir pesos de aspectos;
+- usar el resultado de una tabla para definir niveles de prioridad de los aspectos de aspectos;
 - usar el resultado de una tabla como criterio auxiliar;
 - usar el resultado de una tabla como referencia para comparar otra
   tabla.
@@ -86,7 +86,7 @@ Debe ser acotada, explícita y trazable. Debe terminar en valores base,
 criterios base o decisiones explícitas.
 
 La recursividad permite descomponer decisiones complejas sin construir
-una única tabla enorme. También permite justificar pesos, calcular
+una única tabla enorme. También permite justificar niveles de prioridad de los aspectos, calcular
 aspectos compuestos y abrir la estructura de la subjetividad.
 
 ## Ingeniería inversa
@@ -98,7 +98,7 @@ aspectos, criterios o aspectos harían posible ese resultado.
     resultado deseado -> condiciones necesarias -> ajuste o diagnóstico del modelo
 
 Puede usarse para explicar contradicciones, analizar sensibilidad,
-detectar aspectos faltantes, justificar pesos o auditar decisiones.
+detectar aspectos faltantes, justificar niveles de prioridad de los aspectos o auditar decisiones.
 
 La ingeniería inversa no debe usarse para manipular resultados sin
 justificación. Todo cambio derivado de ella debe quedar documentado.
@@ -138,16 +138,16 @@ Ejemplo abstracto:
 Esto permite que una decisión parcial se convierta en un aspecto dentro
 de una decisión más amplia.
 
-## Uso del resultado como peso de aspectos
+## Uso del resultado como nivel de prioridad de aspectos
 
 Otra forma de composición ocurre cuando una tabla Prioriza se usa para
 priorizar los propios aspectos de otra tabla.
 
     Tabla X prioriza aspectos.
-    Resultado RX = pesos derivados.
-    Tabla Y usa RX como vector de pesos.
+    Resultado RX = niveles de prioridad de los aspectos derivados.
+    Tabla Y usa RX como vector de niveles de prioridad de los aspectos.
 
-Esto permite justificar pesos que, de otro modo, serían asignados
+Esto permite justificar niveles de prioridad de los aspectos que, de otro modo, serían asignados
 directamente por intuición o autoridad.
 
 ## Acoplamiento entre tablas con los mismos elementos
@@ -225,7 +225,7 @@ Un resultado debe poder:
 - versionarse;
 - compararse;
 - usarse como entrada de otra tabla;
-- usarse como pesos;
+- usarse como niveles de prioridad de los aspectos;
 - usarse como columna derivada;
 - usarse como objetivo de ingeniería inversa;
 - explicarse.

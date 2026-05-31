@@ -26,7 +26,7 @@ problema y producir un orden de prioridad que orientara la construcción
 del horario.
 
 Prioriza nació como una forma de convertir valores heterogéneos en
-niveles de prioridad, ponderar esos niveles según la importancia de los
+niveles de prioridad, combinarlos con los niveles de prioridad de los
 aspectos y obtener una estructura de prioridad. En su forma inicial fue
 utilizado como parte de un algoritmo mayor: Prioriza ayudaba a decidir
 qué actividad debía intentarse colocar primero, mientras otros
@@ -37,7 +37,7 @@ recalcular.
 Esa aplicación histórica es importante, pero no agota el método. Con el
 tiempo se hizo evidente que la estructura de Prioriza podía aplicarse
 más allá de la generación de horarios. Allí donde existan alternativas,
-aspectos, valores, criterios de interpretación, pesos y necesidad de
+aspectos, valores, criterios de interpretación, niveles de prioridad de los aspectos y necesidad de
 priorizar, puede plantearse una tabla Prioriza. El método puede
 utilizarse para decisiones simples, como comparar dos opciones, o para
 decisiones más complejas, como priorizar tareas, riesgos, requisitos,
@@ -51,8 +51,8 @@ niveles de prioridad, capaz de combinar valores objetivos, subjetivos o
 derivados dentro de una estructura explícita, trazable y revisable.
 
 Esta afirmación requiere prudencia. Prioriza no inventa la decisión
-multicriterio, la ponderación, la suma ponderada ni las heurísticas de
-planificación. Todos esos elementos tienen antecedentes claros en el
+multicriterio, la ponderación ni las formas de agregación multicriterio.
+Todos esos elementos tienen antecedentes claros en el
 estado del arte. Su posible aporte está en la integración operativa:
 nivelar valores por criterio, conservar empates, expresar subjetividad
 mediante niveles de prioridad de aspectos y reglas, reutilizar tablas,
@@ -62,7 +62,7 @@ rangos continuos mediante particiones por tramos.
 Por esa razón, este documento separa tres niveles:
 
 1.  El núcleo del método: elementos, aspectos, valores, criterios,
-    niveles, pesos, agregación y resultado.
+    niveles, niveles de prioridad de los aspectos, agregación y resultado.
 2.  Las formas generales de uso: reutilización, composición,
     recursividad, ingeniería inversa, comparación de ejecuciones y uso
     iterativo con recálculo.
@@ -100,5 +100,5 @@ constantemente, pero muchas veces lo hacen sin una estructura explícita.
 Cuando no existe un método especializado disponible o cuando la decisión
 está dispersa entre intuiciones, presiones y criterios implícitos,
 Prioriza ofrece una forma mínima de ordenar el problema: declarar
-alternativas, separar aspectos, valorar, nivelar, ponderar, sumar,
-comparar, revisar y explicar.
+alternativas, separar aspectos, valorar, nivelar, aplicar niveles de
+prioridad de aspectos, sumar, comparar, revisar y explicar.

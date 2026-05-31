@@ -12,7 +12,8 @@ La entrada mínima de Prioriza discreto está compuesta por:
 2.  Un conjunto de aspectos: A = {a1, a2, …, am}.
 3.  Una matriz de valores: V = \[vij\].
 4.  Una función de nivelación para cada aspecto: F = {F1, F2, …, Fm}.
-5.  Un vector de pesos: w = (w1, w2, …, wm).
+5.  Un vector de niveles de prioridad de los aspectos:
+    pa = (pa1, pa2, …, pam).
 
 ## Tabla de valores
 
@@ -94,10 +95,18 @@ Esto produce una matriz de niveles combinados P = \[pij\].
 
 ## Suma horizontal
 
-Para cada elemento, se suman sus niveles ponderados:
+Para cada elemento, se suman sus contribuciones por aspecto:
 
-    si = suma(pij), para j = 1..m
-    si = suma(lij * wj), para j = 1..m
+$$
+s_i = \sum_{j=1}^{m} l_{ij} \cdot pa_j
+$$
+
+Donde:
+
+- $l_{ij}$ es el nivel de prioridad del elemento $e_i$ en el aspecto
+  $a_j$.
+- $pa_j$ es el nivel de prioridad del aspecto $a_j$.
+- Menor $s_i$ significa mayor prioridad global.
 
 El resultado si representa una carga de prioridad agregada. Como los
 niveles menores son mejores, el elemento con menor suma tiene mayor
@@ -139,8 +148,9 @@ El algoritmo básico de Prioriza discreto puede describirse así:
 1.  Recibir la tabla de valores V.
 2.  Para cada aspecto aj, aplicar la función de nivelación Fj.
 3.  Construir la matriz de niveles L.
-4.  Multiplicar cada nivel lij por el peso wj.
-5.  Sumar horizontalmente los niveles ponderados.
+4.  Multiplicar cada nivel lij por el nivel de prioridad del aspecto
+    paj.
+5.  Sumar horizontalmente las contribuciones por aspecto.
 6.  Ordenar los elementos por suma ascendente.
 7.  Devolver la estructura de prioridad resultante.
 
@@ -162,15 +172,15 @@ Supóngase que los niveles de prioridad de los aspectos son:
 | Dinero      | 3                              |
 | Placer      | 2                              |
 
-La tabla ponderada sería:
+La tabla de contribuciones por aspecto sería:
 
 | **Decisión** | **Salud**  | **Dinero** | **Placer** | **Total** |
 |:-------------|:-----------|:-----------|:-----------|:----------|
 | Fumar        | 2 \* 1 = 2 | 2 \* 3 = 6 | 1 \* 2 = 2 | 10        |
 | No fumar     | 1 \* 1 = 1 | 1 \* 3 = 3 | 2 \* 2 = 4 | 8         |
 
-Bajo esos niveles y pesos, no fumar tiene mayor prioridad porque tiene
-menor total.
+Bajo esos niveles de prioridad de los aspectos, no fumar tiene mayor
+prioridad porque tiene menor total.
 
 Si los niveles de prioridad de los aspectos cambian, el resultado puede
 cambiar. Esto no es una contradicción del método; expresa que la
@@ -185,14 +195,14 @@ tres pasos:
 
 O de manera más explícita:
 
-    V -> F -> L -> w -> P -> suma -> S -> orden -> Prioridad
+    V -> F -> L -> pa -> P -> suma -> S -> orden -> Prioridad
 
 Donde:
 
 - V contiene los valores originales.
 - F contiene las funciones de nivelación.
 - L contiene los niveles de prioridad.
-- w contiene los niveles de prioridad de los aspectos.
-- P contiene los niveles ponderados.
+- pa contiene los niveles de prioridad de los aspectos.
+- P contiene las contribuciones por aspecto.
 - S contiene las sumas finales.
 - La prioridad final se obtiene ordenando S de menor a mayor.

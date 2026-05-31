@@ -10,7 +10,7 @@ En la forma directa, Prioriza responde:
 
 En la forma inversa, Prioriza pregunta:
 
-    Dada esta prioridad deseada, ¿qué tendría que cambiar en los valores, criterios o pesos para obtenerla?
+    Dada esta prioridad deseada, ¿qué tendría que cambiar en los valores, criterios o niveles de prioridad de los aspectos para obtenerla?
 
 Esta propiedad es importante porque convierte a Prioriza en una
 herramienta de análisis, no solamente en un mecanismo de cálculo.
@@ -38,7 +38,7 @@ condiciones que harían posible una prioridad.
 En Prioriza pueden analizarse inversamente varios componentes.
 
 Primero, pueden invertirse los niveles de prioridad de los aspectos. Se
-pregunta qué pesos deberían tener los aspectos para que un elemento
+pregunta qué niveles de prioridad de los aspectos deberían tener los aspectos para que un elemento
 quede por encima de otro.
 
 Segundo, pueden invertirse los niveles. Se pregunta qué niveles tendría
@@ -55,9 +55,9 @@ Quinto, pueden invertirse los aspectos del modelo. Se pregunta qué
 aspecto falta si el resultado esperado no puede obtenerse razonablemente
 con la tabla actual.
 
-## Ingeniería inversa de pesos
+## Ingeniería inversa de niveles de prioridad de los aspectos
 
-La ingeniería inversa de pesos pregunta qué importancia relativa
+La ingeniería inversa de niveles de prioridad de los aspectos pregunta qué importancia relativa
 tendrían que tener los aspectos para producir determinado orden de
 prioridad.
 
@@ -66,13 +66,13 @@ tarea B, pero Prioriza produce lo contrario.
 
 Entonces se puede preguntar:
 
-    ¿Qué pesos harían que A tenga mejor prioridad que B?
+    ¿Qué niveles de prioridad de los aspectos harían que A tenga mejor prioridad que B?
 
-Si A solo supera a B cuando se asigna un peso extremadamente alto a un
+Si A solo supera a B cuando se asigna un nivel de prioridad del aspecto extremadamente alto a un
 aspecto secundario, eso revela que la preferencia esperada no está bien
 respaldada por el modelo actual.
 
-Si A supera a B con un pequeño ajuste razonable de pesos, entonces el
+Si A supera a B con un pequeño ajuste razonable de niveles de prioridad de los aspectos, entonces el
 problema puede estar en una calibración incorrecta.
 
 ## Ingeniería inversa de niveles
@@ -145,7 +145,7 @@ La ingeniería inversa permite detectar esa ausencia:
 
     El resultado esperado depende de un criterio que no existe en la tabla.
 
-En ese caso, la corrección no consiste en manipular pesos, sino en
+En ese caso, la corrección no consiste en manipular niveles de prioridad de los aspectos, sino en
 agregar un aspecto nuevo.
 
 ## Ingeniería inversa y contradicción
@@ -176,7 +176,7 @@ para observar cuándo cambia el resultado.
 
 Preguntas típicas:
 
-    ¿Qué peso mínimo necesita el aspecto Riesgo para que A supere a B?
+    ¿Qué nivel de prioridad del aspecto mínimo necesita el aspecto Riesgo para que A supere a B?
     ¿Qué variación del costo cambiaría la prioridad?
     ¿Qué aspecto es más decisivo en el resultado?
     ¿Qué tan estable es el ranking ante cambios pequeños?
@@ -191,11 +191,11 @@ La ingeniería inversa también mejora la explicación del resultado.
 
 No solo se puede decir:
 
-    A quedó primero porque obtuvo menor suma ponderada.
+    A quedó primero porque obtuvo menor suma por niveles de prioridad de aspectos.
 
 También se puede decir:
 
-    A dejaría de ser primero si el peso de Riesgo bajara por debajo de cierto umbral,
+    A dejaría de ser primero si el nivel de prioridad del aspecto de Riesgo bajara por debajo de cierto umbral,
     o si B mejorara un nivel en Impacto.
 
 Este tipo de explicación es más útil para gestión, auditoría y
@@ -221,7 +221,7 @@ La pregunta deja de ser:
 
 Y pasa a ser:
 
-    ¿Qué criterios y pesos hacen razonable que B sea prioritario?
+    ¿Qué criterios y niveles de prioridad de los aspectos hacen razonable que B sea prioritario?
 
 ## Ingeniería inversa y auditoría
 
@@ -234,7 +234,7 @@ declarados.
 Ejemplo:
 
     La organización dice que seleccionó al proveedor C por calidad y riesgo.
-    Pero al reconstruir la tabla, C solo gana si se reduce artificialmente el peso de costo
+    Pero al reconstruir la tabla, C solo gana si se reduce artificialmente el nivel de prioridad del aspecto de costo
     o si se omite el historial de incumplimiento.
 
 En ese caso, la ingeniería inversa puede revelar una justificación
@@ -252,14 +252,14 @@ Segundo, algunos resultados deseados pueden ser imposibles bajo los
 valores y criterios definidos.
 
 Tercero, puede producirse una solución inversa matemáticamente posible
-pero decisionalmente absurda, por ejemplo asignar un peso extremo a un
+pero decisionalmente absurda, por ejemplo asignar un nivel de prioridad del aspecto extremo a un
 aspecto irrelevante.
 
 Cuarto, si los datos son falsos o incompletos, la ingeniería inversa
 puede explicar el modelo, pero no corregir la realidad.
 
 Quinto, si hay restricciones duras, no deben forzarse como simples
-cambios de peso.
+cambios de nivel de prioridad del aspecto.
 
 ## Ingeniería inversa y manipulación
 
@@ -313,8 +313,8 @@ La ingeniería inversa puede preguntar:
 
 Posibles respuestas:
 
-- aumentar el peso de Impacto, donde A es mejor;
-- reducir el peso de Esfuerzo, donde A es peor;
+- aumentar el nivel de prioridad del aspecto de Impacto, donde A es mejor;
+- reducir el nivel de prioridad del aspecto de Esfuerzo, donde A es peor;
 - revisar si el esfuerzo de A fue sobreestimado;
 - agregar un aspecto Compromiso externo si A fue prometida;
 - aceptar que, bajo la tabla actual, B debe ser prioritaria.
@@ -328,7 +328,7 @@ La ingeniería inversa puede conducir a recursividad.
 
 Si se descubre que el problema está en los niveles de prioridad de los
 aspectos, puede construirse una tabla Prioriza para justificar esos
-pesos. Si se descubre que el problema está en un valor complejo, puede
+niveles de prioridad de los aspectos. Si se descubre que el problema está en un valor complejo, puede
 construirse una tabla secundaria para calcularlo. Si se descubre que
 falta un aspecto, puede agregarse y luego priorizarse su importancia.
 

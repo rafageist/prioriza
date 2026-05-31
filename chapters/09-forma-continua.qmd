@@ -206,7 +206,7 @@ La tabla resultante es:
 
 Esta tabla ya puede evaluarse con Prioriza discreto.
 
-## Aplicación de pesos y suma
+## Aplicación de niveles de prioridad de los aspectos y suma
 
 Una vez construida la tabla de tramos, el procedimiento continúa como en
 la forma discreta.
@@ -240,7 +240,7 @@ de los aspectos.
 Si un intervalo arbitrario atraviesa varios tramos normalizados,
 entonces contiene zonas con valoraciones distintas. Para evaluarlo haría
 falta una regla adicional: promedio, peor caso, mejor caso, integral,
-duración ponderada o alguna forma de agregación interna.
+duración ajustada por prioridad o alguna forma de agregación interna.
 
 La forma básica de Prioriza continuo evita esa ambigüedad y trabaja con
 tramos homogéneos: tramos donde ningún aspecto cambia de nivel.
@@ -367,7 +367,7 @@ La salida debe conservar la trazabilidad:
     puntos de cambio
     partición común
     tabla de tramos
-    pesos
+    niveles de prioridad de los aspectos
     sumas finales
     tramos priorizados
 
@@ -378,7 +378,7 @@ La forma continua se presta naturalmente a ingeniería inversa.
 Se puede preguntar:
 
     ¿Qué cortes tendría que cambiar para que un tramo sea prioritario?
-    ¿Qué peso hace que un intervalo pase a primer nivel?
+    ¿Qué nivel de prioridad del aspecto hace que un intervalo pase a primer nivel?
     ¿Qué aspecto impide que un tramo sea óptimo?
     ¿Qué parte del rango queda penalizada por más criterios?
 

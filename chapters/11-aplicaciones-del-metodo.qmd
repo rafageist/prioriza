@@ -21,7 +21,8 @@ Un dominio es candidato a usar Prioriza cuando cumple estas condiciones:
 3.  Los aspectos pueden recibir valores objetivos, subjetivos, derivados
     o estimados.
 4.  Los valores pueden transformarse en niveles de prioridad.
-5.  Los aspectos tienen distinta importancia o requieren ponderación.
+5.  Los aspectos tienen distinta importancia o requieren niveles de
+    prioridad explícitos.
 6.  El resultado necesita ser explicable, revisable o auditable.
 
 Si no hay alternativas, no hay decisión. Si no hay valoración posible,
@@ -400,7 +401,7 @@ uniforme:
     Aspectos usados
     Tipo de valores
     Funciones de nivelación
-    Pesos
+    Niveles de prioridad de los aspectos
     Restricciones previas
     Tipo de salida
     Uso del resultado
@@ -416,7 +417,7 @@ abstracto: alternativas, aspectos, valores, niveles locales, niveles de
 prioridad de aspectos y estructura de prioridad.
 
 Sin embargo, cada aplicación debe declarar su propio contexto,
-elementos, aspectos, criterios, pesos y forma de uso del resultado.
+elementos, aspectos, criterios, niveles de prioridad de los aspectos y forma de uso del resultado.
 
 La amplitud de aplicación no significa que Prioriza sea siempre el mejor
 método. Significa que puede proporcionar una estructura mínima de

@@ -1,13 +1,13 @@
 # Conclusiones
 
 Prioriza debe entenderse como un marco práctico de priorización ordinal
-ponderada. Su valor no está en prometer una decisión perfecta ni en
+por niveles de prioridad. Su valor no está en prometer una decisión perfecta ni en
 reemplazar métodos especializados, sino en hacer explícita la estructura
 de decisión cuando existen alternativas, aspectos, valores, criterios y
 niveles de prioridad de aspectos.
 
 El método transforma valores heterogéneos en niveles de prioridad,
-conserva empates, pondera aspectos, agrega contribuciones y produce una
+conserva empates, aplica niveles de prioridad de aspectos, agrega contribuciones y produce una
 estructura de prioridad trazable. A partir de ese núcleo, puede
 reutilizarse, componerse, invertirse, recalcularse y aplicarse en
 dominios diversos.
@@ -18,7 +18,8 @@ donde cada actividad competía por recursos y restricciones, y donde cada
 colocación modificaba el contexto.
 
 El estado del arte obliga a ser prudente. Prioriza no inventa la
-decisión multicriterio, la ponderación, el ranking ni la suma ponderada.
+decisión multicriterio, la ponderación, el ranking ni la agregación por
+niveles de prioridad de aspectos.
 Su contribución defendible está en integrar esos elementos con una
 lógica simple de nivelación ordinal, subjetividad explícita, empates,
 reutilización, recursividad, ingeniería inversa, forma continua y uso

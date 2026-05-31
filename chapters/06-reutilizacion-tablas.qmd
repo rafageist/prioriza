@@ -7,7 +7,7 @@ conjuntos cambiantes de elementos.
 La reutilización no debe confundirse con la recursividad. Reutilizar una
 tabla significa aplicar la misma tabla o plantilla a diferentes
 ejecuciones. Recursividad significa usar el resultado de una tabla como
-entrada, valor, nivel o peso de otra tabla. La reutilización es más
+entrada, valor, nivel o nivel de prioridad de aspecto en otra tabla. La reutilización es más
 simple y más inmediata para entornos organizacionales.
 
 ## Qué es una tabla Prioriza reutilizable
@@ -74,7 +74,7 @@ declarar:
 
     qué se evalúa,
     con qué criterios,
-    con qué pesos,
+    con qué niveles de prioridad de los aspectos,
     con qué reglas,
     y con qué resultado.
 
@@ -109,7 +109,7 @@ historial auditable.
 
 ## Plantillas y versiones
 
-Una tabla reutilizable debe poder versionarse. Los criterios, pesos y
+Una tabla reutilizable debe poder versionarse. Los criterios, niveles de prioridad de los aspectos y
 funciones de nivelación pueden cambiar con el tiempo. Si esos cambios no
 se registran, no se puede explicar por qué una decisión tomada bajo una
 versión produjo un resultado distinto a otra decisión posterior.
@@ -121,7 +121,7 @@ Una plantilla Prioriza debe tener, como mínimo:
     tipo de elemento
     aspectos
     funciones de nivelación
-    pesos
+    niveles de prioridad de los aspectos
     reglas de desempate
     versión
     estado: borrador, activa, archivada
@@ -190,7 +190,7 @@ Cuando una tabla se reutiliza, la organización puede aprender.
 Puede observar:
 
 - qué criterios dominan siempre;
-- qué pesos producen resultados no deseados;
+- qué niveles de prioridad de los aspectos producen resultados no deseados;
 - qué aspectos casi nunca influyen;
 - qué criterios generan demasiados empates;
 - qué decisiones fueron luego consideradas correctas o incorrectas;
@@ -210,7 +210,7 @@ Si una organización declara que ciertos valores son importantes, esos
 valores deben aparecer en sus tablas de decisión. Si la organización
 dice que la seguridad, la continuidad, el bienestar del usuario o el
 cumplimiento normativo son prioritarios, esos aspectos deben tener
-presencia y peso en las tablas correspondientes.
+presencia y nivel de prioridad explícito en las tablas correspondientes.
 
 Si no aparecen, Prioriza puede revelar una contradicción entre la
 política declarada y la práctica de decisión.
@@ -225,7 +225,7 @@ menos tres conceptos:
 **Ejecución:** aplica la plantilla a un conjunto concreto de elementos
 en un momento dado.
 
-**Resultado:** almacena niveles, pesos, sumas, empates, explicaciones y
+**Resultado:** almacena niveles, niveles de prioridad de los aspectos, sumas, empates, explicaciones y
 advertencias.
 
 Una arquitectura mínima podría incluir:
@@ -288,7 +288,7 @@ asistidos por IA, especialmente cuando se necesita trazabilidad.
 Una tabla reutilizable no debe ser rígida en el sentido negativo. Puede
 y debe evolucionar.
 
-Si una tabla produce malos resultados, se revisan sus aspectos, pesos,
+Si una tabla produce malos resultados, se revisan sus aspectos, niveles de prioridad de los aspectos,
 funciones de nivelación o reglas de desempate. La ventaja es que la
 revisión ocurre sobre una estructura visible, no sobre intuiciones
 dispersas.

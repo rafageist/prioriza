@@ -162,13 +162,13 @@ Si un elemento tiene mal nivel en un aspecto poco importante, el impacto
 global debe ser menor. Si tiene mal nivel en un aspecto muy importante,
 el impacto global debe ser mayor.
 
-En Prioriza, la multiplicación produce una contribución ponderada:
+En Prioriza, la multiplicación produce una contribución por aspecto:
 
     contribución = nivel del elemento en el aspecto * nivel de prioridad del aspecto
 
 Esta operación no debe interpretarse como una ley física, sino como una
 regla de agregación decisional. Su función es expresar que la posición
-de una alternativa dentro de un criterio no tiene el mismo peso en todos
+de una alternativa dentro de un criterio no tiene el mismo nivel de prioridad del aspecto en todos
 los criterios.
 
 Multiplicar permite distinguir estos casos:
@@ -182,15 +182,16 @@ Multiplicar permite distinguir estos casos:
 La suma horizontal se justifica cuando los aspectos se tratan como
 contribuciones separables a una carga decisional agregada.
 
-Cada aspecto aporta una contribución ponderada. La suma reúne esas
+Cada aspecto aporta una contribución ajustada por su nivel de prioridad.
+La suma reúne esas
 contribuciones en una señal global:
 
-    prioridad global = suma de las contribuciones ponderadas
+    prioridad global = suma de las contribuciones por aspecto
 
 Como en Prioriza los niveles menores son mejores, la suma puede
 interpretarse como una acumulación de penalizaciones, cargas o
 distancias ordinales respecto a lo prioritario. El elemento con menor
-suma es el que acumula menor carga decisional bajo los criterios y pesos
+suma es el que acumula menor carga decisional bajo los criterios y niveles de prioridad de los aspectos
 definidos.
 
 Esta interpretación es más prudente que decir que la suma mide una
@@ -243,7 +244,7 @@ costo.
 En estos casos, Prioriza debe distinguir entre:
 
     restricciones duras: condiciones que deben cumplirse antes de priorizar
-    criterios blandos: aspectos que pueden ponderarse y agregarse
+    criterios blandos: aspectos que pueden combinarse y agregarse
 
 La forma correcta no es abandonar Prioriza, sino aplicarlo en el nivel
 adecuado: primero se filtran o invalidan alternativas imposibles;
@@ -253,14 +254,14 @@ después se priorizan las alternativas viables.
 
 El menor total es mejor porque Prioriza interpreta los niveles como
 posiciones de prioridad donde 1 es el mejor nivel. Al multiplicar
-niveles por pesos y sumarlos, se acumulan cargas de prioridad. Una suma
-menor significa que el elemento ha ocupado mejores posiciones ponderadas
+niveles por niveles de prioridad de los aspectos y sumarlos, se acumulan cargas de prioridad. Una suma
+menor significa que el elemento ha ocupado mejores posiciones combinadas
 en el conjunto de aspectos.
 
 En forma simple:
 
     menor nivel local -> mejor posición en un aspecto
-    menor nivel ponderado -> mejor contribución en un aspecto importante
+    menor contribución por aspecto -> mejor aporte en un aspecto importante
     menor suma total -> mejor prioridad global
 
 Esta lógica es consistente con la convención inicial del método.
@@ -294,7 +295,7 @@ Prioriza no garantiza por sí solo:
 - independencia real entre criterios;
 - ausencia de sesgo;
 - corrección de valores mal medidos;
-- corrección de pesos mal definidos;
+- corrección de niveles de prioridad de los aspectos mal definidos;
 - superioridad frente a métodos especializados.
 
 ## La contradicción como resultado útil
@@ -333,14 +334,14 @@ condiciones:
 2.  Hay aspectos que permiten valorarlas.
 3.  Los valores pueden transformarse en niveles de prioridad.
 4.  Los aspectos tienen una importancia relativa explícita.
-5.  El decisor acepta una agregación aditiva de contribuciones
-    ponderadas.
+5.  El decisor acepta una agregación aditiva de contribuciones por
+    aspecto.
 6.  El resultado necesita ser trazable, reproducible y revisable.
 
 Bajo estas condiciones, Prioriza ofrece una estructura mínima de
 decisión:
 
-    comparar -> nivelar -> ponderar -> sumar -> ordenar -> revisar
+    comparar -> nivelar -> aplicar prioridad de aspectos -> sumar -> ordenar -> revisar
 
 Su fuerza no está en ocultar la complejidad de la decisión, sino en
 exponerla de forma manejable.

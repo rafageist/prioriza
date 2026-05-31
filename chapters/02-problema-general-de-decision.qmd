@@ -102,22 +102,20 @@ columna, en nivel de prioridad de un aspecto o en referencia para otra
 ejecución. El resultado conserva la misma naturaleza decisional que
 varias de sus entradas.
 
-En terminología de MCDA, el nivel de prioridad del aspecto puede verse
-como peso. Sin embargo, en Prioriza conviene conservar la interpretación
-propia: no se trata simplemente de multiplicar por un coeficiente, sino
-de combinar dos niveles de prioridad de naturaleza análoga situados en
-planos distintos del modelo.
+En terminología externa de MCDA, el nivel de prioridad del aspecto puede
+interpretarse como peso. Sin embargo, en Prioriza conviene conservar la
+interpretación propia: no se trata simplemente de multiplicar por un
+coeficiente, sino de combinar dos niveles de prioridad de naturaleza
+análoga situados en planos distintos del modelo.
 
-Una corrección terminológica importante es distinguir el lenguaje
-interno de Prioriza del lenguaje externo de otros métodos de decisión
+Una corrección terminológica importante es distinguir el lenguaje interno
+de Prioriza del lenguaje externo de otros métodos de decisión
 multicriterio. En Prioriza, el concepto central no es el peso como
-coeficiente independiente, sino el nivel de prioridad. Ese mismo
-concepto aparece en tres planos: el nivel de prioridad de un elemento
-dentro de un aspecto, el nivel de prioridad de un aspecto dentro de la
-decisión, y el nivel de prioridad resultante de un elemento dentro del
-conjunto comparado.
-
-### Unidad conceptual del nivel de prioridad
+coeficiente independiente, sino el nivel de prioridad. Ese mismo concepto
+aparece en tres planos: el nivel de prioridad de un elemento dentro de un
+aspecto, el nivel de prioridad de un aspecto dentro de la decisión, y el
+nivel de prioridad resultante de un elemento dentro del conjunto
+comparado.
 
 ## Nivel de prioridad del aspecto
 
@@ -141,8 +139,8 @@ método de ponderación externo.
 
 ## Prioridad global
 
-La prioridad global de un elemento se obtiene agregando sus niveles
-ponderados por aspecto.
+La prioridad global de un elemento se obtiene agregando sus
+contribuciones por aspecto.
 
 En la forma discreta básica, se calcula como:
 
@@ -188,7 +186,7 @@ aplicación, no al núcleo del método.
 
 El contexto de decisión contiene las condiciones bajo las cuales se
 aplica Prioriza: elementos disponibles, aspectos considerados, valores
-conocidos, criterios de nivelación, pesos, restricciones previas y
+conocidos, criterios de nivelación, niveles de prioridad de los aspectos, restricciones previas y
 propósito de la priorización.
 
 En el núcleo del método, el contexto define qué se va a priorizar y bajo

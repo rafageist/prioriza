@@ -12,7 +12,7 @@ integración operacional específica.
 
 | **Familia** | **Qué comparte con Prioriza** | **Diferencia principal** |
 |:---|:---|:---|
-| WSM / SAW | Alternativas, criterios, nivel de prioridad del aspectos y suma ponderada. | Suele trabajar con valores normalizados o puntuaciones cardinales; Prioriza nivela ordinalmente por columna y conserva empates. |
+| WSM / SAW | Alternativas, criterios, niveles de prioridad de aspectos y suma ponderada. | Suele trabajar con valores normalizados o puntuaciones cardinales; Prioriza nivela ordinalmente por columna y conserva empates. |
 | AHP / ANP | Subjetividad explícita, prioridades, jerarquías y criterios ponderados. | Usa comparaciones pareadas y consistencia; Prioriza usa tabla de valores y nivelación por criterio. |
 | TOPSIS | Ranking multicriterio con niveles de prioridad de aspectos y criterios heterogéneos. | Decide por distancia a solución ideal y anti-ideal; Prioriza usa niveles ordinales y suma ponderada. |
 | ELECTRE / PROMETHEE | Preferencias, nivel de prioridad del aspectos, indiferen­cias y relaciones entre alternativas. | Son métodos de sobreclasificación; Prioriza usa agregación aditiva más simple y explícita. |
@@ -70,6 +70,6 @@ aditiva basada en niveles o rankings; su uso operativo se acerca a
 heurísticas constructivas y modelos de decisión trazables.
 
 La contribución defendible está en la integración: nivelación ordinal
-por criterio, empates explícitos, pesos como prioridades de aspectos,
+por criterio, empates explícitos, niveles de prioridad de aspectos,
 reutilización, composición, ingeniería inversa, variante continua por
 tramos y uso iterativo con recálculo.

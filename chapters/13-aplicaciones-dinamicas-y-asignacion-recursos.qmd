@@ -99,7 +99,7 @@ explícitos.
 Esto lo acerca a heurísticas constructivas y reglas de despacho. Su
 diferencia práctica es que la regla de despacho no queda reducida a un
 solo criterio, sino que puede construirse como una tabla multicriterio,
-con niveles, pesos y explicación.
+con niveles, niveles de prioridad de los aspectos y explicación.
 
 ## Riesgos de uso dinámico
 
@@ -115,7 +115,7 @@ con niveles, pesos y explicación.
   impacto futuro.
 
 - Las restricciones duras deben filtrarse antes de la priorización, no
-  compensarse mediante pesos.
+  compensarse mediante niveles de prioridad de los aspectos.
 
 ## Resumen de la sección
 

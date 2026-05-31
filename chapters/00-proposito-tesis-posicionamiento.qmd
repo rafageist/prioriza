@@ -36,7 +36,7 @@ importante históricamente, pero no debe confundirse con la definición
 esencial del método.
 
 Su aporte no está en inventar la decisión multicriterio, los niveles de
-prioridad de los aspectos ni la suma ponderada como se conocen en otros
+prioridad de los aspectos ni la suma por niveles de prioridad de aspectos como se conocen en otros
 métodos. Su aporte potencial está en integrar, de manera simple y
 operativa, nivelación ordinal por criterio, niveles de prioridad de
 aspectos, subjetividad explícita, conservación de empates, reutilización
@@ -70,7 +70,7 @@ ajustables.
 - Prioriza puede crear información decisional nueva, como rankings,
   empates, contradicciones, justificaciones y prioridades, pero no crea
   información desde la nada. Toda salida deriva de valores, criterios,
-  niveles, pesos o reglas previamente definidos.
+  niveles, niveles de prioridad de los aspectos o reglas previamente definidos.
 
 3.  **Principio de nivelación ordinal**
 
@@ -102,7 +102,7 @@ ajustables.
 
 8.  **Principio de recursividad acotada**
 
-- Una salida de Prioriza puede convertirse en entrada, nivel o peso para
+- Una salida de Prioriza puede convertirse en entrada, nivel o nivel de prioridad del aspecto para
   otra aplicación de Prioriza. Esta recursividad debe ser finita,
   explícita y controlada.
 

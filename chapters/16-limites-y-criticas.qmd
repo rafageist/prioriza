@@ -30,7 +30,7 @@ heterogéneos, la simplificación puede ser deseable. Pero debe
 reconocerse que Prioriza sacrifica sensibilidad cuantitativa a cambio de
 claridad ordinal.
 
-## Sensibilidad a pesos
+## Sensibilidad a niveles de prioridad de los aspectos
 
 El resultado puede depender fuertemente de los niveles de prioridad de
 los aspectos. Si los niveles de prioridad de los aspectos no representan
@@ -56,7 +56,7 @@ dinámico.
 
 ## Compensabilidad
 
-La suma ponderada permite que un mal nivel en un aspecto sea compensado
+La suma por niveles de prioridad de aspectos permite que un mal nivel en un aspecto sea compensado
 por buenos niveles en otros aspectos. Esto es aceptable en algunas
 decisiones, pero no en todas.
 
@@ -115,5 +115,5 @@ o mejora la satisfacción del equipo.
 Prioriza es más fuerte cuando se presenta como método práctico,
 transparente y auditable. Es más débil si se presenta como método
 universal, exacto o inmune a sesgos. Su validez depende de buenos
-aspectos, buenos valores, criterios adecuados, pesos defendibles y una
+aspectos, buenos valores, criterios adecuados, niveles de prioridad de los aspectos defendibles y una
 interpretación honesta del resultado.

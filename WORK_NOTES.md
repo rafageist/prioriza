@@ -26,3 +26,16 @@
   are temporary conversion artifacts and are ignored by Git.
 - The conceptual figures are being recreated as versionable SVG files in the
   canonical `figures/` directory instead of committing DOCX-extracted bitmaps.
+
+## Terminology pass notes
+
+- Internal Prioriza terminology now uses `nivel de prioridad`,
+  `nivel de prioridad del elemento`, `nivel de prioridad del aspecto`,
+  `nivel de prioridad resultante`, `estructura de prioridad`,
+  `función de nivelación`, `nivelación`, `tabla Prioriza`, and
+  `ejecución Prioriza`.
+- JSON/YAML examples use `aspect_priority_level`, not `weight`.
+- The remaining `peso`, `ponderación`, and `suma ponderada` matches are
+  intentionally kept only in terminology notes, MCDA comparisons, or
+  state-of-the-art/critique passages where external vocabulary is being
+  discussed.

@@ -107,7 +107,7 @@ Esto puede resumirse así:
 Esta idea conecta Prioriza con heurísticas conocidas en problemas de
 restricciones, donde suele ser útil atender primero variables difíciles
 o más restringidas. La diferencia es que Prioriza permite combinar
-varias señales de dificultad en una tabla explícita de niveles y pesos.
+varias señales de dificultad en una tabla explícita de niveles de los elementos y niveles de prioridad de los aspectos.
 
 ## Ciclo general de uso en GOH
 
@@ -117,7 +117,7 @@ La aplicación de Prioriza dentro de GOH puede describirse como un ciclo.
     2. Calcular valores relevantes para cada actividad.
     3. Construir la tabla Prioriza.
     4. Nivelar los aspectos.
-    5. Ponderar y sumar niveles.
+    5. Aplicar niveles de prioridad de aspectos y sumar niveles.
     6. Seleccionar la actividad priorizada.
     7. Aplicar el subalgoritmo de colocación.
     8. Actualizar el horario y los recursos disponibles.

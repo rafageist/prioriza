@@ -50,7 +50,7 @@ donde el modelo no las ha definido.
 ## Empate global
 
 Existe empate global cuando dos o más elementos obtienen la misma suma
-final de niveles ponderados.
+final de contribuciones por aspecto.
 
 Ejemplo:
 
@@ -65,7 +65,8 @@ misma prioridad global. Prioriza debe devolver ambos como elementos de
 primer nivel.
 
 El empate global puede aparecer aunque los elementos no sean idénticos
-en cada aspecto. Basta con que la agregación ponderada produzca el mismo
+en cada aspecto. Basta con que la agregación por niveles de prioridad de
+aspectos produzca el mismo
 total.
 
 ## El empate como solución válida
@@ -74,7 +75,7 @@ Un empate no es una ausencia de decisión. Es una decisión con resultado
 no único.
 
 Cuando Prioriza devuelve un empate, afirma que, bajo los valores,
-niveles, criterios y pesos definidos, las alternativas empatadas son
+niveles, criterios y niveles de prioridad de los aspectos definidos, las alternativas empatadas son
 equivalentes para la decisión actual.
 
 Eso puede conducir a varias acciones posteriores:
@@ -190,7 +191,7 @@ tensión entre el discurso y la estructura real de decisión.
 
 La contradicción puede aparecer en varios niveles:
 
-- contradicción entre valores declarados y pesos asignados;
+- contradicción entre valores declarados y niveles de prioridad de los aspectos asignados;
 - contradicción entre criterios de nivelación y objetivos reales;
 - contradicción entre decisión intuitiva y modelo explícito;
 - contradicción entre política institucional y práctica operativa;
@@ -267,7 +268,7 @@ Una salida completa debería incluir:
 - funciones de nivelación usadas;
 - tabla de niveles;
 - niveles de prioridad de los aspectos;
-- tabla ponderada;
+- tabla de contribuciones por aspecto;
 - suma final por elemento;
 - grupos de prioridad;
 - empates locales;

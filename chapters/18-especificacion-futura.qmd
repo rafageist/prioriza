@@ -7,7 +7,7 @@ núcleo, formas de uso y aplicaciones.
 ## Objeto de tabla Prioriza
 
 Una tabla Prioriza debería incluir al menos: nombre, propósito,
-elementos, aspectos, funciones de nivelación, pesos, reglas de
+elementos, aspectos, funciones de nivelación, niveles de prioridad de los aspectos, reglas de
 desempate, restricciones previas, versión y estado.
 
 ## Objeto de ejecución
@@ -21,7 +21,7 @@ explicación.
 
 El resultado no debe ser solo un número o ID. Debe ser un objeto
 trazable que pueda usarse como entrada de otra tabla, columna derivada,
-vector de pesos, referencia de comparación u objetivo de ingeniería
+vector de niveles de prioridad de los aspectos, referencia de comparación u objetivo de ingeniería
 inversa.
 
 ## Formato JSON/YAML
@@ -31,18 +31,20 @@ entre lenguajes y sistemas. Esto facilitaría librerías en Python,
 JavaScript, PHP u otros lenguajes, además de integraciones con Odoo o
 servicios externos.
 
-prioriza_table:\
-name: Weekly Task Priority\
-version: 1.0\
-elements: \[...\]\
-aspects:\
-- name: urgency\
-leveling: min\
-weight: 1\
-- name: impact\
-leveling: max\
-weight: 2\
-result_policy: lower_total_is_better
+```yaml
+prioriza_table:
+  name: Weekly Task Priority
+  version: 1.0
+  elements: [...]
+  aspects:
+    - name: urgency
+      leveling: min
+      aspect_priority_level: 1
+    - name: impact
+      leveling: max
+      aspect_priority_level: 2
+  result_policy: lower_total_is_better
+```
 
 ## Librerías
 
@@ -60,7 +62,7 @@ result_policy: lower_total_is_better
 
 Un servicio Prioriza podría exponer operaciones como evaluar tabla,
 explicar resultado, comparar ejecuciones, ejecutar ingeniería inversa,
-simular cambios de pesos, detectar empates y exportar trazabilidad.
+simular cambios de niveles de prioridad de los aspectos, detectar empates y exportar trazabilidad.
 
 ## MCP server
 
