@@ -38,6 +38,25 @@
 - The conceptual figures are versionable SVG files in `figures/`, with PNG
   derivatives committed for PDF rendering on systems without `rsvg-convert`.
 
+## Book cleanup and static website (Issues #14-#21)
+
+Completed on `docs/book-cleanup-and-static-site` branch (commit `28b27de`):
+
+- **Book manuscript cleaned**: preface rewritten reader-facing; all references to Quarto,
+  DOCX, `_output`, `GitHub Actions`, TODO, placeholder, issue, workflow, and
+  `Plan de ilustraciones` removed from book-facing content.
+- **Internal process moved**: `docs/editorial-notes.md`, `docs/illustration-plan.md`,
+  `docs/release-process.md`, `docs/custom-domain.md` created.
+- **Static website created**: `site/` with `index.html`, `assets/css/styles.css`,
+  `assets/js/main.js`, `tool/index.html` (future tool placeholder),
+  `downloads/index.html` (PDF download pending).
+- **Three separate workflows**: `ci.yml` (check/render), `pages.yml` (deploy),
+  `release.yml` (manual PDF release).
+- **No forbidden terms** remain in `index.qmd` or `chapters/`.
+- **No Sochi/Valdés** references remain.
+- **Author**: Rafael Rodríguez Ramírez.
+- **`quarto render --to html` and `quarto render --to pdf`**: both succeed.
+
 ## Terminology pass notes
 
 - Internal Prioriza terminology now uses `nivel de prioridad`,
