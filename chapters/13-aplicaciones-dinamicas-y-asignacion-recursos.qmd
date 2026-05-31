@@ -144,6 +144,13 @@ ser cursos de acción: continuar B, pausar B y hacer C, terminar B
 primero y luego C, delegar C, dividir C en una acción mínima o
 replanificar el bloque completo.
 
+Esto separa prioridad de tarea y prioridad de acción. La tarea C puede
+ser importante o urgente, pero la decisión concreta puede ser no hacer C
+completa inmediatamente, sino delegarla, ejecutar una acción mínima,
+esperar a terminar B o replanificar el bloque. Prioriza debe comparar
+acciones posibles dentro del contexto actualizado, no solo insertar una
+nueva tarea en la lista.
+
 Para decidir correctamente, Prioriza debe incorporar información sobre
 la tarea en curso y sobre el costo de interrupción: avance actual de B,
 tiempo restante, costo de cambio de contexto, riesgo de dejar B
@@ -161,6 +168,12 @@ vencimiento inmediato, afecta a un cliente crítico y el costo de
 interrumpir B es bajo”, o “C no desplaza a B porque B está cerca de
 terminarse, bloquea otras tareas y suspenderla tendría alto costo de
 recuperación”.
+
+La advertencia metodológica es importante: Prioriza no debe convertir al
+sistema en reactivo ante toda urgencia aparente. La planificación tiene
+valor propio. Romperla solo se justifica cuando el evento nuevo supera el
+umbral de interrupción, activa una restricción dura o cambia de manera
+significativa el contexto de decisión.
 
 ## Resumen ampliado de uso dinámico
 

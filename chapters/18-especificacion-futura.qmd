@@ -17,6 +17,21 @@ sistema ejecutor, valores de entrada, niveles calculados, niveles de
 prioridad de aspectos aplicados, sumas finales, empates, advertencias y
 explicación.
 
+Para uso dinámico, la ejecución también debe poder registrar recálculo
+disparado por evento. Los campos sugeridos son:
+
+- `trigger_event`: descripción y tipo del evento;
+- `current_action`: tarea o acción en curso antes del evento;
+- `candidate_actions`: cursos de acción evaluados;
+- `interruption_cost`: costo estimado de pausar o abandonar la acción en
+  curso;
+- `context_switch_cost`: costo de cambio de contexto;
+- `current_progress`: avance de la tarea interrumpida;
+- `postponement_risk`: riesgo de postergar el evento nuevo;
+- `planning_stability`: regla o umbral usado para no romper el plan ante
+  diferencias mínimas;
+- `recalculation_reason`: razón trazable por la que se recalculó.
+
 ## Objeto de resultado
 
 El resultado no debe ser solo un número o ID. Debe ser un objeto
