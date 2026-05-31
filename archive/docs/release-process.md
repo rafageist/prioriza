@@ -21,7 +21,7 @@ The CI workflow checks the static website source, renders book HTML and PDF on
 pushes and pull requests, and uploads artifacts for inspection.
 
 The public website is not generated with Quarto. The Pages workflow copies
-`site/` into `public/`, then adds the generated book under `public/book/` and
+`docs/` into `public/`, then adds the generated book under `public/book/` and
 the generated PDF under `public/downloads/` when PDF rendering succeeds.
 
 ## Manual Release

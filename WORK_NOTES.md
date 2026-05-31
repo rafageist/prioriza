@@ -17,12 +17,12 @@
 - Local Quarto is available at `C:\Program Files\Quarto\bin\quarto.exe`.
 - `quarto render --to html` and `quarto render --to pdf` succeeded locally on
   2026-05-31 using that executable.
-- The public static website was served locally from `site/` and returned 200
+- The public static website was served locally from `docs/` and returned 200
   for `/`, `/downloads/`, `/tool/`, CSS, JS, and the hero image.
 - The CI workflow checks the static HTML/CSS/JS site source and renders the
   HTML book and PDF book on push and pull request events.
 - The Pages workflow deploys the static site after changes reach `master` or
-  `main`; it copies `site/` into `public/` and then adds generated book/PDF
+  `main`; it copies `docs/` into `public/` and then adds generated book/PDF
   outputs.
 - The release workflow is manual. It reads `manifest.yml` and publishes a PDF
   named `prioriza-method-<version>-es.pdf` only when the tag does not already
@@ -47,7 +47,7 @@ Completed on `docs/book-cleanup-and-static-site` branch (commit `28b27de`):
   `Plan de ilustraciones` removed from book-facing content.
 - **Internal process moved**: `docs/editorial-notes.md`, `docs/illustration-plan.md`,
   `docs/release-process.md`, `docs/custom-domain.md` created.
-- **Static website created**: `site/` with `index.html`, `assets/css/styles.css`,
+- **Static website created**: `docs/` with `index.html`, `assets/css/styles.css`,
   `assets/js/main.js`, `tool/index.html` (future tool placeholder),
   `downloads/index.html` (PDF download pending).
 - **Three separate workflows**: `ci.yml` (check/render), `pages.yml` (deploy),

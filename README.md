@@ -46,20 +46,20 @@ Preview the static website locally:
 python -m http.server 8000 -d site
 ```
 
-The deployment workflow copies `site/` into `public/` and then adds the
+The deployment workflow copies `docs/` into `public/` and then adds the
 generated book and PDF outputs. The generated `public/` folder is ignored by
 Git.
 
 ## Website
 
-The Spanish public website lives under `site/` and is standard HTML, CSS, and
+The Spanish public website lives under `docs/` and is standard HTML, CSS, and
 JavaScript. Quarto is not used to generate the landing page.
 
-- `site/index.html` is the landing page.
-- `site/downloads/index.html` is the downloads page.
-- `site/tool/index.html` reserves a future browser-only Prioriza tool route.
-- `site/assets/css/styles.css` contains the site styling.
-- `site/assets/js/main.js` contains light progressive enhancement.
+- `docs/index.html` is the landing page.
+- `docs/downloads/index.html` is the downloads page.
+- `docs/tool/index.html` reserves a future browser-only Prioriza tool route.
+- `docs/assets/css/styles.css` contains the site styling.
+- `docs/assets/js/main.js` contains light progressive enhancement.
 
 The deployed site is expected to expose:
 
@@ -74,7 +74,7 @@ The deployed site is expected to expose:
 - `ci.yml` checks the static site source, renders the HTML book and PDF book on
   pushes and pull requests, then uploads build artifacts.
 - `pages.yml` deploys the static site to GitHub Pages after changes reach
-  `master` or `main`; it copies `site/`, then adds the generated book under
+  `master` or `main`; it copies `docs/`, then adds the generated book under
   `/book/` and the generated PDF under `/downloads/` when available.
 - `release.yml` is manual. It reads `manifest.yml`, renders the PDF, and
   creates a GitHub release only when the manifest version does not already

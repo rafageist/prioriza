@@ -52,18 +52,18 @@ jobs:
 
       - name: Assemble static site
         run: |
-          test -f site/index.html
-          test -f site/assets/css/styles.css
-          test -f site/assets/js/main.js
-          test -f site/downloads/index.html
-          test -f site/tool/index.html
+          test -f docs/index.html
+          test -f docs/assets/css/styles.css
+          test -f docs/assets/js/main.js
+          test -f docs/downloads/index.html
+          test -f docs/tool/index.html
           if find site -name '*.qmd' | grep .; then
             echo "The public website must be standard HTML/CSS/JS, not Quarto."
             exit 1
           fi
           rm -rf public
           mkdir -p public
-          cp -R site/. public/
+          cp -R docs/. public/
 
       - name: Render HTML book
         run: quarto render --to html
@@ -93,8 +93,8 @@ jobs:
 
       - name: Copy custom domain file when enabled
         run: |
-          if [ -f site/CNAME ]; then
-            cp site/CNAME public/CNAME
+          if [ -f docs/CNAME ]; then
+            cp docs/CNAME public/CNAME
           fi
 
       - name: Upload Pages artifact

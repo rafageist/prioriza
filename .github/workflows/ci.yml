@@ -39,24 +39,24 @@ jobs:
 
       - name: Check static site source
         run: |
-          test -f site/index.html
-          test -f site/assets/css/styles.css
-          test -f site/assets/js/main.js
-          test -f site/downloads/index.html
-          test -f site/tool/index.html
+          test -f docs/index.html
+          test -f docs/assets/css/styles.css
+          test -f docs/assets/js/main.js
+          test -f docs/downloads/index.html
+          test -f docs/tool/index.html
           if find site -name '*.qmd' | grep .; then
             echo "The public website must be standard HTML/CSS/JS, not Quarto."
             exit 1
           fi
           rm -rf artifacts/site
           mkdir -p artifacts/site
-          cp -R site/. artifacts/site/
+          cp -R docs/. artifacts/docs/
 
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
           name: prioriza-site-${{ steps.manifest.outputs.version }}
-          path: artifacts/site/
+          path: artifacts/docs/
           if-no-files-found: error
 
       - name: Render HTML book

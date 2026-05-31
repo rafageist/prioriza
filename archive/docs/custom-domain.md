@@ -9,13 +9,13 @@ prioriza.rafageist.com
 ## GitHub Pages
 
 After the Pages workflow is confirmed working, enable the custom domain in the
-repository Pages settings and add a `site/CNAME` file containing:
+repository Pages settings and add a `docs/CNAME` file containing:
 
 ```text
 prioriza.rafageist.com
 ```
 
-The Pages workflow copies `site/CNAME` to the published root when that file is
+The Pages workflow copies `docs/CNAME` to the published root when that file is
 present. Do not add the file until the domain is ready to be activated.
 
 ## DNS
