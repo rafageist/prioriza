@@ -1,5 +1,7 @@
 # Estado del arte
 
+<!-- TODO: citation needed: MCDA/MCDM classical methods: SAW/WSM, AHP/ANP, TOPSIS, ELECTRE, PROMETHEE, VIKOR, MAUT/MAVT/SMART. -->
+
 El estado del arte debe situar Prioriza con prudencia. El método no
 nació en un vacío conceptual. Antes de 2010 ya existían familias maduras
 de decisión multicriterio, ponderación, ranking, métodos ordinales,
@@ -15,13 +17,15 @@ integración operacional específica.
 | WSM / SAW | Alternativas, criterios, niveles de prioridad de aspectos y suma ponderada. | Suele trabajar con valores normalizados o puntuaciones cardinales; Prioriza nivela ordinalmente por columna y conserva empates. |
 | AHP / ANP | Subjetividad explícita, prioridades, jerarquías y criterios ponderados. | Usa comparaciones pareadas y consistencia; Prioriza usa tabla de valores y nivelación por criterio. |
 | TOPSIS | Ranking multicriterio con niveles de prioridad de aspectos y criterios heterogéneos. | Decide por distancia a solución ideal y anti-ideal; Prioriza usa niveles ordinales y suma ponderada. |
-| ELECTRE / PROMETHEE | Preferencias, nivel de prioridad del aspectos, indiferen­cias y relaciones entre alternativas. | Son métodos de sobreclasificación; Prioriza usa agregación aditiva más simple y explícita. |
+| ELECTRE / PROMETHEE | Preferencias, niveles de prioridad de aspectos, indiferencias y relaciones entre alternativas. | Son métodos de sobreclasificación; Prioriza usa agregación aditiva más simple y explícita. |
 | VIKOR | Ranking y compromiso entre criterios. | Usa lógica de solución compromiso y regret; Prioriza no usa ideal/anti-ideal ni regret formal. |
 | MAUT / MAVT / SMART | Valoración de alternativas y agregación de criterios. | Trabajan con funciones de utilidad o valor más cardinales; Prioriza usa niveles de prioridad. |
 | Borda / rank aggregation | Uso de posiciones ordinales agregadas. | Borda agrega rankings; Prioriza nivela cada criterio y luego pondera criterios. |
 | Métodos de timetabling | Construcción o mejora de horarios bajo restricciones. | Resuelven o buscan soluciones del dominio; Prioriza actúa como política de priorización dentro de un proceso. |
 
 ## Métodos posteriores a 2010
+
+<!-- TODO: citation needed: post-2010 MCDA/MCDM methods and decision intelligence / explainable AI literature. -->
 
 Después de 2010 aparecieron o se popularizaron métodos como BWM, OPA,
 SWARA, FUCOM, EDAS, CODAS, MABAC, MARCOS, WASPAS y varias extensiones
