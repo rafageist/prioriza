@@ -120,8 +120,6 @@ en determinado nivel. Esto exige conservar valores originales, niveles,
 niveles de prioridad de aspectos, criterios, versión de la tabla y fecha
 de ejecución.
 
-## Roadmap sugerido
-
 ## Explicación humana y preguntas sugeridas
 
 Una implementación futura debe generar explicaciones orientadas al
@@ -134,42 +132,3 @@ Ejemplos de preguntas automáticas: ¿qué aspecto falta para desempatar?,
 ¿qué nivel de prioridad del aspecto hizo ganar a esta alternativa?, ¿qué
 valor tendría que cambiar para que el segundo lugar pase al primero?,
 ¿el usuario está usando una intuición no modelada?
-
-1.  Cerrar documento teórico.
-
-2.  Definir especificación JSON/YAML.
-
-3.  Implementar librería de referencia en Python.
-
-4.  Crear pruebas unitarias con casos clásicos y casos históricos.
-
-5.  Implementar ejemplos de CLI y notebooks.
-
-6.  Desarrollar API mínima.
-
-7.  Crear módulo Odoo experimental.
-
-8.  Crear servidor MCP.
-
-9.  Publicar documentación y benchmarks.
-
-## Plan de ilustraciones para el libro
-
-La comprensión de Prioriza mejora si el documento incluye esquemas.
-Muchas ideas del método son más claras visualmente que en forma
-puramente textual: nivelación, empates, refinamiento progresivo,
-explicación humana, forma continua y replanificación por evento.
-
-Las ilustraciones deben cumplir una función conceptual, no decorativa.
-Cada figura debe ayudar a entender una operación del método o una
-tensión metodológica: por qué se empata, por qué se recalcula, por qué
-el resultado puede contradecir la intuición o cómo una nueva pregunta
-refina la decisión.
-
-Las figuras versionadas del libro están en `figures/`:
-
-- `refinamiento-progresivo.svg`;
-- `explicacion-humana.svg`;
-- `replanificacion-evento.svg`;
-- `desempate-azar.svg`;
-- `forma-continua-tramos.svg`.

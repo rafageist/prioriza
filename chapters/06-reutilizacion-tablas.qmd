@@ -233,7 +233,7 @@ Una arquitectura mínima podría incluir:
     PriorizaTemplate
     PriorizaAspect
     PriorizaLevelingRule
-    PriorizaWeight
+    PriorizaAspectPriorityLevel
     PriorizaRun
     PriorizaRunItem
     PriorizaResult
@@ -256,7 +256,7 @@ Ejemplos:
 - risk registers: priorización de riesgos;
 - quality.alert: priorización de problemas de calidad;
 - requirements: priorización de requisitos;
-- software inventory: priorización de releases, issues o deuda técnica.
+- software inventory: priorización de entregas, solicitudes o deuda técnica.
 
 La tabla Prioriza no sustituye el modelo de Odoo. Opera sobre sus
 registros y devuelve una estructura de prioridad que puede almacenarse,

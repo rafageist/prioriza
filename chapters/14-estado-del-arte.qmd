@@ -1,7 +1,5 @@
 # Estado del arte
 
-<!-- TODO: citation needed: MCDA/MCDM classical methods: SAW/WSM, AHP/ANP, TOPSIS, ELECTRE, PROMETHEE, VIKOR, MAUT/MAVT/SMART. -->
-
 El estado del arte debe situar Prioriza con prudencia. El método no
 nació en un vacío conceptual. Antes de 2010 ya existían familias maduras
 de decisión multicriterio, ponderación, ranking, métodos ordinales,
@@ -24,8 +22,6 @@ integración operacional específica.
 | Métodos de timetabling | Construcción o mejora de horarios bajo restricciones. | Resuelven o buscan soluciones del dominio; Prioriza actúa como política de priorización dentro de un proceso. |
 
 ## Métodos posteriores a 2010
-
-<!-- TODO: citation needed: post-2010 MCDA/MCDM methods and decision intelligence / explainable AI literature. -->
 
 Después de 2010 aparecieron o se popularizaron métodos como BWM, OPA,
 SWARA, FUCOM, EDAS, CODAS, MABAC, MARCOS, WASPAS y varias extensiones

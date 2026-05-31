@@ -7,8 +7,6 @@ creíble.
 
 ## Suma de niveles ordinales
 
-<!-- TODO: citation needed: ordinal aggregation, additive scoring limits, and rank-based MCDA critiques. -->
-
 La crítica principal es que Prioriza suma niveles que, en principio, son
 ordinales. Una escala ordinal indica orden, pero no necesariamente
 distancia igual entre niveles. Si nivel 1 es mejor que nivel 2, eso no
@@ -46,8 +44,6 @@ responsabilidad de validarlos.
 
 ## Rank reversal y dependencia del conjunto comparado
 
-<!-- TODO: citation needed: rank reversal in AHP/TOPSIS/MCDA and rank aggregation methods. -->
-
 Como la nivelación se hace dentro de la columna y respecto al conjunto
 de elementos presentes, agregar o eliminar alternativas puede cambiar
 niveles relativos. En un ranking estático esto puede ser criticado como
@@ -59,8 +55,6 @@ poder cambiar. La clave es distinguir entre uso estático, recurrente y
 dinámico.
 
 ## Compensabilidad
-
-<!-- TODO: citation needed: compensatory vs non-compensatory multicriteria models and veto/constraint handling. -->
 
 La suma por niveles de prioridad de aspectos permite que un mal nivel en un aspecto sea compensado
 por buenos niveles en otros aspectos. Esto es aceptable en algunas
@@ -92,12 +86,12 @@ de aspectos, criterios y resultados.
 
 ## No garantía de óptimo global
 
-<!-- TODO: citation needed: scheduling/timetabling heuristics, dispatching rules, constructive heuristics, and empirical validation. -->
-
 Prioriza produce una prioridad coherente con el modelo declarado. No
 garantiza por sí solo la solución óptima global de un problema
 combinatorio. En dominios como timetabling, puede ser una heurística
 útil, pero no una prueba de optimalidad.
+
+## Validación empírica del rendimiento
 
 Esta validación no pertenece al núcleo matemático del método, pero sí es
 necesaria para demostrar valor organizacional. Prioriza puede ser
@@ -115,8 +109,6 @@ práctico. En una empresa, no basta con que Prioriza produzca una
 prioridad coherente; también debe evaluarse si mejora la planificación,
 reduce arrastres, disminuye conflictos de prioridad, acelera decisiones
 o mejora la satisfacción del equipo.
-
-## Validación empírica del rendimiento
 
 ## Resumen de límites
 

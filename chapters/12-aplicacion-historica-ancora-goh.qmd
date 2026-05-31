@@ -305,10 +305,10 @@ heterogéneas: profesores, lugares, recursos, restricciones y cantidades.
 Quinto, muestra la transición natural desde timetabling hacia una visión
 más general de decisión y asignación.
 
-## Evidencia documental y técnica pendiente
+## Evidencia documental y técnica necesaria
 
-Para cerrar esta sección de forma rigurosa, deben incorporarse
-referencias exactas a las fuentes históricas:
+Para sostener esta reconstrucción con rigor, conviene contrastarla con
+fuentes históricas exactas:
 
 - tesis final de Áncora GOH 2.0;
 - perfiles o borradores previos;
@@ -341,5 +341,3 @@ aspectos.
 El valor del caso GOH está en mostrar Prioriza funcionando en un
 problema real, dinámico y restrictivo, donde cada decisión modifica las
 posibilidades de las decisiones siguientes.
-
-**\**

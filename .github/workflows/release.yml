@@ -1,10 +1,6 @@
-name: Release Quarto PDF
+name: Release PDF
 
 on:
-  push:
-    branches:
-      - master
-      - main
   workflow_dispatch:
 
 jobs:
@@ -48,18 +44,7 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Install PDF dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y librsvg2-bin
-          quarto install tinytex --update-path
-
-      - name: Render HTML
-        run: quarto render --to html
-
-      - name: Preserve HTML output
-        run: |
-          rm -rf quarto-html-output
-          cp -R _output quarto-html-output
+        run: quarto install tinytex --update-path
 
       - name: Render PDF
         run: quarto render --to pdf
@@ -71,15 +56,13 @@ jobs:
             echo "No PDF was generated under _output/."
             exit 1
           fi
-          cp "$PDF" "prioriza-method-${{ steps.manifest.outputs.version }}.pdf"
+          cp "$PDF" "prioriza-method-${{ steps.manifest.outputs.version }}-es.pdf"
 
-      - name: Upload Quarto output artifact
+      - name: Upload release candidate artifact
         uses: actions/upload-artifact@v4
         with:
-          name: prioriza-quarto-output-${{ steps.manifest.outputs.version }}
-          path: |
-            quarto-html-output/
-            prioriza-method-${{ steps.manifest.outputs.version }}.pdf
+          name: prioriza-method-${{ steps.manifest.outputs.version }}-es
+          path: prioriza-method-${{ steps.manifest.outputs.version }}-es.pdf
           if-no-files-found: error
 
       - name: Create GitHub release
@@ -87,5 +70,5 @@ jobs:
         with:
           tag_name: ${{ steps.manifest.outputs.tag }}
           name: "Prioriza Method - ${{ steps.manifest.outputs.version }}"
-          body: "Automated Quarto PDF release for Prioriza Method ${{ steps.manifest.outputs.version }}."
-          files: prioriza-method-${{ steps.manifest.outputs.version }}.pdf
+          body: "Manual PDF release for Prioriza Method ${{ steps.manifest.outputs.version }}."
+          files: prioriza-method-${{ steps.manifest.outputs.version }}-es.pdf

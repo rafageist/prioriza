@@ -94,6 +94,12 @@ con valores, criterios y niveles de prioridad de aspectos auditables.
 
 ## Formulaciones posibles del aporte
 
+| **Nivel** | **Formulación** |
+|:---|:---|
+| Conservadora | Prioriza es un procedimiento transparente de priorización ordinal ponderada para criterios heterogéneos, con conservación de empates y salida trazable. |
+| Moderada | Prioriza es un marco integrador que combina nivelación ordinal por criterio, ponderación explícita, reutilización de tablas, ingeniería inversa y formas de uso dinámicas. |
+| Ambiciosa | Prioriza es un marco de gobernanza decisional que permite componer, reutilizar, invertir y auditar decisiones multicriterio en sistemas humanos, empresariales y asistidos por IA. |
+
 ## Aporte diagnóstico: producir preguntas, no solo respuestas
 
 Un aporte importante de Prioriza es que no siempre entrega una respuesta
@@ -106,9 +112,3 @@ contiene conocimiento no modelado o sesgo operativo.
 Este aporte diagnóstico diferencia el método de una simple tabla de
 puntuación. Prioriza puede ser usado para decidir, pero también para
 investigar por qué no se puede decidir todavía de manera coherente.
-
-| **Nivel** | **Formulación** |
-|:---|:---|
-| Conservadora | Prioriza es un procedimiento transparente de priorización ordinal ponderada para criterios heterogéneos, con conservación de empates y salida trazable. |
-| Moderada | Prioriza es un marco integrador que combina nivelación ordinal por criterio, ponderación explícita, reutilización de tablas, ingeniería inversa y formas de uso dinámicas. |
-| Ambiciosa | Prioriza es un marco de gobernanza decisional que permite componer, reutilizar, invertir y auditar decisiones multicriterio en sistemas humanos, empresariales y asistidos por IA. |

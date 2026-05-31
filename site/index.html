@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Rafael Rodríguez Ramírez">
+    <meta
+      name="description"
+      content="El Método Prioriza: marco de priorización ordinal por niveles de prioridad, trazabilidad y explicación."
+    >
+    <title>El Método Prioriza</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/main.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Inicio">Prioriza</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
+        <a href="#metodo">Método</a>
+        <a href="#ejemplo">Ejemplo</a>
+        <a href="downloads/">PDF</a>
+        <a href="tool/">Herramienta</a>
+        <a href="book/">Libro</a>
+        <a href="https://github.com/rafageist/prioriza">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content reveal">
+          <p class="eyebrow">Priorización ordinal trazable</p>
+          <h1>El Método Prioriza</h1>
+          <p class="lead">
+            Un marco para decidir qué atender primero cuando los criterios son
+            heterogéneos, las preferencias deben ser explícitas y el resultado
+            necesita explicación.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="book/">Leer el libro</a>
+            <a class="button secondary" href="downloads/">Descargar PDF</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="problema" class="band intro-band">
+        <div class="section-heading reveal">
+          <p class="eyebrow">El problema</p>
+          <h2>Muchas decisiones mezclan señales que no caben en una sola escala.</h2>
+        </div>
+        <div class="intro-text reveal">
+          <p>
+            Urgencia, impacto, distancia, riesgo, costo, justicia, oportunidad
+            y esfuerzo no siempre se comparan directamente. Prioriza propone
+            convertir cada señal en niveles de prioridad locales y combinarla
+            con prioridades explícitas de los aspectos.
+          </p>
+          <p>
+            El método no reemplaza técnicas especializadas de optimización,
+            IA, arquitectura o gestión. Aporta una capa clara para ordenar,
+            revisar y explicar decisiones en esos contextos.
+          </p>
+        </div>
+      </section>
+
+      <section id="metodo" class="method-flow">
+        <div class="flow-copy reveal">
+          <p class="eyebrow">Idea central</p>
+          <h2>Valores -> niveles -> prioridad de aspectos -> estructura de prioridad</h2>
+          <p>
+            Cada aspecto se nivela con su propio criterio. Después, los niveles
+            de prioridad de los aspectos expresan qué criterio tiene mayor
+            fuerza decisional. La salida conserva empates y deja trazas para
+            revisar por qué una alternativa quedó arriba, igualada o debajo.
+          </p>
+        </div>
+        <ol class="flow-steps reveal" aria-label="Flujo del método">
+          <li>
+            <span>01</span>
+            <strong>Valores</strong>
+            <p>Datos o juicios registrados por aspecto.</p>
+          </li>
+          <li>
+            <span>02</span>
+            <strong>Niveles de prioridad</strong>
+            <p>Conversión ordinal dentro de cada aspecto.</p>
+          </li>
+          <li>
+            <span>03</span>
+            <strong>Aspectos priorizados</strong>
+            <p>Preferencia explícita sobre qué aspecto importa más.</p>
+          </li>
+          <li>
+            <span>04</span>
+            <strong>Estructura resultante</strong>
+            <p>Orden, empates, advertencias y preguntas de revisión.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="ejemplo" class="example-section">
+        <div class="example-copy reveal">
+          <p class="eyebrow">Ejemplo mínimo</p>
+          <h2>Store A vs Store B: el empate también informa.</h2>
+          <p>
+            Si dos tiendas tienen la misma distancia, Prioriza no fuerza una
+            diferencia artificial. Conserva el empate local y permite preguntar
+            qué aspecto falta: disponibilidad, costo, horario, riesgo o
+            preferencia del usuario.
+          </p>
+        </div>
+        <div class="comparison reveal" aria-label="Comparación de ejemplo">
+          <div class="store-row header">
+            <span>Tienda</span>
+            <span>Distancia</span>
+            <span>Nivel local</span>
+          </div>
+          <div class="store-row">
+            <strong>Store A</strong>
+            <span>2.4 km</span>
+            <span class="badge">1</span>
+          </div>
+          <div class="store-row">
+            <strong>Store B</strong>
+            <span>2.4 km</span>
+            <span class="badge">1</span>
+          </div>
+          <p class="comparison-note">
+            El resultado no oculta la indeterminación: la convierte en una
+            pregunta útil para refinar la decisión.
+          </p>
+        </div>
+      </section>
+
+      <section class="why-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Por qué importa</p>
+          <h2>Prioriza puede producir respuestas y también mejores preguntas.</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature reveal">
+            <h3>Trazabilidad</h3>
+            <p>La decisión queda ligada a valores, criterios, niveles y versión de la tabla.</p>
+          </article>
+          <article class="feature reveal">
+            <h3>Subjetividad explícita</h3>
+            <p>Las preferencias no desaparecen: se declaran y se pueden discutir.</p>
+          </article>
+          <article class="feature reveal">
+            <h3>Explicación</h3>
+            <p>El resultado puede mostrar razones dominantes, empates y contradicciones.</p>
+          </article>
+          <article class="feature reveal">
+            <h3>Refinamiento</h3>
+            <p>Un empate o una sorpresa puede señalar qué dato o criterio falta.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="resource-band">
+        <div class="resource-copy reveal">
+          <p class="eyebrow">Proyecto abierto</p>
+          <h2>Libro, PDF, repositorio y herramienta futura.</h2>
+          <p>
+            El manuscrito actual es un borrador teórico en español. La web
+            también reserva una ruta para una futura herramienta estática de
+            Prioriza en el navegador.
+          </p>
+        </div>
+        <div class="resource-links reveal">
+          <a href="book/">Leer libro HTML</a>
+          <a href="downloads/">Descargas</a>
+          <a href="tool/">Herramienta futura</a>
+          <a href="https://github.com/rafageist/prioriza">Repositorio</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>El Método Prioriza</span>
+      <span>Rafael Rodríguez Ramírez</span>
+      <span id="current-year"></span>
+    </footer>
+  </body>
+</html>

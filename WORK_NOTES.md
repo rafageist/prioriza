@@ -14,17 +14,19 @@
 
 ## Validation notes
 
-- Quarto is not installed in the local PATH in this environment, so local
-  `quarto render` commands cannot be executed here yet.
-- `quarto --version` was attempted and failed because the executable is not
-  available in PATH.
-- Render commands to run after installing Quarto:
-  `quarto render`, `quarto render --to html`, and `quarto render --to pdf`.
-- The GitHub Actions workflow runs after changes are merged to `master` or
-  `main`, or when triggered manually with `workflow_dispatch`.
-- The workflow renders HTML and PDF, installs `librsvg2-bin` for SVG-to-PDF
-  conversion, and creates a GitHub release with a PDF named from the
-  `manifest.yml` version.
+- Local Quarto is available at `C:\Program Files\Quarto\bin\quarto.exe`.
+- `quarto render --to html` and `quarto render --to pdf` succeeded locally on
+  2026-05-31 using that executable.
+- The public static website was served locally from `site/` and returned 200
+  for `/`, `/downloads/`, `/tool/`, CSS, JS, and the hero image.
+- The CI workflow checks the static HTML/CSS/JS site source and renders the
+  HTML book and PDF book on push and pull request events.
+- The Pages workflow deploys the static site after changes reach `master` or
+  `main`; it copies `site/` into `public/` and then adds generated book/PDF
+  outputs.
+- The release workflow is manual. It reads `manifest.yml` and publishes a PDF
+  named `prioriza-method-<version>-es.pdf` only when the tag does not already
+  exist.
 
 ## DOCX conversion notes
 
@@ -33,8 +35,8 @@
   `chapters/`.
 - The generated `tmp/` Markdown and Pandoc-extracted `figures/imported/` media
   are temporary conversion artifacts and are ignored by Git.
-- The conceptual figures are being recreated as versionable SVG files in the
-  canonical `figures/` directory instead of committing DOCX-extracted bitmaps.
+- The conceptual figures are versionable SVG files in `figures/`, with PNG
+  derivatives committed for PDF rendering on systems without `rsvg-convert`.
 
 ## Terminology pass notes
 

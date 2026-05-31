@@ -8,10 +8,9 @@ traceable priority structure that can be reviewed, reused, and explained.
 This repository contains the theory manuscript, not a software implementation.
 The current manuscript status is `v0.4-draft`.
 
-## Canonical Source
+## Manuscript Source
 
-The canonical editable source is now the Quarto book configured by
-`_quarto.yml`.
+The editable manuscript is the Quarto book configured by `_quarto.yml`.
 
 - Edit manuscript text in `index.qmd` and `chapters/*.qmd`.
 - Store conceptual figures in `figures/`.
@@ -19,11 +18,11 @@ The canonical editable source is now the Quarto book configured by
   `bibliography/bibliography-todo.md`.
 - Treat `_output/` as generated output. It is ignored by Git.
 
-The latest DOCX used for conversion is archived at
-`archive/source-docx/Prioriza_Documento_Maestro_V0_3_azar_reactividad_ilustraciones.docx`.
-It is source material for traceability, not the canonical editable format.
+The original conversion input is retained under `archive/source-docx/` for
+traceability only. The public book should not contain repository, conversion,
+or build-process notes.
 
-## Quarto
+## Local Rendering
 
 Install Quarto before rendering locally:
 
@@ -39,11 +38,47 @@ quarto render --to html
 quarto render --to pdf
 ```
 
-HTML and PDF output should be generated under `_output/`.
+HTML and PDF output is generated under `_output/`.
 
-On GitHub, the release workflow runs after changes are merged to `master` or
-`main`, or when triggered manually. It reads `manifest.yml`, renders the Quarto
-book, and creates a GitHub release with `prioriza-method-<version>.pdf`.
+Preview the static website locally:
+
+```powershell
+python -m http.server 8000 -d site
+```
+
+The deployment workflow copies `site/` into `public/` and then adds the
+generated book and PDF outputs. The generated `public/` folder is ignored by
+Git.
+
+## Website
+
+The Spanish public website lives under `site/` and is standard HTML, CSS, and
+JavaScript. Quarto is not used to generate the landing page.
+
+- `site/index.html` is the landing page.
+- `site/downloads/index.html` is the downloads page.
+- `site/tool/index.html` reserves a future browser-only Prioriza tool route.
+- `site/assets/css/styles.css` contains the site styling.
+- `site/assets/js/main.js` contains light progressive enhancement.
+
+The deployed site is expected to expose:
+
+- the HTML book under `/book/`;
+- the downloads page under `/downloads/`;
+- a versioned Spanish PDF named `prioriza-method-<version>-es.pdf` when PDF
+  rendering succeeds;
+- links to the GitHub repository, examples, and public roadmap.
+
+## GitHub Workflows
+
+- `ci.yml` checks the static site source, renders the HTML book and PDF book on
+  pushes and pull requests, then uploads build artifacts.
+- `pages.yml` deploys the static site to GitHub Pages after changes reach
+  `master` or `main`; it copies `site/`, then adds the generated book under
+  `/book/` and the generated PDF under `/downloads/` when available.
+- `release.yml` is manual. It reads `manifest.yml`, renders the PDF, and
+  creates a GitHub release only when the manifest version does not already
+  exist as a tag.
 
 ## Chapter Structure
 
@@ -71,11 +106,21 @@ The book is split into one Quarto file per major section:
 - `chapters/18-especificacion-futura.qmd`
 - `chapters/19-conclusiones.qmd`
 
+## Contributor Docs
+
+- `docs/editorial-notes.md` defines the boundary between public manuscript and
+  contributor notes.
+- `docs/illustration-plan.md` tracks conceptual figure work.
+- `docs/release-process.md` documents rendering, artifacts, and release
+  naming.
+- `docs/custom-domain.md` documents the planned `prioriza.rafageist.com`
+  GitHub Pages setup.
+
 ## Bibliography Policy
 
 Do not invent references. Add entries to `references.bib` only after verifying
 metadata against reliable sources. Use `bibliography/bibliography-todo.md` and
-HTML comments in chapters to mark where citations are needed.
+citation notes outside rendered chapters to mark where sources are needed.
 
 ## Archive And Legacy Material
 
@@ -89,8 +134,9 @@ HTML comments in chapters to mark where citations are needed.
 
 When continuing work with Codex, point it at this repository and treat
 `_quarto.yml` as the manuscript entry point. Ask it to preserve the Quarto
-structure, avoid fabricated bibliography, and document render failures or local
-tooling gaps in `WORK_NOTES.md`.
+structure, avoid fabricated bibliography, keep public-book text free of
+repository process notes, and document render failures or local tooling gaps in
+`WORK_NOTES.md`.
 
 ## License
 

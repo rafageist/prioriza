@@ -1,6 +1,10 @@
 _output/
+public/
 .quarto/
 tmp/
 figures/imported/
 prioriza-method-*.pdf
 md-order.txt
+**/*.quarto_ipynb
+
+/.quarto/

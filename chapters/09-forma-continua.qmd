@@ -157,7 +157,7 @@ aspecto cambia de nivel.
 
 Esto permite convertir cada tramo en un elemento discreto.
 
-![Construcción de tramos normalizados a partir de cortes por aspecto.](../figures/forma-continua-tramos.svg){#fig-forma-continua-tramos}
+![Construcción de tramos normalizados a partir de cortes por aspecto.](../figures/forma-continua-tramos.png){#fig-forma-continua-tramos}
 
 @fig-forma-continua-tramos muestra cómo los cortes propios de cada
 aspecto producen una partición común y una tabla de tramos comparables.

@@ -276,7 +276,7 @@ desempate externo
 recalcular cuando cambie el modelo
 ```
 
-![Ciclo de refinamiento progresivo de la decisión.](../figures/refinamiento-progresivo.svg){#fig-refinamiento}
+![Ciclo de refinamiento progresivo de la decisión.](../figures/refinamiento-progresivo.png){#fig-refinamiento}
 
 Como muestra @fig-refinamiento, el resultado puede cerrar una decisión o
 abrir la siguiente pregunta útil para mejorar el modelo.

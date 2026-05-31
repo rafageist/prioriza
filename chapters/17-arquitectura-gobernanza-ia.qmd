@@ -71,8 +71,6 @@ prompt. El agente podría preguntar qué herramienta usar, qué riesgo
 atender, qué evidencia revisar o qué tarea ejecutar, y Prioriza
 devolvería una respuesta trazable basada en una tabla versionada.
 
-## Posicionamiento correcto
-
 ## Prioriza como modelo computacional acotado de decisión humana
 
 Prioriza puede ubicarse dentro del campo amplio de la inteligencia

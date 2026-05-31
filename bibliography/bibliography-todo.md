@@ -13,6 +13,7 @@ venue/publisher, and DOI/URL are checked against a reliable source.
 - PROMETHEE
 - VIKOR
 - MAUT / MAVT / SMART
+- pre-2010 MCDA/MCDM surveys and textbooks covering classical method families
 
 ## Ordinal And Rank-Based Methods
 
@@ -20,6 +21,10 @@ venue/publisher, and DOI/URL are checked against a reliable source.
 - rank aggregation
 - ordinal preference models
 - rank reversal in multicriteria methods
+- ordinal aggregation limits
+- additive scoring critiques for rank-based models
+- compensatory versus non-compensatory multicriteria models
+- veto and hard-constraint handling
 
 ## Scheduling And Timetabling
 
@@ -29,6 +34,7 @@ venue/publisher, and DOI/URL are checked against a reliable source.
 - dispatching rules
 - metaheuristics
 - timetabling validation metrics
+- empirical validation of scheduling and timetabling heuristics
 
 ## Decision Support Systems And AI
 
@@ -39,6 +45,8 @@ venue/publisher, and DOI/URL are checked against a reliable source.
 - explainable AI
 - AI governance
 - MCP / tool-using agents as external decision infrastructure
+- post-2010 MCDA/MCDM families such as BWM, OPA, SWARA, FUCOM, EDAS,
+  CODAS, MABAC, MARCOS, WASPAS, and fuzzy/grey/neutrosophic extensions
 
 ## Prioriza-Specific Validation
 

@@ -1,10 +1,23 @@
 # Prefacio
 
-Este libro Quarto es la fuente editable canónica del Método Prioriza.
+Prioriza nació de una necesidad práctica: decidir qué atender primero
+cuando varias alternativas compiten bajo criterios distintos, datos
+heterogéneos y preferencias que deben hacerse explícitas.
 
-El material conceptual más reciente fue archivado como DOCX en
-`archive/source-docx/` y convertido a capítulos Quarto para continuar el
-trabajo de forma versionable, revisable y reproducible.
+La primera aplicación documentada aparece en Áncora GOH, un sistema para
+generar y organizar horarios docentes. En ese contexto, Prioriza ayudó a
+responder una pregunta operativa: qué actividad convenía colocar primero
+cuando cada decisión modificaba las posibilidades futuras.
 
-Los archivos generados por renderizado deben producirse en `_output/` y no se
-versionan.
+Este manuscrito reconstruye el método desde esa experiencia inicial y lo
+presenta como un marco general de priorización ordinal por niveles de
+prioridad. El propósito no es afirmar que Prioriza inventa la decisión
+multicriterio, sino precisar qué integra, cómo opera, dónde aporta valor
+y cuáles son sus límites.
+
+El lector encontrará una exposición teórica, ejemplos de uso, una lectura
+histórica del caso Áncora GOH, comparaciones prudentes con familias
+cercanas y una especificación futura para implementaciones trazables. La
+versión actual debe leerse como un borrador técnico en consolidación:
+expone la teoría disponible, señala sus cautelas y deja espacio para
+validación documental, empírica y bibliográfica posterior.

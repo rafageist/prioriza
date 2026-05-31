@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  render-book:
+    name: Check site and render book
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read manifest version
+        id: manifest
+        run: |
+          VERSION=$(python - <<'PY'
+          import pathlib
+          import re
+
+          text = pathlib.Path("manifest.yml").read_text(encoding="utf-8")
+          match = re.search(r"^version:\s*['\"]?([^'\"\n]+)['\"]?\s*$", text, re.MULTILINE)
+          if not match:
+              raise SystemExit("manifest.yml does not contain a version field")
+          print(match.group(1).strip())
+          PY
+          )
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install render dependencies
+        run: quarto install tinytex --update-path
+
+      - name: Check static site source
+        run: |
+          test -f site/index.html
+          test -f site/assets/css/styles.css
+          test -f site/assets/js/main.js
+          test -f site/downloads/index.html
+          test -f site/tool/index.html
+          if find site -name '*.qmd' | grep .; then
+            echo "The public website must be standard HTML/CSS/JS, not Quarto."
+            exit 1
+          fi
+          rm -rf artifacts/site
+          mkdir -p artifacts/site
+          cp -R site/. artifacts/site/
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prioriza-site-${{ steps.manifest.outputs.version }}
+          path: artifacts/site/
+          if-no-files-found: error
+
+      - name: Render HTML book
+        run: quarto render --to html
+
+      - name: Prepare HTML artifact
+        run: |
+          test -d _output
+          rm -rf artifacts
+          mkdir -p artifacts/book-html
+          cp -R _output/. artifacts/book-html/
+
+      - name: Upload HTML artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prioriza-book-html-${{ steps.manifest.outputs.version }}
+          path: artifacts/book-html/
+          if-no-files-found: error
+
+      - name: Render PDF book
+        run: quarto render --to pdf
+
+      - name: Prepare PDF artifact
+        run: |
+          PDF=$(find _output -maxdepth 1 -type f -name '*.pdf' | head -n 1)
+          if [ -z "$PDF" ]; then
+            echo "No PDF was generated under _output/."
+            exit 1
+          fi
+          mkdir -p artifacts/pdf
+          cp "$PDF" "artifacts/pdf/prioriza-method-${{ steps.manifest.outputs.version }}-es.pdf"
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prioriza-book-pdf-${{ steps.manifest.outputs.version }}
+          path: artifacts/pdf/
+          if-no-files-found: error
