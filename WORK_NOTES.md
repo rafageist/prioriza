@@ -20,9 +20,11 @@
   available in PATH.
 - Render commands to run after installing Quarto:
   `quarto render`, `quarto render --to html`, and `quarto render --to pdf`.
-- The GitHub Actions workflow renders HTML first, then attempts PDF with
-  TinyTeX. The PDF step is non-blocking so HTML artifacts remain available if
-  PDF-specific LaTeX issues appear.
+- The GitHub Actions workflow runs after changes are merged to `master` or
+  `main`, or when triggered manually with `workflow_dispatch`.
+- The workflow renders HTML and PDF, installs `librsvg2-bin` for SVG-to-PDF
+  conversion, and creates a GitHub release with a PDF named from the
+  `manifest.yml` version.
 
 ## DOCX conversion notes
 

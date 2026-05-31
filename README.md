@@ -41,6 +41,10 @@ quarto render --to pdf
 
 HTML and PDF output should be generated under `_output/`.
 
+On GitHub, the release workflow runs after changes are merged to `master` or
+`main`, or when triggered manually. It reads `manifest.yml`, renders the Quarto
+book, and creates a GitHub release with `prioriza-method-<version>.pdf`.
+
 ## Chapter Structure
 
 The book is split into one Quarto file per major section:

@@ -1,50 +1,91 @@
-name: Build Quarto Book
+name: Release Quarto PDF
 
 on:
   push:
     branches:
       - master
       - main
-      - docs/quarto-book-v0.4
-  pull_request:
   workflow_dispatch:
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read manifest version
+        id: manifest
+        run: |
+          VERSION=$(python - <<'PY'
+          import pathlib
+          import re
+
+          text = pathlib.Path("manifest.yml").read_text(encoding="utf-8")
+          match = re.search(r"^version:\s*['\"]?([^'\"\n]+)['\"]?\s*$", text, re.MULTILINE)
+          if not match:
+              raise SystemExit("manifest.yml does not contain a version field")
+          print(match.group(1).strip())
+          PY
+          )
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Ensure release tag is new
+        run: |
+          git fetch --tags --force
+          if git rev-parse "${{ steps.manifest.outputs.tag }}" >/dev/null 2>&1; then
+            echo "Tag ${{ steps.manifest.outputs.tag }} already exists. Update manifest.yml before releasing."
+            exit 1
+          fi
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Install TinyTeX
-        run: quarto install tinytex --update-path
+      - name: Install PDF dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+          quarto install tinytex --update-path
 
       - name: Render HTML
         run: quarto render --to html
 
+      - name: Preserve HTML output
+        run: |
+          rm -rf quarto-html-output
+          cp -R _output quarto-html-output
+
       - name: Render PDF
-        id: render_pdf
-        continue-on-error: true
         run: quarto render --to pdf
 
-      - name: Record PDF render limitation
-        if: steps.render_pdf.outcome == 'failure'
+      - name: Prepare release PDF
         run: |
-          {
-            echo "PDF render failed in CI.";
-            echo "HTML render completed before the PDF attempt.";
-            echo "Check the Quarto and LaTeX logs for missing packages or PDF-specific errors.";
-          } >> "$GITHUB_STEP_SUMMARY"
+          PDF=$(find _output -maxdepth 1 -type f -name '*.pdf' | head -n 1)
+          if [ -z "$PDF" ]; then
+            echo "No PDF was generated under _output/."
+            exit 1
+          fi
+          cp "$PDF" "prioriza-method-${{ steps.manifest.outputs.version }}.pdf"
 
-      - name: Upload Quarto output
+      - name: Upload Quarto output artifact
         uses: actions/upload-artifact@v4
         with:
-          name: prioriza-quarto-output
-          path: _output/
+          name: prioriza-quarto-output-${{ steps.manifest.outputs.version }}
+          path: |
+            quarto-html-output/
+            prioriza-method-${{ steps.manifest.outputs.version }}.pdf
           if-no-files-found: error
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.manifest.outputs.tag }}
+          name: "Prioriza Method - ${{ steps.manifest.outputs.version }}"
+          body: "Automated Quarto PDF release for Prioriza Method ${{ steps.manifest.outputs.version }}."
+          files: prioriza-method-${{ steps.manifest.outputs.version }}.pdf
