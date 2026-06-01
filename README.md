@@ -55,11 +55,31 @@ Git.
 The Spanish public website lives under `docs/` and is standard HTML, CSS, and
 JavaScript. Quarto is not used to generate the landing page.
 
-- `docs/index.html` is the landing page.
-- `docs/downloads/index.html` is the downloads page.
-- `docs/tool/index.html` reserves a future browser-only Prioriza tool route.
+- `docs/index.html` is the Spanish landing page.
+- `docs/en/index.html` is a future English landing page placeholder.
+- `docs/downloads/index.html` is the downloads / releases guide page.
+- `docs/tool/index.html` is the future browser-only Prioriza tool route.
 - `docs/assets/css/styles.css` contains the site styling.
 - `docs/assets/js/main.js` contains light progressive enhancement.
+
+## Bilingual Architecture
+
+Spanish is the canonical source language. The website and manuscript are
+authored in Spanish first. English will be a controlled translation later.
+
+URL structure:
+
+```text
+/          Spanish landing page (canonical)
+/en/       English version placeholder (future)
+/downloads/  Releases guide (Spanish for now)
+/tool/     Tool UI (Spanish for now)
+```
+
+- No language switcher is displayed until English pages contain real content.
+- Navigation labels are in Spanish matching the page language.
+- English URLs exist but are not linked from Spanish pages until content is ready.
+- The `docs/en/` directory reserves the English route without exposing broken links.
 
 The deployed site is expected to expose:
 
