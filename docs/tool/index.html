@@ -8,6 +8,7 @@
     <title>Herramienta Prioriza | El Método Prioriza</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/tool.css">
+    <script src="../assets/js/calculos.js"></script>
     <script src="../assets/js/main.js" defer></script>
     <script src="assets/js/tool.js" defer></script>
   </head>
@@ -67,71 +68,25 @@
             </label>
           </div>
 
-          <div class="table-section">
-            <div class="section-header">
-              <h2>Aspectos</h2>
-              <button class="button small" id="add-aspect">+ Agregar aspecto</button>
-            </div>
-            <div class="aspect-list" id="aspect-list">
-              <div class="aspect-row template" data-template>
-                <input type="text" class="aspect-name" placeholder="Nombre del aspecto">
-                <select class="aspect-leveling">
-                  <option value="min">Menor es mejor</option>
-                  <option value="max">Mayor es mejor</option>
-                </select>
-                <label class="apl-label">
-                  NPA
-                  <input type="number" class="aspect-apl" min="1" max="9" value="1">
-                </label>
-                <button class="btn-icon btn-remove" data-remove-aspect title="Eliminar aspecto">&times;</button>
-              </div>
-            </div>
+          <p class="calc-note">
+            Los valores se convierten en niveles locales según la función de cada columna.
+            Cada nivel local se multiplica por el NPA de su aspecto.
+            El elemento con menor total tiene la mayor prioridad.
+          </p>
+
+          <div class="ptable-wrap">
+            <table class="ptable" id="ptable">
+              <thead id="ptable-head"></thead>
+              <tbody id="ptable-body"></tbody>
+            </table>
           </div>
 
-          <div class="table-section">
-            <div class="section-header">
-              <h2>Elementos</h2>
-              <button class="button small" id="add-element">+ Agregar elemento</button>
-            </div>
-            <div class="element-table-wrap">
-              <table class="element-table" id="element-table">
-                <thead>
-                  <tr id="element-header">
-                    <th>Elemento</th>
-                  </tr>
-                </thead>
-                <tbody id="element-body">
-                </tbody>
-              </table>
-            </div>
+          <div class="ptable-actions">
+            <button class="button small" id="add-aspect">+ Agregar aspecto</button>
+            <button class="button small" id="add-element">+ Agregar elemento</button>
           </div>
 
-          <div class="table-actions">
-            <button class="button primary" id="btn-calculate">Calcular estructura de prioridad</button>
-          </div>
-
-          <div class="results-section" id="results-section" style="display:none">
-            <h2>Estructura de prioridad</h2>
-
-            <div class="result-table-wrap">
-              <table class="result-table" id="result-table">
-                <thead>
-                  <tr>
-                    <th>Prioridad</th>
-                    <th>Elemento</th>
-                    <th>Total</th>
-                    <th id="result-levels-head">Niveles locales</th>
-                    <th id="result-contrib-head">Contribuciones</th>
-                  </tr>
-                </thead>
-                <tbody id="result-body">
-                </tbody>
-              </table>
-            </div>
-
-            <div id="result-ties" class="result-ties"></div>
-            <div id="result-explanation" class="result-explanation"></div>
-          </div>
+          <div id="tool-results" class="tool-results"></div>
         </div>
       </div>
     </main>

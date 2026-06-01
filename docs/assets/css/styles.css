@@ -554,6 +554,195 @@ code {
   font-size: 0.92em;
 }
 
+/* ---- Homepage demo ---- */
+
+.home-demo {
+  padding: clamp(3rem, 7vw, 5.5rem) clamp(1rem, 5vw, 4rem);
+  background: linear-gradient(180deg, var(--band), var(--paper));
+}
+
+.home-demo .section-heading p {
+  max-width: 640px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.demo-app {
+  margin: 1.5rem 0;
+}
+
+.de-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.de-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.de-table th,
+.de-table td {
+  padding: 0.6rem 0.7rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.de-table th {
+  background: var(--forest);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  vertical-align: top;
+}
+
+.de-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.de-table tbody tr:hover {
+  background: rgba(31, 92, 67, 0.03);
+}
+
+.de-elem {
+  min-width: 110px;
+}
+
+.de-aspect {
+  min-width: 140px;
+  text-align: center;
+}
+
+.de-fn {
+  display: block;
+  font-weight: 400;
+  font-size: 0.7rem;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.85;
+  margin-top: 0.15rem;
+}
+
+.de-apl {
+  display: inline-block;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.9;
+  background: rgba(255,255,255,0.15);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+}
+
+.de-total {
+  min-width: 55px;
+  text-align: center;
+}
+
+.de-elem-cell {
+  font-weight: 600;
+}
+
+.de-val-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.de-raw {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.de-raw:hover {
+  background: var(--band);
+}
+
+.de-inline-edit {
+  padding: 0.2rem 0.3rem;
+  border: 2px solid var(--forest);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--ink);
+  background: var(--paper);
+  width: 56px;
+}
+
+.de-level {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--forest);
+  margin-top: 0.15rem;
+}
+
+.de-total-cell {
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.de-p1 td {
+  background: #f0f9f3;
+}
+
+.de-p1 .de-total-cell {
+  color: var(--forest);
+}
+
+.de-summary {
+  margin-top: 0.8rem;
+}
+
+.de-tie {
+  margin: 0;
+  padding: 0.65rem 0.9rem;
+  background: #fff8e6;
+  border-left: 4px solid var(--gold);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.de-tie.de-no-tie {
+  background: #eef4f0;
+  border-left-color: var(--forest);
+}
+
+.de-note {
+  margin: 0.8rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.demo-cta {
+  margin-top: 1.5rem;
+}
+
+.demo-cta .button.primary {
+  background: var(--forest);
+  color: var(--white);
+}
+
+.demo-cta .button.primary:hover {
+  background: var(--forest-light);
+}
+
+/* ---- Tool page ---- */
+
 .tool-page {
   background: linear-gradient(180deg, var(--paper), var(--band));
 }

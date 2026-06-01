@@ -10,6 +10,7 @@
     >
     <title>El Método Prioriza</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/calculos.js"></script>
     <script src="assets/js/main.js" defer></script>
   </head>
   <body>
@@ -189,6 +190,21 @@
         </p>
       </section>
 
+      <section id="demo" class="home-demo">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Demo interactiva</p>
+          <h2>Prioriza en vivo</h2>
+          <p>
+            Modifica los valores o el NPA de cada aspecto. La tabla recalcula
+            autom&aacute;ticamente la estructura de prioridad.
+          </p>
+        </div>
+        <div id="demo-app" class="demo-app reveal"></div>
+        <p class="demo-cta reveal">
+          <a href="tool/" class="button primary">Abrir herramienta completa &rarr;</a>
+        </p>
+      </section>
+
       <section id="ejemplo" class="example-section">
         <div class="example-copy reveal">
           <p class="eyebrow">Ejemplo mínimo</p>
@@ -266,6 +282,121 @@
         </div>
       </section>
     </main>
+
+    <script>
+    (function () {
+      var C = PRIORIZA;
+      var demoData = {
+        aspects: [
+          { id: C.generateId(), name: "Distancia",  leveling: "min", aspectPriorityLevel: 1 },
+          { id: C.generateId(), name: "Costo",      leveling: "min", aspectPriorityLevel: 1 },
+          { id: C.generateId(), name: "Disponibilidad", leveling: "max", aspectPriorityLevel: 1 }
+        ],
+        elements: [
+          { id: C.generateId(), name: "Tienda A", values: {} },
+          { id: C.generateId(), name: "Tienda B", values: {} }
+        ]
+      };
+      demoData.aspects.forEach(function (a) {
+        demoData.elements.forEach(function (e) { e.values[a.id] = ""; });
+      });
+      demoData.elements[0].values = {};
+      demoData.elements[1].values = {};
+      demoData.aspects.forEach(function (a, i) {
+        demoData.elements[0].values[a.id] = i === 0 ? "2.4" : i === 1 ? "10" : "8";
+        demoData.elements[1].values[a.id] = i === 0 ? "1.2" : i === 1 ? "15" : "6";
+      });
+
+      var app = document.getElementById("demo-app");
+
+      function renderDemo() {
+        var levels = C.computeAllLevels(demoData);
+        var results = C.computeResults(demoData, levels);
+
+        var cols = ['<th class="de-elem">Elemento</th>'];
+        demoData.aspects.forEach(function (a) {
+          var fn = C.LEVELING_FNS[a.leveling] || C.LEVELING_FNS.min;
+          cols.push('<th class="de-aspect">' +
+            C.esc(a.name) +
+            '<br><span class="de-fn">' + fn.label + '</span>' +
+            '<br><span class="de-apl">NPA ' + a.aspectPriorityLevel + '</span></th>');
+        });
+        cols.push('<th class="de-total">Total</th>');
+
+        var headHtml = '<thead><tr>' + cols.join("") + '</tr></thead>';
+
+        var bodyHtml = '<tbody>';
+        results.forEach(function (r, idx) {
+          var rank = idx > 0 && r.total === results[idx - 1].total ? (results[idx - 2] && results[idx - 2].total === r.total ? "" : idx) : idx + 1;
+          var isP1 = rank === 1;
+          bodyHtml += '<tr class="' + (isP1 ? 'de-p1' : '') + '">';
+          bodyHtml += '<td class="de-elem-cell"><strong>' + C.esc(r.element.name) + '</strong></td>';
+
+          demoData.aspects.forEach(function (a) {
+            var c = r.contribs[a.id];
+            var rawStr = c.raw !== null ? C.esc(String(c.raw)) : "\u2014";
+            bodyHtml += '<td class="de-val-cell">' +
+              '<span class="de-raw">' + rawStr + '</span>' +
+              '<span class="de-level">nivel ' + c.localLevel + '</span>' +
+            '</td>';
+          });
+
+          bodyHtml += '<td class="de-total-cell"><strong>' + r.total + '</strong></td>';
+          bodyHtml += '</tr>';
+        });
+        bodyHtml += '</tbody>';
+
+        var topResults = results.filter(function (r) { return r.total === results[0].total; });
+        var tieHtml = topResults.length > 1
+          ? '<p class="de-tie"><strong>Empate:</strong> ' + topResults.map(function (r) { return C.esc(r.element.name); }).join(", ") + ' tienen el mismo total (' + topResults[0].total + ').</p>'
+          : '<p class="de-tie de-no-tie"><strong>Prioridad 1:</strong> ' + C.esc(results[0].element.name) + ' (' + results[0].total + ' puntos, total m\u00e1s bajo).</p>';
+
+        app.innerHTML =
+          '<div class="de-table-wrap">' +
+            '<table class="de-table">' + headHtml + bodyHtml + '</table>' +
+          '</div>' +
+          '<div class="de-summary">' + tieHtml + '</div>' +
+          '<p class="de-note">Cada nivel local se multiplica por el NPA. El elemento con menor total tiene la mayor prioridad.</p>';
+
+        app.querySelectorAll(".de-raw").forEach(function (el) {
+          el.addEventListener("dblclick", function () {
+            makeEditable(this, demoData, renderDemo);
+          });
+        });
+      }
+
+      function makeEditable(span, data, onchange) {
+        var td = span.parentNode;
+        var ths = td.parentNode.parentNode.querySelectorAll("thead th");
+        var colIdx = Array.prototype.indexOf.call(td.parentNode.children, td);
+        var rowIdx = Array.prototype.indexOf.call(td.parentNode.parentNode.children, td.parentNode);
+        var aspectIdx = colIdx - 1;
+        if (aspectIdx < 0 || aspectIdx >= data.aspects.length) return;
+        var aspect = data.aspects[aspectIdx];
+        var element = data.elements[rowIdx];
+        if (!element || !element.values) return;
+        var currentVal = element.values[aspect.id] || "";
+        var inp = document.createElement("input");
+        inp.type = "text";
+        inp.className = "de-inline-edit";
+        inp.value = currentVal;
+        inp.style.width = "50px";
+        span.replaceWith(inp);
+        inp.focus();
+        inp.select();
+        inp.addEventListener("blur", function () {
+          element.values[aspect.id] = inp.value;
+          onchange();
+        });
+        inp.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") { inp.blur(); }
+          if (e.key === "Escape") { element.values[aspect.id] = currentVal; onchange(); }
+        });
+      }
+
+      renderDemo();
+    })();
+    </script>
 
     <footer class="site-footer">
       <span>El Método Prioriza</span>
