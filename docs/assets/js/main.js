@@ -40,23 +40,3 @@ if ("IntersectionObserver" in window) {
 } else {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
-
-const pdfLink = document.querySelector("[data-pdf-link]");
-const pdfStatus = document.querySelector("[data-pdf-status]");
-const pdfCard = document.querySelector("[data-pdf-card]");
-
-if (pdfLink && pdfStatus && pdfCard) {
-  fetch(pdfLink.getAttribute("href"), { method: "HEAD" })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("PDF unavailable");
-      }
-      pdfStatus.textContent = "PDF disponible en este sitio.";
-      pdfCard.classList.remove("pending");
-    })
-    .catch(() => {
-      pdfStatus.textContent =
-        "La descarga directa del PDF está pendiente en este sitio. Revisa las publicaciones de GitHub si necesitas el PDF generado.";
-      pdfCard.classList.add("pending");
-    });
-}
