@@ -53,7 +53,6 @@ Completed on `docs/book-cleanup-and-static-site` branch (commit `28b27de`):
 - **Three separate workflows**: `ci.yml` (check/render), `pages.yml` (deploy),
   `release.yml` (manual PDF release).
 - **No forbidden terms** remain in `index.qmd` or `chapters/`.
-- **No Sochi/Valdés** references remain.
 - **Author**: Rafael Rodríguez Ramírez.
 - **`quarto render --to html` and `quarto render --to pdf`**: both succeed.
 
