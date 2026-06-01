@@ -5,7 +5,7 @@
 }
 
 .tool-header h1 {
-  color: var(--ink);
+  color: var(--text);
 }
 
 .tool-bar {
@@ -16,7 +16,7 @@
 }
 
 .tool-bar .button.secondary {
-  background: var(--forest);
+  background: var(--accent);
   color: var(--white);
   border-color: transparent;
   min-height: 42px;
@@ -24,15 +24,14 @@
 }
 
 .tool-bar .button.secondary:hover {
-  background: var(--forest-light);
+  background: #4f3f2c;
 }
 
 .tool-notice {
   margin: 1.5rem 0;
   padding: 1rem 1.2rem;
   background: #fff8e6;
-  border-left: 4px solid var(--gold);
-  border-radius: 6px;
+  border-left: 4px solid var(--accent);
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.6;
@@ -50,9 +49,8 @@
   padding: 3rem;
   text-align: center;
   color: var(--muted);
-  background: var(--surface);
+  background: var(--panel);
   border: 2px dashed var(--line);
-  border-radius: var(--radius);
 }
 
 .table-config {
@@ -68,9 +66,9 @@
   font-size: 1.1rem;
   font-weight: 700;
   border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--panel);
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .calc-note {
@@ -86,8 +84,7 @@
 .ptable-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
+  background: var(--panel);
 }
 
 .ptable {
@@ -141,21 +138,21 @@
   font-size: 0.9rem;
   padding: 0.3rem 0.4rem;
   border: 1px solid var(--line);
-  border-radius: 4px;
   background: var(--paper);
-  color: var(--ink);
+  color: var(--text);
   width: 100%;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .ac-fn {
   font-size: 0.75rem;
   padding: 0.25rem 0.3rem;
   border: 1px solid var(--line);
-  border-radius: 4px;
   background: var(--paper);
   color: var(--muted);
   cursor: pointer;
   width: 100%;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .ac-apl-label {
@@ -171,11 +168,11 @@
   width: 48px;
   padding: 0.25rem 0.3rem;
   border: 1px solid var(--line);
-  border-radius: 4px;
   font-size: 0.82rem;
   text-align: center;
-  color: var(--ink);
+  color: var(--text);
   background: var(--paper);
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .ac-remove {
@@ -186,16 +183,15 @@
   width: 28px;
   height: 28px;
   border: none;
-  border-radius: 4px;
   background: transparent;
-  color: var(--red);
+  color: var(--accent);
   font-size: 1.1rem;
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .ac-remove:hover {
-  background: rgba(168, 66, 53, 0.1);
+  background: rgba(107, 83, 54, 0.1);
 }
 
 /* Data cells */
@@ -208,10 +204,10 @@
   min-width: 100px;
   padding: 0.4rem 0.5rem;
   border: 1px solid var(--line);
-  border-radius: 4px;
   font-size: 0.85rem;
-  color: var(--ink);
+  color: var(--text);
   background: var(--paper);
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .cell-value {
@@ -223,18 +219,18 @@
   width: 64px;
   padding: 0.4rem 0.3rem;
   border: 1px solid var(--line);
-  border-radius: 4px;
   font-size: 0.85rem;
   text-align: center;
-  color: var(--ink);
+  color: var(--text);
   background: var(--paper);
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .cell-level {
   display: block;
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--forest);
+  color: var(--accent);
   margin-top: 0.15rem;
 }
 
@@ -242,8 +238,8 @@
   text-align: center;
   font-weight: 800;
   font-size: 1rem;
-  color: var(--ink);
-  background: #f0f5f2;
+  color: var(--text);
+  background: var(--band);
 }
 
 .cell-remove {
@@ -257,16 +253,15 @@
   width: 30px;
   height: 30px;
   border: 1px solid transparent;
-  border-radius: 4px;
   background: transparent;
-  color: var(--red);
+  color: var(--accent);
   font-size: 1.2rem;
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .btn-remove-elem:hover {
-  background: rgba(168, 66, 53, 0.1);
+  background: rgba(107, 83, 54, 0.1);
 }
 
 /* Table actions */
@@ -281,17 +276,17 @@
   min-height: 36px;
   padding: 0.4rem 1rem;
   font-size: 0.88rem;
-  background: var(--forest);
+  background: var(--accent);
   color: var(--white);
-  border: none;
-  border-radius: 6px;
+  border: 1px solid #4f3f2c;
   cursor: pointer;
   font-weight: 700;
   transition: background 0.2s;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .button.small:hover {
-  background: var(--forest-light);
+  background: #4f3f2c;
 }
 
 .btn-icon {
@@ -301,16 +296,15 @@
   width: 34px;
   height: 34px;
   border: 1px solid transparent;
-  border-radius: 6px;
   background: transparent;
-  color: var(--red);
+  color: var(--accent);
   font-size: 1.3rem;
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .btn-icon:hover {
-  background: rgba(168, 66, 53, 0.1);
+  background: rgba(107, 83, 54, 0.1);
 }
 
 /* Results below table */
@@ -326,15 +320,14 @@
 .tie-badge {
   padding: 0.75rem 1rem;
   background: #fff8e6;
-  border-left: 4px solid var(--gold);
-  border-radius: 6px;
+  border-left: 4px solid var(--accent);
   font-size: 0.9rem;
   color: var(--muted);
 }
 
 .tie-badge.no-tie {
-  background: #eef4f0;
-  border-left-color: var(--forest);
+  background: var(--band);
+  border-left-color: var(--accent);
 }
 
 .tr-heading {
@@ -353,16 +346,15 @@
 }
 
 .trace-card {
-  background: var(--surface);
+  background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
   overflow: hidden;
   transition: box-shadow 0.2s, border-color 0.2s;
 }
 
 .trace-card.trace-p1 {
-  border-color: var(--forest);
-  box-shadow: 0 0 0 2px rgba(31, 92, 67, 0.12);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(107, 83, 54, 0.12);
 }
 
 .tc-header {
@@ -376,30 +368,30 @@
 }
 
 .trace-p1 .tc-header {
-  background: #e8f3ec;
-  border-bottom-color: var(--forest);
+  background: var(--band);
+  border-bottom-color: var(--accent);
 }
 
 .tc-rank {
   font-weight: 800;
   font-size: 1rem;
-  color: var(--forest);
+  color: var(--accent);
   text-align: center;
 }
 
 .tc-elem {
   font-size: 0.95rem;
-  color: var(--ink);
+  color: var(--text);
 }
 
 .tc-total {
   font-weight: 800;
   font-size: 1.1rem;
-  color: var(--ink);
+  color: var(--text);
 }
 
 .trace-p1 .tc-total {
-  color: var(--forest);
+  color: var(--accent);
 }
 
 .tc-aspects {
@@ -425,11 +417,11 @@
 
 .ta-aspect {
   font-weight: 700;
-  color: var(--ink);
+  color: var(--text);
 }
 
 .ta-raw {
-  color: var(--ink);
+  color: var(--text);
   text-align: center;
   font-weight: 600;
 }
@@ -440,7 +432,7 @@
 }
 
 .ta-level {
-  color: var(--forest);
+  color: var(--accent);
   font-weight: 700;
   text-align: center;
 }
@@ -453,7 +445,7 @@
 
 .ta-contrib {
   font-weight: 800;
-  color: var(--ink);
+  color: var(--text);
   text-align: right;
 }
 
@@ -467,9 +459,9 @@
 }
 
 .trace-p1 .tc-explain {
-  color: var(--forest);
+  color: var(--accent);
   font-weight: 600;
-  background: #f5faf7;
+  background: var(--paper);
 }
 
 /* Responsive */
