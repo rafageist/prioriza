@@ -41,22 +41,38 @@ if ("IntersectionObserver" in window) {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
 
-const pdfLink = document.querySelector("[data-pdf-link]");
-const pdfStatus = document.querySelector("[data-pdf-status]");
-const pdfCard = document.querySelector("[data-pdf-card]");
+const stages = document.querySelectorAll(".pipe-stage");
+if (stages.length && "IntersectionObserver" in window) {
+  const pipeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animatePipeline();
+          pipeObserver.unobserve(entry.target.closest(".visual-section"));
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
 
-if (pdfLink && pdfStatus && pdfCard) {
-  fetch(pdfLink.getAttribute("href"), { method: "HEAD" })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("PDF unavailable");
-      }
-      pdfStatus.textContent = "PDF disponible en este sitio.";
-      pdfCard.classList.remove("pending");
-    })
-    .catch(() => {
-      pdfStatus.textContent =
-        "La descarga directa del PDF está pendiente en este sitio. Revisa las publicaciones de GitHub si necesitas el PDF generado.";
-      pdfCard.classList.add("pending");
-    });
+  pipeObserver.observe(stages[0].closest(".visual-section"));
+}
+
+function animatePipeline() {
+  let current = 0;
+  const tick = () => {
+    stages.forEach((s) => s.classList.remove("active"));
+    if (current < stages.length) {
+      stages[current].classList.add("active");
+      current++;
+      setTimeout(tick, 700);
+    } else {
+      setTimeout(() => {
+        current = 0;
+        stages.forEach((s) => s.classList.remove("active"));
+        setTimeout(tick, 1800);
+      }, 900);
+    }
+  };
+  tick();
 }
