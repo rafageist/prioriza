@@ -62,6 +62,23 @@ img {
   backdrop-filter: blur(10px);
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+.header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
 .brand {
   color: var(--text);
   font-weight: 700;
