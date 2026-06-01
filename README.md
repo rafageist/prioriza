@@ -43,7 +43,7 @@ HTML and PDF output is generated under `_output/`.
 Preview the static website locally:
 
 ```powershell
-python -m http.server 8000 -d site
+python -m http.server 8000 -d docs
 ```
 
 The deployment workflow copies `docs/` into `public/` and then adds the
@@ -63,19 +63,19 @@ JavaScript. Quarto is not used to generate the landing page.
 
 The deployed site is expected to expose:
 
-- the HTML book under `/book/`;
 - the downloads page under `/downloads/`;
-- a versioned Spanish PDF named `prioriza-method-<version>-es.pdf` when PDF
-  rendering succeeds;
+- the future static tool under `/tool/`;
+- links to GitHub Releases for PDF downloads;
 - links to the GitHub repository, examples, and public roadmap.
+- the HTML book under `/book/` only when a Pages workflow renders it.
 
 ## GitHub Workflows
 
-- `ci.yml` checks the static site source, renders the HTML book and PDF book on
-  pushes and pull requests, then uploads build artifacts.
+- `ci.yml` checks the static site source (`docs/`), renders the HTML book and
+  PDF book on pushes and pull requests, then uploads build artifacts.
 - `pages.yml` deploys the static site to GitHub Pages after changes reach
-  `master` or `main`; it copies `docs/`, then adds the generated book under
-  `/book/` and the generated PDF under `/downloads/` when available.
+  `master` or `main`; it copies `docs/` into `public/`, then adds the generated
+  book under `/book/` and the generated PDF under `/downloads/` when available.
 - `release.yml` is manual. It reads `manifest.yml`, renders the PDF, and
   creates a GitHub release only when the manifest version does not already
   exist as a tag.

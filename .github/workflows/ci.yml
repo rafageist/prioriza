@@ -44,12 +44,12 @@ jobs:
           test -f docs/assets/js/main.js
           test -f docs/downloads/index.html
           test -f docs/tool/index.html
-          if find site -name '*.qmd' | grep .; then
+          if find docs -name '*.qmd' | grep .; then
             echo "The public website must be standard HTML/CSS/JS, not Quarto."
             exit 1
           fi
-          rm -rf artifacts/site
-          mkdir -p artifacts/site
+          rm -rf artifacts/docs
+          mkdir -p artifacts/docs
           cp -R docs/. artifacts/docs/
 
       - name: Upload site artifact

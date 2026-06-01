@@ -1,0 +1,115 @@
+name: Deploy Static Site
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read manifest version
+        id: manifest
+        run: |
+          VERSION=$(python - <<'PY'
+          import pathlib
+          import re
+          text = pathlib.Path("manifest.yml").read_text(encoding="utf-8")
+          match = re.search(r"^version:\s*['\"]?([^'\"\n]+)['\"]?\s*$", text, re.MULTILINE)
+          if not match:
+              raise SystemExit("manifest.yml does not contain a version field")
+          print(match.group(1).strip())
+          PY
+          )
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Pages
+        uses: actions/configure-pages@v5
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install render dependencies
+        run: quarto install tinytex --update-path
+
+      - name: Assemble static site
+        run: |
+          test -f docs/index.html
+          test -f docs/assets/css/styles.css
+          test -f docs/assets/js/main.js
+          test -f docs/downloads/index.html
+          test -f docs/tool/index.html
+          if find docs -name '*.qmd' | grep .; then
+            echo "The public website must be standard HTML/CSS/JS, not Quarto."
+            exit 1
+          fi
+          rm -rf public
+          mkdir -p public
+          cp -R docs/. public/
+
+      - name: Render HTML book
+        run: quarto render --to html
+
+      - name: Copy HTML book into site
+        run: |
+          test -d _output
+          rm -rf public/book
+          mkdir -p public/book
+          cp -R _output/. public/book/
+
+      - name: Render PDF for downloads
+        id: render_pdf
+        continue-on-error: true
+        run: quarto render --to pdf
+
+      - name: Copy PDF when available
+        if: always()
+        run: |
+          mkdir -p public/downloads
+          PDF=$(find _output -maxdepth 1 -type f -name '*.pdf' | head -n 1 || true)
+          if [ -n "$PDF" ]; then
+            cp "$PDF" "public/downloads/prioriza-method-${{ steps.manifest.outputs.version }}-es.pdf"
+          else
+            echo "PDF was not generated in this Pages run." > public/downloads/pdf-pending.txt
+          fi
+
+      - name: Copy custom domain file when enabled
+        run: |
+          if [ -f docs/CNAME ]; then
+            cp docs/CNAME public/CNAME
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
