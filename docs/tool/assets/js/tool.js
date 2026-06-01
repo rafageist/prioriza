@@ -105,14 +105,15 @@
     uiState.aspectCount = table.aspects.length;
     uiState.elementCount = table.elements.length;
 
-    const template = aspectList.querySelector(".aspect-row.template");
-    aspectList.querySelectorAll("[data-template]").forEach((el) => el.remove());
-    table.aspects.forEach((a) => addAspectRow(a, template));
+    aspectList.querySelectorAll(".aspect-row:not(.template)").forEach((el) => el.remove());
+    table.aspects.forEach((a) => addAspectRow(a));
     renderElementTable(table);
     resultsSection.style.display = "none";
   }
 
-  function addAspectRow(aspect, template) {
+  function addAspectRow(aspect) {
+    const template = aspectList.querySelector(".aspect-row.template");
+    if (!template) return;
     const row = template.cloneNode(true);
     row.classList.remove("template");
     row.removeAttribute("data-template");
@@ -166,14 +167,10 @@
   function removeAspect(idx) {
     const table = getCurrentTable();
     if (!table) return;
-    table.aspects.splice(idx, 1);
-    table.elements.forEach((e) => {
-      const keys = Object.keys(e.values);
-      if (idx < keys.length) {
-        const key = table.aspects[idx] ? table.aspects[idx].id : null;
-        if (key) delete e.values[key];
-      }
-    });
+    const removed = table.aspects.splice(idx, 1)[0];
+    if (removed) {
+      table.elements.forEach((e) => { delete e.values[removed.id]; });
+    }
     saveState();
     loadTableIntoUI(table);
   }
