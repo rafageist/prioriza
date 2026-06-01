@@ -766,6 +766,7 @@ code {
   html {
     scroll-behavior: auto;
   }
+}
 
 .visual-section {
   padding: clamp(3rem, 7vw, 5.5rem) clamp(1rem, 5vw, 4rem);
@@ -886,7 +887,8 @@ code {
   }
 }
 
-.reveal {
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
     transform: none;
     opacity: 1;
     transition: none;
