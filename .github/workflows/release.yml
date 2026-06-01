@@ -47,7 +47,7 @@ jobs:
         run: quarto install tinytex --update-path
 
       - name: Render PDF
-        run: quarto render --to pdf --profile es
+        run: quarto render --to pdf
 
       - name: Prepare release PDF
         run: |
