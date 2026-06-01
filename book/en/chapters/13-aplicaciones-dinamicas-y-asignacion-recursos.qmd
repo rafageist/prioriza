@@ -1,0 +1,4 @@
+# Dynamic Applications and Resource Allocation
+
+> English translation pending. See `book/es/chapters/13-aplicaciones-dinamicas-y-asignacion-recursos.qmd` for the source of truth.
+

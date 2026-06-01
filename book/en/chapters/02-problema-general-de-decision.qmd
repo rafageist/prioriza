@@ -1,0 +1,4 @@
+# The General Decision Problem
+
+> English translation pending. See `book/es/chapters/02-problema-general-de-decision.qmd` for the source of truth.
+

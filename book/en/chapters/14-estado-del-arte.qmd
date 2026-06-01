@@ -1,0 +1,4 @@
+# State of the Art
+
+> English translation pending. See `book/es/chapters/14-estado-del-arte.qmd` for the source of truth.
+

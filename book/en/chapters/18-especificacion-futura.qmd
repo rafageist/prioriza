@@ -1,0 +1,4 @@
+# Future Specification
+
+> English translation pending. See `book/es/chapters/18-especificacion-futura.qmd` for the source of truth.
+

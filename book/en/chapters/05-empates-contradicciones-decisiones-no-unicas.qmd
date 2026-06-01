@@ -1,0 +1,4 @@
+# Ties, Contradictions and Non-Unique Decisions
+
+> English translation pending. See `book/es/chapters/05-empates-contradicciones-decisiones-no-unicas.qmd` for the source of truth.
+

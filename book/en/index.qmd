@@ -1,0 +1,4 @@
+# Preface
+
+> English translation pending. See `book/es/index.qmd` for the source of truth.
+

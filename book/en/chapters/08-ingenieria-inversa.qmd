@@ -1,0 +1,4 @@
+# Reverse Engineering
+
+> English translation pending. See `book/es/chapters/08-ingenieria-inversa.qmd` for the source of truth.
+
