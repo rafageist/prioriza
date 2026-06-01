@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prioriza.rafageist.com/sitemap.xml

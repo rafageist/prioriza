@@ -68,9 +68,22 @@ landing page or sub-pages.
 - `docs/tool/index.html` is the browser-only Prioriza tool page.
 - `docs/assets/css/styles.css` contains the site styling.
 - `docs/assets/js/main.js` contains light progressive enhancement.
+- `docs/assets/js/core.js` contains the Prioriza calculation core.
+- `docs/robots.txt` and `docs/sitemap.xml` provide crawler guidance.
+
+### Website source code conventions
+
+Website code uses English naming conventions for:
+
+- HTML IDs, classes, and data attributes
+- JavaScript variable and function names
+- filenames (e.g., `core.js` instead of `calculos.js`)
+- SEO metadata (Open Graph, Twitter card, canonical URLs)
+- localStorage keys and JSON property names
+
+The book manuscript remains in Spanish (see [Bilingual Book Architecture](#bilingual-book-architecture)).
 
 There is no `/en/` subdirectory — the website is English at the root.
-
 The deployed site exposes:
 
 - the downloads page under `/downloads/`;
@@ -78,6 +91,8 @@ The deployed site exposes:
 - links to GitHub Releases for PDF downloads;
 - links to the GitHub repository, examples, and public roadmap;
 - the HTML book under `/book/` only when a Pages workflow renders it.
+
+There is no `/en/` subdirectory — the website is English at the root.
 
 ## GitHub Workflows
 
