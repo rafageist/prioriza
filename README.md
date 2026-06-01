@@ -10,9 +10,14 @@ The current manuscript status is `v0.4-draft`.
 
 ## Manuscript Source
 
-The editable manuscript is the Quarto book configured by `_quarto.yml`.
+The editable manuscript is the Quarto book configured by `_quarto.yml`
+(shared base) with profile-specific overrides in `_quarto-es.yml` (Spanish)
+and `_quarto-en.yml` (English).
 
-- Edit manuscript text in `index.qmd` and `chapters/*.qmd`.
+- Spanish manuscript (canonical source): `book/es/index.qmd` and
+  `book/es/chapters/*.qmd`.
+- English manuscript (translation scaffold): `book/en/index.qmd` and
+  `book/en/chapters/*.qmd`.
 - Store conceptual figures in `figures/`.
 - Store bibliography work in `references.bib` and
   `bibliography/bibliography-todo.md`.
@@ -24,7 +29,7 @@ or build-process notes.
 
 ## Local Rendering
 
-Install Quarto before rendering locally:
+Install Quarto (≥1.6) before rendering locally:
 
 ```powershell
 quarto --version
@@ -33,7 +38,9 @@ quarto --version
 Render commands:
 
 ```powershell
-quarto render
+quarto render                    # renders Spanish (default profile)
+quarto render --profile es       # explicit Spanish render
+quarto render --profile en       # English render (placeholder scaffold)
 quarto render --to html
 quarto render --to pdf
 ```
@@ -74,8 +81,9 @@ Website code uses English naming conventions for:
 - SEO metadata (Open Graph, Twitter card, canonical URLs)
 - localStorage keys and JSON property names
 
-The book manuscript remains in Spanish (see [Manuscript Source](#manuscript-source)).
+The book manuscript remains in Spanish (see [Bilingual Book Architecture](#bilingual-book-architecture)).
 
+There is no `/en/` subdirectory — the website is English at the root.
 The deployed site exposes:
 
 - the downloads page under `/downloads/`;
@@ -97,31 +105,91 @@ There is no `/en/` subdirectory — the website is English at the root.
   creates a GitHub release only when the manifest version does not already
   exist as a tag.
 
+## Bilingual Book Architecture
+
+The book is **bilingual**: Spanish is the canonical source of truth, and
+English is a controlled translation. The website remains **English-only**
+(see [Website](#website)).
+
+### Principles
+
+1. **Spanish is canonical.** All substantive edits happen in the Spanish
+   manuscript (`book/es/`). The English manuscript (`book/en/`) is a
+   controlled translation derived from the Spanish source.
+2. **No automated translation.** English chapters are human-translated and
+   reviewed. Each English chapter carries a "translation pending" notice
+   until translated.
+3. **Languages do not mix in one output.** Each Quarto profile produces a
+   monolingual book. There is no single bilingual output.
+4. **Website is separate.** The website (`docs/`) is English-only and
+   independent of the book's bilingual structure.
+
+### Directory layout
+
+```text
+_quarto.yml           Shared project config + profile definitions
+_quarto-es.yml        Spanish profile (lang, title, chapters)
+_quarto-en.yml        English profile (lang, title, chapters)
+book/
+  es/
+    index.qmd         Spanish preface (canonical)
+    chapters/
+      00-proposito-tesis-posicionamiento.qmd
+      ...
+  en/
+    index.qmd         English preface (translation scaffold)
+    chapters/
+      00-proposito-tesis-posicionamiento.qmd
+      ...
+```
+
+### How Spanish changes flow into English
+
+1. Edit the Spanish file under `book/es/`.
+2. When the content is stable, translate the corresponding English file
+   under `book/en/` (keeping the same base filename).
+3. Render both profiles to verify:
+   ```powershell
+   quarto render --profile es
+   quarto render --profile en
+   ```
+
+### Render with Quarto profiles
+
+```powershell
+quarto render              # renders Spanish (default profile)
+quarto render --profile es # explicit Spanish
+quarto render --profile en # English
+quarto render --profile en --to pdf  # English PDF
+```
+
 ## Chapter Structure
 
-The book is split into one Quarto file per major section:
+The Spanish manuscript source files (canonical) live under `book/es/`:
 
-- `index.qmd`
-- `chapters/00-proposito-tesis-posicionamiento.qmd`
-- `chapters/01-introduccion.qmd`
-- `chapters/02-problema-general-de-decision.qmd`
-- `chapters/03-forma-discreta.qmd`
-- `chapters/04-justificacion-del-procedimiento.qmd`
-- `chapters/05-empates-contradicciones-decisiones-no-unicas.qmd`
-- `chapters/06-reutilizacion-tablas.qmd`
-- `chapters/07-recursividad.qmd`
-- `chapters/08-ingenieria-inversa.qmd`
-- `chapters/09-forma-continua.qmd`
-- `chapters/10-formas-generales-de-uso.qmd`
-- `chapters/11-aplicaciones-del-metodo.qmd`
-- `chapters/12-aplicacion-historica-ancora-goh.qmd`
-- `chapters/13-aplicaciones-dinamicas-y-asignacion-recursos.qmd`
-- `chapters/14-estado-del-arte.qmd`
-- `chapters/15-aporte-real-de-prioriza.qmd`
-- `chapters/16-limites-y-criticas.qmd`
-- `chapters/17-arquitectura-gobernanza-ia.qmd`
-- `chapters/18-especificacion-futura.qmd`
-- `chapters/19-conclusiones.qmd`
+- `book/es/index.qmd`
+- `book/es/chapters/00-proposito-tesis-posicionamiento.qmd`
+- `book/es/chapters/01-introduccion.qmd`
+- `book/es/chapters/02-problema-general-de-decision.qmd`
+- `book/es/chapters/03-forma-discreta.qmd`
+- `book/es/chapters/04-justificacion-del-procedimiento.qmd`
+- `book/es/chapters/05-empates-contradicciones-decisiones-no-unicas.qmd`
+- `book/es/chapters/06-reutilizacion-tablas.qmd`
+- `book/es/chapters/07-recursividad.qmd`
+- `book/es/chapters/08-ingenieria-inversa.qmd`
+- `book/es/chapters/09-forma-continua.qmd`
+- `book/es/chapters/10-formas-generales-de-uso.qmd`
+- `book/es/chapters/11-aplicaciones-del-metodo.qmd`
+- `book/es/chapters/12-aplicacion-historica-ancora-goh.qmd`
+- `book/es/chapters/13-aplicaciones-dinamicas-y-asignacion-recursos.qmd`
+- `book/es/chapters/14-estado-del-arte.qmd`
+- `book/es/chapters/15-aporte-real-de-prioriza.qmd`
+- `book/es/chapters/16-limites-y-criticas.qmd`
+- `book/es/chapters/17-arquitectura-gobernanza-ia.qmd`
+- `book/es/chapters/18-especificacion-futura.qmd`
+- `book/es/chapters/19-conclusiones.qmd`
+
+The English scaffold mirrors the same filenames under `book/en/`.
 
 ## Contributor Docs
 
@@ -150,8 +218,9 @@ citation notes outside rendered chapters to mark where sources are needed.
 ## Continuing With Codex
 
 When continuing work with Codex, point it at this repository and treat
-`_quarto.yml` as the manuscript entry point. Ask it to preserve the Quarto
-structure, avoid fabricated bibliography, keep public-book text free of
+`_quarto.yml` (with its profile overrides `_quarto-es.yml` and
+`_quarto-en.yml`) as the manuscript entry point. Ask it to preserve the
+Quarto structure, avoid fabricated bibliography, keep public-book text free of
 repository process notes, and document render failures or local tooling gaps in
 `WORK_NOTES.md`.
 

@@ -1,0 +1,4 @@
+# Continuous Form
+
+> English translation pending. See `book/es/chapters/09-forma-continua.qmd` for the source of truth.
+

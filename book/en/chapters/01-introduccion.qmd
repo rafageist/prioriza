@@ -1,0 +1,4 @@
+# Introduction
+
+> English translation pending. See `book/es/chapters/01-introduccion.qmd` for the source of truth.
+

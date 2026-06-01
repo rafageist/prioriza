@@ -1,0 +1,4 @@
+# Limitations and Criticisms
+
+> English translation pending. See `book/es/chapters/16-limites-y-criticas.qmd` for the source of truth.
+

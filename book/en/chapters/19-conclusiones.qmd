@@ -1,0 +1,4 @@
+# Conclusions
+
+> English translation pending. See `book/es/chapters/19-conclusiones.qmd` for the source of truth.
+

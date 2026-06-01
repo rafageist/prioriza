@@ -1,0 +1,4 @@
+# Historical Application: Áncora GOH
+
+> English translation pending. See `book/es/chapters/12-aplicacion-historica-ancora-goh.qmd` for the source of truth.
+

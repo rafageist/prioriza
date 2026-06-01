@@ -1,0 +1,4 @@
+# General Usage Patterns
+
+> English translation pending. See `book/es/chapters/10-formas-generales-de-uso.qmd` for the source of truth.
+

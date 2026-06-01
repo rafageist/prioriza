@@ -1,0 +1,4 @@
+# Justification of the Procedure
+
+> English translation pending. See `book/es/chapters/04-justificacion-del-procedimiento.qmd` for the source of truth.
+
