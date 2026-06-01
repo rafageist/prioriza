@@ -105,14 +105,14 @@
     uiState.aspectCount = table.aspects.length;
     uiState.elementCount = table.elements.length;
 
+    const template = aspectList.querySelector(".aspect-row.template");
     aspectList.querySelectorAll("[data-template]").forEach((el) => el.remove());
-    table.aspects.forEach((a) => addAspectRow(a));
+    table.aspects.forEach((a) => addAspectRow(a, template));
     renderElementTable(table);
     resultsSection.style.display = "none";
   }
 
-  function addAspectRow(aspect) {
-    const template = aspectList.querySelector(".aspect-row.template");
+  function addAspectRow(aspect, template) {
     const row = template.cloneNode(true);
     row.classList.remove("template");
     row.removeAttribute("data-template");
