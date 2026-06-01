@@ -67,14 +67,14 @@
   function createNewTable() {
     const table = {
       id: C.generateId(),
-      name: "Mi tabla Prioriza",
+      name: "My Prioriza table",
       aspects: [
-        { id: C.generateId(), name: "Urgencia", leveling: "min", aspectPriorityLevel: 1 },
-        { id: C.generateId(), name: "Impacto", leveling: "max", aspectPriorityLevel: 2 }
+        { id: C.generateId(), name: "Urgency", leveling: "min", aspectPriorityLevel: 1 },
+        { id: C.generateId(), name: "Impact", leveling: "max", aspectPriorityLevel: 2 }
       ],
       elements: [
-        { id: C.generateId(), name: "Elemento A", values: {} },
-        { id: C.generateId(), name: "Elemento B", values: {} }
+        { id: C.generateId(), name: "Element A", values: {} },
+        { id: C.generateId(), name: "Element B", values: {} }
       ]
     };
     table.aspects.forEach((a) => {
@@ -114,19 +114,19 @@
   }
 
   function renderTableHead(table) {
-    const cells = ['<th class="col-elem">Elemento</th>'];
+    const cells = ['<th class="col-elem">Element</th>'];
     table.aspects.forEach((a, i) => {
       const fn = C.LEVELING_FNS[a.leveling] || C.LEVELING_FNS.min;
       cells.push(
         '<th class="col-aspect">' +
           '<div class="aspect-config">' +
-            '<input class="ac-name" value="' + C.esc(a.name || "Aspecto") + '" data-idx="' + i + '">' +
+            '<input class="ac-name" value="' + C.esc(a.name || "Aspect") + '" data-idx="' + i + '">' +
             '<select class="ac-fn" data-idx="' + i + '">' +
-              '<option value="min"' + (a.leveling === "min" ? " selected" : "") + '>Menor valor \u21d2 mayor prioridad</option>' +
-              '<option value="max"' + (a.leveling === "max" ? " selected" : "") + '>Mayor valor \u21d2 mayor prioridad</option>' +
+              '<option value="min"' + (a.leveling === "min" ? " selected" : "") + '>Lower value \u21d2 higher priority</option>' +
+              '<option value="max"' + (a.leveling === "max" ? " selected" : "") + '>Higher value \u21d2 higher priority</option>' +
             '</select>' +
-            '<label class="ac-apl-label">NPA <input class="ac-apl" type="number" min="1" max="9" value="' + (a.aspectPriorityLevel || 1) + '" data-idx="' + i + '"></label>' +
-            '<button class="ac-remove" data-idx="' + i + '" title="Eliminar aspecto">&times;</button>' +
+            '<label class="ac-apl-label">APL <input class="ac-apl" type="number" min="1" max="9" value="' + (a.aspectPriorityLevel || 1) + '" data-idx="' + i + '"></label>' +
+            '<button class="ac-remove" data-idx="' + i + '" title="Remove aspect">&times;</button>' +
           '</div>' +
         '</th>'
       );
@@ -200,7 +200,7 @@
     const inp = document.createElement("input");
     inp.className = "elem-input";
     inp.type = "text";
-    inp.placeholder = "Nombre";
+    inp.placeholder = "Name";
     inp.value = element.name || "";
     inp.addEventListener("input", function () {
       element.name = this.value;
@@ -231,7 +231,7 @@
     if (!isNaN(num) && levelMap && levelMap[num] !== undefined) {
       const lbl = document.createElement("span");
       lbl.className = "cell-level";
-      lbl.textContent = "nivel " + levelMap[num];
+      lbl.textContent = "level " + levelMap[num];
       td.appendChild(lbl);
     }
     return td;
@@ -255,7 +255,7 @@
     const btn = document.createElement("button");
     btn.className = "btn-icon btn-remove-elem";
     btn.textContent = "\u00d7";
-    btn.title = "Eliminar elemento";
+    btn.title = "Remove element";
     btn.addEventListener("click", function () { removeElement(ei); });
     td.appendChild(btn);
     return td;
@@ -281,8 +281,8 @@
           '<span class="ta-aspect">' + C.esc(a.name) + '</span>' +
           '<span class="ta-raw">' + rawStr + '</span>' +
           '<span class="ta-fn">' + fnLabel + '</span>' +
-          '<span class="ta-level">nivel ' + c.localLevel + '</span>' +
-          '<span class="ta-npa">NPA ' + a.aspectPriorityLevel + '</span>' +
+          '<span class="ta-level">level ' + c.localLevel + '</span>' +
+          '<span class="ta-npa">APL ' + a.aspectPriorityLevel + '</span>' +
           '<span class="ta-contrib">= ' + c.contribution + '</span>' +
         '</div>';
       }).join("");
@@ -297,19 +297,19 @@
         '<div class="tc-explain">' +
           (isPriority1
             ? (topResults.length > 1
-              ? "Comparte el primer lugar: revisa si es necesario agregar otro aspecto para desempatar."
-              : "Menor total de la tabla. Encabeza la estructura de prioridad.")
-            : "Total parcial superior al del primer lugar.")
+              ? "Shares first place: consider adding another aspect to break the tie."
+              : "Lowest total in the table. Leads the priority structure.")
+            : "Partial total higher than the first place.")
         + '</div>' +
       '</div>';
     }).join("");
 
     const tieHtml = topResults.length > 1
-      ? '<div class="tie-badge"><strong>Empate:</strong> ' + topResults.map(r => C.esc(r.element.name)).join(", ") + ' empatan en el primer lugar con ' + topResults[0].total + ' puntos cada uno.</div>'
-      : '<div class="tie-badge no-tie"><strong>Prioridad 1:</strong> ' + C.esc(results[0].element.name) + ' encabeza con ' + results[0].total + ' puntos (total m\u00e1s bajo).</div>';
+      ? '<div class="tie-badge"><strong>Tie:</strong> ' + topResults.map(r => C.esc(r.element.name)).join(", ") + ' are tied for first place with ' + topResults[0].total + ' points each.</div>'
+      : '<div class="tie-badge no-tie"><strong>Priority 1:</strong> ' + C.esc(results[0].element.name) + ' leads with ' + results[0].total + ' points (lowest total).</div>';
 
     toolResults.innerHTML =
-      '<h3 class="tr-heading">Estructura de prioridad</h3>' +
+      '<h3 class="tr-heading">Priority structure</h3>' +
       '<div class="tr-summary">' + tieHtml + '</div>' +
       '<div class="tr-traces">' + rankHtml + '</div>';
   }
@@ -317,7 +317,7 @@
   function addAspect() {
     const table = getCurrentTable();
     if (!table) return;
-    const newA = { id: C.generateId(), name: "Aspecto " + (table.aspects.length + 1), leveling: "min", aspectPriorityLevel: 1 };
+    const newA = { id: C.generateId(), name: "Aspect " + (table.aspects.length + 1), leveling: "min", aspectPriorityLevel: 1 };
     table.aspects.push(newA);
     table.elements.forEach((e) => { e.values[newA.id] = ""; });
     saveState();
@@ -327,7 +327,7 @@
   function addElement() {
     const table = getCurrentTable();
     if (!table) return;
-    const newEl = { id: C.generateId(), name: "Elemento " + (table.elements.length + 1), values: {} };
+    const newEl = { id: C.generateId(), name: "Element " + (table.elements.length + 1), values: {} };
     table.aspects.forEach((a) => { newEl.values[a.id] = ""; });
     table.elements.push(newEl);
     saveState();
@@ -358,7 +358,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "prioriza-tablas.json";
+    a.download = "prioriza-tables.json";
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -380,10 +380,10 @@
             showEmpty();
           }
         } else {
-          alert("El archivo no contiene datos v\u00e1lidos de Prioriza.");
+          alert("The file does not contain valid Prioriza data.");
         }
       } catch (err) {
-        alert("No se pudo leer el archivo JSON.");
+        alert("Could not read the JSON file.");
       }
     };
     reader.readAsText(file);
@@ -391,7 +391,7 @@
   }
 
   function resetAll() {
-    if (!confirm("\u00bfReiniciar todos los datos? Esta acci\u00f3n no se puede deshacer.")) return;
+    if (!confirm("Reset all data? This action cannot be undone.")) return;
     state = { version: "0.2", tables: [] };
     saveState();
     showEmpty();
