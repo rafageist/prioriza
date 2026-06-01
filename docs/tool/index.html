@@ -67,6 +67,12 @@
             </label>
           </div>
 
+          <p class="calc-note">
+            Cada aspecto asigna niveles locales desde sus valores:
+            la función define qué valores reciben prioridad;
+            el NPA (nivel de prioridad del aspecto) indica su peso relativo.
+          </p>
+
           <div class="table-section">
             <div class="section-header">
               <h2>Aspectos</h2>
@@ -76,8 +82,8 @@
               <div class="aspect-row template" data-template>
                 <input type="text" class="aspect-name" placeholder="Nombre del aspecto">
                 <select class="aspect-leveling">
-                  <option value="min">Menor es mejor</option>
-                  <option value="max">Mayor es mejor</option>
+                  <option value="min">Menor valor &rArr; mayor prioridad</option>
+                  <option value="max">Mayor valor &rArr; mayor prioridad</option>
                 </select>
                 <label class="apl-label">
                   NPA

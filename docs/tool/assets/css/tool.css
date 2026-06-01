@@ -190,6 +190,14 @@
   background: rgba(168, 66, 53, 0.1);
 }
 
+.calc-note {
+  margin: 0 0 1.5rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 640px;
+}
+
 .element-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
@@ -218,6 +226,18 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  vertical-align: top;
+}
+
+.fn-label {
+  display: block;
+  font-weight: 400;
+  font-size: 0.72rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--forest);
+  margin-top: 0.2rem;
+  white-space: normal;
 }
 
 .element-table tr:last-child td {
@@ -243,6 +263,19 @@
   text-align: center;
   color: var(--ink);
   background: var(--paper);
+}
+
+.value-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.local-level {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--forest);
+  margin-top: 0.2rem;
 }
 
 .table-actions {

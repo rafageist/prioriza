@@ -1,5 +1,37 @@
 (function () {
   const STORAGE_KEY = "prioriza-tool-data";
+
+  const LEVELING_FNS = {
+    min: { sortDir: "asc", label: "Menor valor \u21d2 mayor prioridad" },
+    max: { sortDir: "desc", label: "Mayor valor \u21d2 mayor prioridad" }
+  };
+
+  function computeLocalLevels(values, fnId) {
+    const fn = LEVELING_FNS[fnId] || LEVELING_FNS.min;
+    const nums = values.map(v => parseFloat(v)).filter(v => !isNaN(v));
+    const sorted = fn.sortDir === "asc"
+      ? [...nums].sort((x, y) => x - y)
+      : [...nums].sort((x, y) => y - x);
+    const map = {};
+    let level = 1;
+    sorted.forEach((v, i) => {
+      if (i > 0 && v !== sorted[i - 1]) level++;
+      map[v] = level;
+    });
+    return map;
+  }
+
+  function computeAllLevels(table) {
+    const levels = {};
+    table.aspects.forEach((a) => {
+      levels[a.id] = computeLocalLevels(
+        table.elements.map(e => e.values[a.id]),
+        a.leveling
+      );
+    });
+    return levels;
+  }
+
   let state = loadState();
 
   function loadState() {
@@ -178,20 +210,23 @@
   function renderElementHeader(table) {
     const cells = ['<th>Elemento</th>'];
     table.aspects.forEach((a) => {
-      cells.push(`<th>${a.name || "Aspecto"}</th>`);
+      const fn = LEVELING_FNS[a.leveling];
+      const fnLabel = fn ? fn.label : "Menor valor \u21d2 mayor prioridad";
+      cells.push(`<th>${a.name || "Aspecto"}<br><span class="fn-label">${fnLabel}</span></th>`);
     });
     cells.push('<th></th>');
     elementHeader.innerHTML = '<tr>' + cells.join('') + '</tr>';
   }
 
   function renderElementTable(table) {
+    const levels = computeAllLevels(table);
     renderElementHeader(table);
     elementBody.innerHTML = "";
-    table.elements.forEach((e, idx) => renderElementRow(e, idx, table));
+    table.elements.forEach((e, idx) => renderElementRow(e, idx, table, levels));
     syncElementValueKeys(table);
   }
 
-  function renderElementRow(element, idx, table) {
+  function renderElementRow(element, idx, table, levels) {
     const tr = document.createElement("tr");
     const nameTd = document.createElement("td");
     const nameInput = document.createElement("input");
@@ -202,12 +237,14 @@
     nameInput.addEventListener("input", () => {
       element.name = nameInput.value;
       saveState();
+      renderElementTable(table);
     });
     nameTd.appendChild(nameInput);
     tr.appendChild(nameTd);
 
     table.aspects.forEach((a) => {
       const td = document.createElement("td");
+      td.className = "value-cell";
       const valInput = document.createElement("input");
       valInput.type = "text";
       valInput.className = "value-input";
@@ -216,8 +253,17 @@
       valInput.addEventListener("input", () => {
         element.values[a.id] = valInput.value;
         saveState();
+        renderElementTable(table);
       });
       td.appendChild(valInput);
+      const levelMap = levels[a.id];
+      const num = parseFloat(element.values[a.id]);
+      if (!isNaN(num) && levelMap && levelMap[num] !== undefined) {
+        const levelLabel = document.createElement("span");
+        levelLabel.className = "local-level";
+        levelLabel.textContent = "nivel " + levelMap[num];
+        td.appendChild(levelLabel);
+      }
       tr.appendChild(td);
     });
 
@@ -308,20 +354,7 @@
       return;
     }
 
-    const levels = {};
-    aspects.forEach((a) => {
-      const vals = parsed.map((p) => p.values[a.id]).filter((v) => v !== null);
-      const sorted = a.leveling === "min"
-        ? [...vals].sort((x, y) => x - y)
-        : [...vals].sort((x, y) => y - x);
-      const levelMap = {};
-      let level = 1;
-      sorted.forEach((v, i) => {
-        if (i > 0 && v !== sorted[i - 1]) level++;
-        levelMap[v] = level;
-      });
-      levels[a.id] = levelMap;
-    });
+    const levels = computeAllLevels(table);
 
     const results = parsed.map((p) => {
       const localLevels = {};
