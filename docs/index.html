@@ -102,6 +102,93 @@
         </ol>
       </section>
 
+      <section id="visual" class="visual-section reveal">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Visualización del método</p>
+          <h2>Cómo fluyen los datos en Prioriza</h2>
+        </div>
+        <div class="pipeline" aria-label="Tubería visual del método Prioriza">
+          <div class="pipe-stage" data-stage="1">
+            <div class="pipe-icon">
+              <svg viewBox="0 0 40 40" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="6" y="10" width="28" height="20" rx="3"/>
+                <path d="M14 18h12M14 24h8"/>
+              </svg>
+            </div>
+            <strong>Valores</strong>
+            <div class="pipe-data">
+              <span class="pipe-label">Distancia</span>
+              <span class="pipe-datum">A: 2.4 km</span>
+              <span class="pipe-datum">B: 2.4 km</span>
+            </div>
+          </div>
+          <div class="pipe-arrow">
+            <svg viewBox="0 0 40 16" width="40" height="16">
+              <path d="M4 8h28l-6-5m6 5l-6 5" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="pipe-stage" data-stage="2">
+            <div class="pipe-icon">
+              <svg viewBox="0 0 40 40" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="20" cy="16" r="8"/>
+                <path d="M12 28l5-5 6 6 5-5"/>
+              </svg>
+            </div>
+            <strong>Niveles locales</strong>
+            <div class="pipe-data">
+              <span class="pipe-label">Distancia</span>
+              <span class="pipe-datum">A: nivel 1</span>
+              <span class="pipe-datum">B: nivel 1</span>
+            </div>
+          </div>
+          <div class="pipe-arrow">
+            <svg viewBox="0 0 40 16" width="40" height="16">
+              <path d="M4 8h28l-6-5m6 5l-6 5" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="pipe-stage" data-stage="3">
+            <div class="pipe-icon">
+              <svg viewBox="0 0 40 40" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M8 14l4 12M20 10l4 20M32 18l4 12"/>
+                <circle cx="12" cy="8" r="3" fill="currentColor"/>
+                <circle cx="24" cy="6" r="3" fill="currentColor"/>
+                <circle cx="36" cy="12" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <strong>Niveles de aspecto</strong>
+            <div class="pipe-data">
+              <span class="pipe-label">Distancia: nivel 1</span>
+              <span class="pipe-datum">Prioriza: nivel 1</span>
+            </div>
+          </div>
+          <div class="pipe-arrow">
+            <svg viewBox="0 0 40 16" width="40" height="16">
+              <path d="M4 8h28l-6-5m6 5l-6 5" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="pipe-stage" data-stage="4">
+            <div class="pipe-icon">
+              <svg viewBox="0 0 40 40" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="6" y="8" width="28" height="24" rx="3"/>
+                <path d="M12 16h16M12 22h12M12 28h8"/>
+                <circle cx="32" cy="22" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <strong>Estructura de prioridad</strong>
+            <div class="pipe-data">
+              <span class="pipe-label">Empate</span>
+              <span class="pipe-datum">A y B: mismo nivel</span>
+              <span class="pipe-datum">Revisar otro aspecto</span>
+            </div>
+          </div>
+        </div>
+        <p class="pipeline-note reveal">
+          Cada columna se ilumina en secuencia para mostrar el flujo del método.
+          Los datos de Tienda A y Tienda B fluyen desde los valores originales
+          hasta la estructura de prioridad, conservando el empate en cada etapa.
+        </p>
+      </section>
+
       <section id="ejemplo" class="example-section">
         <div class="example-copy reveal">
           <p class="eyebrow">Ejemplo mínimo</p>

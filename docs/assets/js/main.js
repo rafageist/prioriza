@@ -40,3 +40,39 @@ if ("IntersectionObserver" in window) {
 } else {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
+
+const stages = document.querySelectorAll(".pipe-stage");
+if (stages.length && "IntersectionObserver" in window) {
+  const pipeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animatePipeline();
+          pipeObserver.unobserve(entry.target.closest(".visual-section"));
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  pipeObserver.observe(stages[0].closest(".visual-section"));
+}
+
+function animatePipeline() {
+  let current = 0;
+  const tick = () => {
+    stages.forEach((s) => s.classList.remove("active"));
+    if (current < stages.length) {
+      stages[current].classList.add("active");
+      current++;
+      setTimeout(tick, 700);
+    } else {
+      setTimeout(() => {
+        current = 0;
+        stages.forEach((s) => s.classList.remove("active"));
+        setTimeout(tick, 1800);
+      }, 900);
+    }
+  };
+  tick();
+}
