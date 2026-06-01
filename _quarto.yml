@@ -26,7 +26,7 @@ book:
     - chapters/14-estado-del-arte.qmd
     - chapters/15-aporte-real-de-prioriza.qmd
     - chapters/16-limites-y-criticas.qmd
-    - chapters/17-arquitectura-governanza-ia.qmd
+    - chapters/17-arquitectura-gobernanza-ia.qmd
     - chapters/18-especificacion-futura.qmd
     - chapters/19-conclusiones.qmd
 
