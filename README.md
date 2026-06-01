@@ -52,42 +52,39 @@ Git.
 
 ## Website
 
-The Spanish public website lives under `docs/` and is standard HTML, CSS, and
-JavaScript. Quarto is not used to generate the landing page.
+The public website lives under `docs/` and is **English-only**, written in
+standard HTML, CSS, and JavaScript. Quarto is not used to generate the
+landing page or sub-pages.
 
-- `docs/index.html` is the Spanish landing page.
-- `docs/en/index.html` is a future English landing page placeholder.
+- `docs/index.html` is the English landing page.
 - `docs/downloads/index.html` is the downloads / releases guide page.
-- `docs/tool/index.html` is the future browser-only Prioriza tool route.
+- `docs/tool/index.html` is the browser-only Prioriza tool page.
 - `docs/assets/css/styles.css` contains the site styling.
 - `docs/assets/js/main.js` contains light progressive enhancement.
+- `docs/assets/js/core.js` contains the Prioriza calculation core.
+- `docs/robots.txt` and `docs/sitemap.xml` provide crawler guidance.
 
-## Bilingual Architecture
+### Website source code conventions
 
-Spanish is the canonical source language. The website and manuscript are
-authored in Spanish first. English will be a controlled translation later.
+Website code uses English naming conventions for:
 
-URL structure:
+- HTML IDs, classes, and data attributes
+- JavaScript variable and function names
+- filenames (e.g., `core.js` instead of `calculos.js`)
+- SEO metadata (Open Graph, Twitter card, canonical URLs)
+- localStorage keys and JSON property names
 
-```text
-/          Spanish landing page (canonical)
-/en/       English version placeholder (future)
-/downloads/  Releases guide (Spanish for now)
-/tool/     Tool UI (Spanish for now)
-```
+The book manuscript remains in Spanish (see [Manuscript Source](#manuscript-source)).
 
-- No language switcher is displayed until English pages contain real content.
-- Navigation labels are in Spanish matching the page language.
-- English URLs exist but are not linked from Spanish pages until content is ready.
-- The `docs/en/` directory reserves the English route without exposing broken links.
-
-The deployed site is expected to expose:
+The deployed site exposes:
 
 - the downloads page under `/downloads/`;
-- the future static tool under `/tool/`;
+- the static tool under `/tool/`;
 - links to GitHub Releases for PDF downloads;
-- links to the GitHub repository, examples, and public roadmap.
+- links to the GitHub repository, examples, and public roadmap;
 - the HTML book under `/book/` only when a Pages workflow renders it.
+
+There is no `/en/` subdirectory — the website is English at the root.
 
 ## GitHub Workflows
 
