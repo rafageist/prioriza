@@ -320,28 +320,48 @@
     }
     const topResults = results.filter(r => r.total === results[0].total);
 
+    let currentRank = 1;
     const rankHtml = results.map((r, idx) => {
-      const rank = idx > 0 && r.total === results[idx - 1].total
-        ? results.filter((x, j) => j < idx && x.total === r.total).length > 0 ? "" : idx
-        : idx + 1;
+      const rank = idx > 0 && r.total === results[idx - 1].total ? currentRank : (currentRank = idx + 1);
       const isPriority1 = rank === 1;
-      const parts = table.aspects.map(a => {
+
+      const aspectRows = table.aspects.map(a => {
         const c = r.contribs[a.id];
-        return (c.raw !== null ? c.raw : "\u2014") + " \u2192 nivel " + c.localLevel + " \u00d7 NPA " + a.aspectPriorityLevel + " = " + c.contribution;
-      });
-      return '<div class="trace-row' + (isPriority1 ? ' trace-p1' : '') + '">' +
-        '<span class="trace-rank">#' + rank + '</span>' +
-        '<strong class="trace-elem">' + esc(r.element.name) + '</strong>' +
-        '<span class="trace-formula">' + parts.join("; ") + '</span>' +
-        '<span class="trace-total">Total: <strong>' + r.total + '</strong></span>' +
+        const rawStr = c.raw !== null ? c.raw : "\u2014";
+        const fnLabel = (LEVELING_FNS[a.leveling] || LEVELING_FNS.min).label;
+        return '<div class="ta-row">' +
+          '<span class="ta-aspect">' + esc(a.name) + '</span>' +
+          '<span class="ta-raw">' + rawStr + '</span>' +
+          '<span class="ta-fn">' + fnLabel + '</span>' +
+          '<span class="ta-level">nivel ' + c.localLevel + '</span>' +
+          '<span class="ta-npa">NPA ' + a.aspectPriorityLevel + '</span>' +
+          '<span class="ta-contrib">= ' + c.contribution + '</span>' +
+        '</div>';
+      }).join("");
+
+      return '<div class="trace-card' + (isPriority1 ? ' trace-p1' : '') + '">' +
+        '<div class="tc-header">' +
+          '<span class="tc-rank">#' + rank + '</span>' +
+          '<strong class="tc-elem">' + esc(r.element.name) + '</strong>' +
+          '<span class="tc-total"><strong>' + r.total + '</strong></span>' +
+        '</div>' +
+        '<div class="tc-aspects">' + aspectRows + '</div>' +
+        '<div class="tc-explain">' +
+          (isPriority1
+            ? (topResults.length > 1
+              ? "Comparte el primer lugar: revisa si es necesario agregar otro aspecto para desempatar."
+              : "Menor total de la tabla. Encabeza la estructura de prioridad.")
+            : "Total parcial superior al del primer lugar.")
+        + '</div>' +
       '</div>';
     }).join("");
 
     const tieHtml = topResults.length > 1
-      ? '<div class="tie-badge"><strong>Empate:</strong> ' + topResults.map(r => esc(r.element.name)).join(", ") + ' tienen el mismo total (' + topResults[0].total + ').</div>'
-      : '<div class="tie-badge no-tie"><strong>Prioridad 1:</strong> ' + esc(results[0].element.name) + ' con ' + results[0].total + ' puntos.</div>';
+      ? '<div class="tie-badge"><strong>Empate:</strong> ' + topResults.map(r => esc(r.element.name)).join(", ") + ' empatan en el primer lugar con ' + topResults[0].total + ' puntos cada uno.</div>'
+      : '<div class="tie-badge no-tie"><strong>Prioridad 1:</strong> ' + esc(results[0].element.name) + ' encabeza con ' + results[0].total + ' puntos (total m\u00e1s bajo).</div>';
 
     toolResults.innerHTML =
+      '<h3 class="tr-heading">Estructura de prioridad</h3>' +
       '<div class="tr-summary">' + tieHtml + '</div>' +
       '<div class="tr-traces">' + rankHtml + '</div>';
   }
