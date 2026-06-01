@@ -1,36 +1,6 @@
 (function () {
+  var C = PRIORIZA;
   const STORAGE_KEY = "prioriza-tool-data";
-
-  const LEVELING_FNS = {
-    min: { sortDir: "asc", label: "Menor valor \u21d2 mayor prioridad" },
-    max: { sortDir: "desc", label: "Mayor valor \u21d2 mayor prioridad" }
-  };
-
-  function computeLocalLevels(values, fnId) {
-    const fn = LEVELING_FNS[fnId] || LEVELING_FNS.min;
-    const nums = values.map(v => parseFloat(v)).filter(v => !isNaN(v));
-    const sorted = fn.sortDir === "asc"
-      ? [...nums].sort((x, y) => x - y)
-      : [...nums].sort((x, y) => y - x);
-    const map = {};
-    let level = 1;
-    sorted.forEach((v, i) => {
-      if (i > 0 && v !== sorted[i - 1]) level++;
-      map[v] = level;
-    });
-    return map;
-  }
-
-  function computeAllLevels(table) {
-    const levels = {};
-    table.aspects.forEach((a) => {
-      levels[a.id] = computeLocalLevels(
-        table.elements.map(e => e.values[a.id]),
-        a.leveling
-      );
-    });
-    return levels;
-  }
 
   let state = loadState();
 
@@ -49,10 +19,6 @@
 
   function saveState() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }
-
-  function generateId() {
-    return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   }
 
   function getCurrentTable() {
@@ -100,15 +66,15 @@
 
   function createNewTable() {
     const table = {
-      id: generateId(),
+      id: C.generateId(),
       name: "Mi tabla Prioriza",
       aspects: [
-        { id: generateId(), name: "Urgencia", leveling: "min", aspectPriorityLevel: 1 },
-        { id: generateId(), name: "Impacto", leveling: "max", aspectPriorityLevel: 2 }
+        { id: C.generateId(), name: "Urgencia", leveling: "min", aspectPriorityLevel: 1 },
+        { id: C.generateId(), name: "Impacto", leveling: "max", aspectPriorityLevel: 2 }
       ],
       elements: [
-        { id: generateId(), name: "Elemento A", values: {} },
-        { id: generateId(), name: "Elemento B", values: {} }
+        { id: C.generateId(), name: "Elemento A", values: {} },
+        { id: C.generateId(), name: "Elemento B", values: {} }
       ]
     };
     table.aspects.forEach((a) => {
@@ -136,8 +102,8 @@
   }
 
   function renderToolTable(table) {
-    const levels = computeAllLevels(table);
-    const results = computeResults(table, levels);
+    const levels = C.computeAllLevels(table);
+    const results = C.computeResults(table, levels);
 
     renderTableHead(table);
     renderTableBody(table, levels, results);
@@ -147,32 +113,14 @@
     document.querySelector("#add-element").onclick = function () { addElement(); };
   }
 
-  function computeResults(table, levels) {
-    return table.elements.map((e) => {
-      let total = 0;
-      const contribs = {};
-      table.aspects.forEach((a) => {
-        const num = parseFloat(e.values[a.id]);
-        const val = isNaN(num) ? null : num;
-        let ll = 0;
-        if (val !== null && levels[a.id] && levels[a.id][val] !== undefined) {
-          ll = levels[a.id][val];
-        }
-        contribs[a.id] = { raw: val, localLevel: ll, contribution: ll * a.aspectPriorityLevel };
-        total += ll * a.aspectPriorityLevel;
-      });
-      return { element: e, contribs, total };
-    }).sort((x, y) => x.total - y.total);
-  }
-
   function renderTableHead(table) {
     const cells = ['<th class="col-elem">Elemento</th>'];
     table.aspects.forEach((a, i) => {
-      const fn = LEVELING_FNS[a.leveling] || LEVELING_FNS.min;
+      const fn = C.LEVELING_FNS[a.leveling] || C.LEVELING_FNS.min;
       cells.push(
         '<th class="col-aspect">' +
           '<div class="aspect-config">' +
-            '<input class="ac-name" value="' + esc(a.name || "Aspecto") + '" data-idx="' + i + '">' +
+            '<input class="ac-name" value="' + C.esc(a.name || "Aspecto") + '" data-idx="' + i + '">' +
             '<select class="ac-fn" data-idx="' + i + '">' +
               '<option value="min"' + (a.leveling === "min" ? " selected" : "") + '>Menor valor \u21d2 mayor prioridad</option>' +
               '<option value="max"' + (a.leveling === "max" ? " selected" : "") + '>Mayor valor \u21d2 mayor prioridad</option>' +
@@ -328,9 +276,9 @@
       const aspectRows = table.aspects.map(a => {
         const c = r.contribs[a.id];
         const rawStr = c.raw !== null ? c.raw : "\u2014";
-        const fnLabel = (LEVELING_FNS[a.leveling] || LEVELING_FNS.min).label;
+        const fnLabel = (C.LEVELING_FNS[a.leveling] || C.LEVELING_FNS.min).label;
         return '<div class="ta-row">' +
-          '<span class="ta-aspect">' + esc(a.name) + '</span>' +
+          '<span class="ta-aspect">' + C.esc(a.name) + '</span>' +
           '<span class="ta-raw">' + rawStr + '</span>' +
           '<span class="ta-fn">' + fnLabel + '</span>' +
           '<span class="ta-level">nivel ' + c.localLevel + '</span>' +
@@ -342,7 +290,7 @@
       return '<div class="trace-card' + (isPriority1 ? ' trace-p1' : '') + '">' +
         '<div class="tc-header">' +
           '<span class="tc-rank">#' + rank + '</span>' +
-          '<strong class="tc-elem">' + esc(r.element.name) + '</strong>' +
+          '<strong class="tc-elem">' + C.esc(r.element.name) + '</strong>' +
           '<span class="tc-total"><strong>' + r.total + '</strong></span>' +
         '</div>' +
         '<div class="tc-aspects">' + aspectRows + '</div>' +
@@ -357,8 +305,8 @@
     }).join("");
 
     const tieHtml = topResults.length > 1
-      ? '<div class="tie-badge"><strong>Empate:</strong> ' + topResults.map(r => esc(r.element.name)).join(", ") + ' empatan en el primer lugar con ' + topResults[0].total + ' puntos cada uno.</div>'
-      : '<div class="tie-badge no-tie"><strong>Prioridad 1:</strong> ' + esc(results[0].element.name) + ' encabeza con ' + results[0].total + ' puntos (total m\u00e1s bajo).</div>';
+      ? '<div class="tie-badge"><strong>Empate:</strong> ' + topResults.map(r => C.esc(r.element.name)).join(", ") + ' empatan en el primer lugar con ' + topResults[0].total + ' puntos cada uno.</div>'
+      : '<div class="tie-badge no-tie"><strong>Prioridad 1:</strong> ' + C.esc(results[0].element.name) + ' encabeza con ' + results[0].total + ' puntos (total m\u00e1s bajo).</div>';
 
     toolResults.innerHTML =
       '<h3 class="tr-heading">Estructura de prioridad</h3>' +
@@ -369,7 +317,7 @@
   function addAspect() {
     const table = getCurrentTable();
     if (!table) return;
-    const newA = { id: generateId(), name: "Aspecto " + (table.aspects.length + 1), leveling: "min", aspectPriorityLevel: 1 };
+    const newA = { id: C.generateId(), name: "Aspecto " + (table.aspects.length + 1), leveling: "min", aspectPriorityLevel: 1 };
     table.aspects.push(newA);
     table.elements.forEach((e) => { e.values[newA.id] = ""; });
     saveState();
@@ -379,7 +327,7 @@
   function addElement() {
     const table = getCurrentTable();
     if (!table) return;
-    const newEl = { id: generateId(), name: "Elemento " + (table.elements.length + 1), values: {} };
+    const newEl = { id: C.generateId(), name: "Elemento " + (table.elements.length + 1), values: {} };
     table.aspects.forEach((a) => { newEl.values[a.id] = ""; });
     table.elements.push(newEl);
     saveState();
@@ -403,12 +351,6 @@
     table.elements.splice(idx, 1);
     saveState();
     renderToolTable(table);
-  }
-
-  function esc(s) {
-    const d = document.createElement("div");
-    d.appendChild(document.createTextNode(s));
-    return d.innerHTML;
   }
 
   function exportData() {
