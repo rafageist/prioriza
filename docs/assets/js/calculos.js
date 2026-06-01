@@ -2,8 +2,8 @@ var PRIORIZA = PRIORIZA || {};
 
 (function (ns) {
   ns.LEVELING_FNS = {
-    min: { sortDir: "asc", label: "Menor valor \u21d2 mayor prioridad" },
-    max: { sortDir: "desc", label: "Mayor valor \u21d2 mayor prioridad" }
+    min: { sortDir: "asc", label: "Lower value \u21d2 higher priority" },
+    max: { sortDir: "desc", label: "Higher value \u21d2 higher priority" }
   };
 
   ns.computeLocalLevels = function (values, fnId) {
