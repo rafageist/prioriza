@@ -4,10 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Rafael Rodríguez Ramírez">
-    <meta name="description" content="Herramienta web futura del Método Prioriza.">
-    <title>Herramienta futura | El Método Prioriza</title>
+    <meta name="description" content="Herramienta demo del Método Prioriza. Calcula estructura de prioridad desde el navegador.">
+    <title>Herramienta Prioriza | El Método Prioriza</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tool.css">
     <script src="../assets/js/main.js" defer></script>
+    <script src="assets/js/tool.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -26,31 +28,112 @@
       </nav>
     </header>
 
-    <main class="subpage tool-page">
-      <section class="subpage-hero reveal">
-        <p class="eyebrow">Herramienta en preparación</p>
-        <h1>Prioriza en el navegador</h1>
+    <main class="tool-layout">
+      <section class="tool-header">
+        <p class="eyebrow">Demo experimental</p>
+        <h1>Herramienta Prioriza</h1>
         <p class="lead dark">
-          Esta ruta queda reservada para una futura herramienta estática que
-          permita definir elementos, aspectos, niveles y explicaciones sin
-          depender de un servidor.
+          Define elementos, aspectos, valores y niveles de prioridad.
+          El cálculo se ejecuta en el navegador. Los datos se guardan
+          automáticamente en el almacenamiento local.
+        </p>
+        <div class="tool-bar">
+          <button class="button primary" data-new-table>Nueva tabla</button>
+          <button class="button secondary" data-import>Importar JSON</button>
+          <button class="button secondary" data-export>Exportar JSON</button>
+          <button class="button secondary" data-reset>Reiniciar</button>
+        </div>
+        <input type="file" id="import-input" accept=".json" style="display:none">
+      </section>
+
+      <section class="tool-notice" aria-label="Advertencia">
+        <p>
+          <strong>Demo experimental.</strong> Esta herramienta es una
+          demostración del método. No debe usarse para tomar decisiones
+          reales sin validación independiente.
         </p>
       </section>
 
-      <section class="tool-placeholder reveal" aria-label="Alcance futuro">
-        <h2>Alcance previsto</h2>
-        <ul>
-          <li>Definir elementos y aspectos.</li>
-          <li>Registrar valores y reglas de nivelación.</li>
-          <li>Declarar niveles de prioridad de los aspectos.</li>
-          <li>Calcular y explicar la estructura de prioridad.</li>
-          <li>Exportar datos en formatos interoperables.</li>
-        </ul>
-        <p>
-          La lógica de cálculo no está implementada todavía. Esta página no es
-          una calculadora y no debe usarse para tomar decisiones.
-        </p>
-      </section>
+      <div id="tool-app" class="tool-app">
+        <div class="tool-empty" id="tool-empty">
+          <p>Aún no hay tablas. Crea una nueva para comenzar.</p>
+        </div>
+
+        <div class="tool-table" id="tool-table" style="display:none">
+          <div class="table-config">
+            <label>
+              Nombre de la tabla
+              <input type="text" id="table-name" class="table-name-input" placeholder="Priorización de tareas">
+            </label>
+          </div>
+
+          <div class="table-section">
+            <div class="section-header">
+              <h2>Aspectos</h2>
+              <button class="button small" id="add-aspect">+ Agregar aspecto</button>
+            </div>
+            <div class="aspect-list" id="aspect-list">
+              <div class="aspect-row template" data-template>
+                <input type="text" class="aspect-name" placeholder="Nombre del aspecto">
+                <select class="aspect-leveling">
+                  <option value="min">Menor es mejor</option>
+                  <option value="max">Mayor es mejor</option>
+                </select>
+                <label class="apl-label">
+                  NPA
+                  <input type="number" class="aspect-apl" min="1" max="9" value="1">
+                </label>
+                <button class="btn-icon btn-remove" data-remove-aspect title="Eliminar aspecto">&times;</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-section">
+            <div class="section-header">
+              <h2>Elementos</h2>
+              <button class="button small" id="add-element">+ Agregar elemento</button>
+            </div>
+            <div class="element-table-wrap">
+              <table class="element-table" id="element-table">
+                <thead>
+                  <tr id="element-header">
+                    <th>Elemento</th>
+                  </tr>
+                </thead>
+                <tbody id="element-body">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="table-actions">
+            <button class="button primary" id="btn-calculate">Calcular estructura de prioridad</button>
+          </div>
+
+          <div class="results-section" id="results-section" style="display:none">
+            <h2>Estructura de prioridad</h2>
+
+            <div class="result-table-wrap">
+              <table class="result-table" id="result-table">
+                <thead>
+                  <tr>
+                    <th>Prioridad</th>
+                    <th>Elemento</th>
+                    <th>Total</th>
+                    <th id="result-levels-head">Niveles locales</th>
+                    <th id="result-contrib-head">Contribuciones</th>
+                  </tr>
+                </thead>
+                <tbody id="result-body">
+                </tbody>
+              </table>
+            </div>
+
+            <div id="result-ties" class="result-ties"></div>
+            <div id="result-explanation" class="result-explanation"></div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="site-footer">
