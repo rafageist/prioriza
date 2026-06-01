@@ -62,7 +62,7 @@ jobs:
           if-no-files-found: error
 
       - name: Render HTML book
-        run: quarto render --to html --profile es
+        run: quarto render --to html
 
       - name: Prepare HTML artifact
         run: |
@@ -79,7 +79,7 @@ jobs:
           if-no-files-found: error
 
       - name: Render PDF book
-        run: quarto render --to pdf --profile es
+        run: quarto render --to pdf
 
       - name: Prepare PDF artifact
         run: |

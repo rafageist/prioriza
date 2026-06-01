@@ -2,10 +2,40 @@ project:
   type: book
   output-dir: _output
 
+book:
+  title: "El Método Prioriza"
+  subtitle: "Un marco de priorización ordinal por niveles de prioridad"
+  author: "Rafael Rodríguez Ramírez"
+  date: today
+  chapters:
+    - book/es/index.qmd
+    - book/es/chapters/00-proposito-tesis-posicionamiento.qmd
+    - book/es/chapters/01-introduccion.qmd
+    - book/es/chapters/02-problema-general-de-decision.qmd
+    - book/es/chapters/03-forma-discreta.qmd
+    - book/es/chapters/04-justificacion-del-procedimiento.qmd
+    - book/es/chapters/05-empates-contradicciones-decisiones-no-unicas.qmd
+    - book/es/chapters/06-reutilizacion-tablas.qmd
+    - book/es/chapters/07-recursividad.qmd
+    - book/es/chapters/08-ingenieria-inversa.qmd
+    - book/es/chapters/09-forma-continua.qmd
+    - book/es/chapters/10-formas-generales-de-uso.qmd
+    - book/es/chapters/11-aplicaciones-del-metodo.qmd
+    - book/es/chapters/12-aplicacion-historica-ancora-goh.qmd
+    - book/es/chapters/13-aplicaciones-dinamicas-y-asignacion-recursos.qmd
+    - book/es/chapters/14-estado-del-arte.qmd
+    - book/es/chapters/15-aporte-real-de-prioriza.qmd
+    - book/es/chapters/16-limites-y-criticas.qmd
+    - book/es/chapters/17-arquitectura-gobernanza-ia.qmd
+    - book/es/chapters/18-especificacion-futura.qmd
+    - book/es/chapters/19-conclusiones.qmd
+
+bibliography: references.bib
+lang: es
+
 profile:
-  default: es
   group:
-    - [es, en]
+    - [en]
 
 format:
   html:

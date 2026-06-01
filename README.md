@@ -11,8 +11,8 @@ The current manuscript status is `v0.4-draft`.
 ## Manuscript Source
 
 The editable manuscript is the Quarto book configured by `_quarto.yml`
-(shared base) with profile-specific overrides in `_quarto-es.yml` (Spanish)
-and `_quarto-en.yml` (English).
+(Spanish is the base config) with the `_quarto-en.yml` profile for the
+English translation.
 
 - Spanish manuscript (canonical source): `book/es/index.qmd` and
   `book/es/chapters/*.qmd`.
@@ -38,8 +38,7 @@ quarto --version
 Render commands:
 
 ```powershell
-quarto render                    # renders Spanish (default profile)
-quarto render --profile es       # explicit Spanish render
+quarto render                    # renders Spanish (base config)
 quarto render --profile en       # English render (placeholder scaffold)
 quarto render --to html
 quarto render --to pdf
@@ -127,8 +126,7 @@ English is a controlled translation. The website remains **English-only**
 ### Directory layout
 
 ```text
-_quarto.yml           Shared project config + profile definitions
-_quarto-es.yml        Spanish profile (lang, title, chapters)
+_quarto.yml           Base project config (Spanish) + profile definitions
 _quarto-en.yml        English profile (lang, title, chapters)
 book/
   es/
@@ -148,18 +146,17 @@ book/
 1. Edit the Spanish file under `book/es/`.
 2. When the content is stable, translate the corresponding English file
    under `book/en/` (keeping the same base filename).
-3. Render both profiles to verify:
+3. Render both languages to verify:
    ```powershell
-   quarto render --profile es
-   quarto render --profile en
+   quarto render              # Spanish (base config)
+   quarto render --profile en # English
    ```
 
 ### Render with Quarto profiles
 
 ```powershell
-quarto render              # renders Spanish (default profile)
-quarto render --profile es # explicit Spanish
-quarto render --profile en # English
+quarto render                    # Spanish (base config)
+quarto render --profile en       # English
 quarto render --profile en --to pdf  # English PDF
 ```
 
@@ -218,8 +215,8 @@ citation notes outside rendered chapters to mark where sources are needed.
 ## Continuing With Codex
 
 When continuing work with Codex, point it at this repository and treat
-`_quarto.yml` (with its profile overrides `_quarto-es.yml` and
-`_quarto-en.yml`) as the manuscript entry point. Ask it to preserve the
+`_quarto.yml` (with its `_quarto-en.yml` profile override) as the
+manuscript entry point. Ask it to preserve the
 Quarto structure, avoid fabricated bibliography, keep public-book text free of
 repository process notes, and document render failures or local tooling gaps in
 `WORK_NOTES.md`.
