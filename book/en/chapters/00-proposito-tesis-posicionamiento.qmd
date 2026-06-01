@@ -1,0 +1,4 @@
+# Purpose, Thesis and Positioning
+
+> English translation pending. See `book/es/chapters/00-proposito-tesis-posicionamiento.qmd` for the source of truth.
+

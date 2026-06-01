@@ -1,0 +1,4 @@
+# Architecture, Governance and AI
+
+> English translation pending. See `book/es/chapters/17-arquitectura-gobernanza-ia.qmd` for the source of truth.
+

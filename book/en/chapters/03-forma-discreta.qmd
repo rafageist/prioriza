@@ -1,0 +1,4 @@
+# Discrete Form
+
+> English translation pending. See `book/es/chapters/03-forma-discreta.qmd` for the source of truth.
+

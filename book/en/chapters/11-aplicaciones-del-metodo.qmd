@@ -1,0 +1,4 @@
+# Applications of the Method
+
+> English translation pending. See `book/es/chapters/11-aplicaciones-del-metodo.qmd` for the source of truth.
+

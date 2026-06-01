@@ -1,0 +1,4 @@
+# Table Reuse
+
+> English translation pending. See `book/es/chapters/06-reutilizacion-tablas.qmd` for the source of truth.
+
